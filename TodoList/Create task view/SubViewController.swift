@@ -7,28 +7,23 @@
 //
 
 import UIKit
-
-struct TaskVC {
-    let taskTitle: String
-    let subTasks: [SubTask]
-}
-
-
-struct SubTask {
-    var subTaskTitle: String
-    var isComplite: Bool
-}
+import CoreData
 
 class SubViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    let headerView = HeaderTextView()
-    let footerView = FooterView()
+    // MARK: - Public properties
+    var task: Task?
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Private properties
-    private var subTasks = [SubTask]()
+    private let storageManager: StoreManager = StorageManager()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let headerView = HeaderTextView()
+    private let footerView = FooterView()
     private var degreeOfProtection = 0
+    private var isCreated: Bool!
     
     // MARK: - Live cycle
     
@@ -44,9 +39,13 @@ class SubViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillHideNotification, object: nil)
         
-        
-        subTasks.append(SubTask(subTaskTitle: "Hello", isComplite: true))
-        subTasks.append(SubTask(subTaskTitle: "hello2", isComplite: false))
+        // TASK INIT
+        if task != nil {
+            isCreated = false
+        } else {
+            isCreated = true
+            task = Task(context: context)
+        }
     }
     
     
@@ -68,13 +67,29 @@ class SubViewController: UIViewController {
     
     @objc private func addSubTaskButtonPressed() {
         
-        let subTask = SubTask(subTaskTitle: "", isComplite: false)
-        subTasks.append(subTask)
+        // FIXME: - create data manager crete sub task
+        guard let subTaskEntity = NSEntityDescription.entity(forEntityName: "SubTask", in: context) else { return }
+        guard let subTask = NSManagedObject(entity: subTaskEntity, insertInto: context) as? SubTask else { return }
+        
+        subTask.subTaskTitle = ""
+        subTask.isComplite = false
+        
+        let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet
+        subTasks?.add(subTask)
+        
+        task?.subTasks = subTasks
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("error - \(error.userInfo)")
+        }
+        
         tableView.reloadData()
         
-        resignFirstResponderForLastCell()
     }
     
+    // FIXME: - WHY?
     private func resignFirstResponderForLastCell() {
         let section = tableView.numberOfSections - 1
         let row = tableView.numberOfRows(inSection: section) - 1
@@ -116,13 +131,13 @@ class SubViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension SubViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subTasks.count
+        return task?.subTasks?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubTaskCell.reuseId, for: indexPath) as! SubTaskCell
-        let subTask = subTasks[indexPath.row]
-
+        let subTask = task?.subTasks?[indexPath.row] as? SubTask
+        
         cell.set(subTask: subTask)
         cell.myDelegate = self
         return cell
@@ -145,11 +160,24 @@ extension SubViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let sourceItem = subTasks[sourceIndexPath.row]
+        // MARK: - SAVE IN CORE DATA MANAGER
+        guard let sourceSubTask = task?.subTasks?[sourceIndexPath.row] as? SubTask else { return }
+        guard let destanationTask = task?.subTasks?[destinationIndexPath.row] as? SubTask else { return }
+        guard let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet else { return }
         
-        subTasks.remove(at: sourceIndexPath.row)
-        subTasks.insert(sourceItem, at: destinationIndexPath.row)
-        // FIXME: - SAVE CORE DATA
+        
+        subTasks.remove(subTasks)
+        subTasks.insert(destanationTask, at: destinationIndexPath.row)
+        
+        context.delete(sourceSubTask)
+        
+        task?.subTasks = subTasks
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("error - \(error.userInfo)")
+        }
     }
 }
 
@@ -158,30 +186,58 @@ extension SubViewController: UITableViewDelegate {
 extension SubViewController: SubTaskCellDelegate {
     
     func subTaskCellDidComplite(subTaskCell: SubTaskCell) {
+        // FIXME: - SAVE IN CORE DATA MANAGET
+        
         guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
         
-        subTaskCell.subTaskTextField.becomeFirstResponder()
-        subTasks[indexPath.row].isComplite.toggle()
-        tableView.reloadRows(at: [indexPath], with: .none)
+        let subTask = task?.subTasks?[indexPath.row] as? SubTask
+        subTask?.isComplite.toggle()
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("error - \(error.userInfo)")
+        }
         
         subTaskCell.subTaskTextField.resignFirstResponder()
-        // FIXME: - SAVE CORE DATA EDIT
     }
     
     func subTaskCellDidRemove(subTaskCell: SubTaskCell) {
+        // FIXME: - SAVE IN CORE DATA MANAGER
         guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
+        guard let subTask = task?.subTasks?[indexPath.row] as? SubTask else { return }
         
-        subTasks.remove(at: indexPath.row)
+        let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet
+        
+        subTasks?.remove(subTask)
+        context.delete(subTask)
+        task?.subTasks = subTasks
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("error - \(error.userInfo)")
+        }
+        
+        
         tableView.deleteRows(at: [indexPath], with: .left)
         resignFirstResponderForLastCell()
         
-        // FIXME: - SAVE CORE DATA DELETE
+        
     }
     
     func subTaskCellDidEndEditing(subTaskCell: SubTaskCell) {
         guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
         
-        subTasks[indexPath.row].subTaskTitle = subTaskCell.subTaskTextField.text ?? ""
+        let subTask = task?.subTasks?[indexPath.row] as? SubTask
+        
+        subTask?.subTaskTitle = subTaskCell.subTaskTextField.text
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("error - \(error.userInfo)")
+        }
         
         // FIXME: - SAVE CORE DATA EDIT
     }

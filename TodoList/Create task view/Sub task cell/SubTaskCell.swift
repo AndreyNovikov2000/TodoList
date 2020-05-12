@@ -52,9 +52,11 @@ class SubTaskCell: UITableViewCell {
         myDelegate?.subTaskCellDidRemove(subTaskCell: self)
     }
     // MARK: - Public methods
-    func set(subTask: SubTask) {
-        let imageForCompliteButton = subTask.isComplite ? UIImage(named: "MaskC") : UIImage(named: "MaskU")
+    func set(subTask: SubTask?) {
+        guard let subTask = subTask else { return }
         
+        let imageForCompliteButton = subTask.isComplite ? UIImage(named: "MaskC") : UIImage(named: "MaskU")
+
         compliteButton.setImage(imageForCompliteButton, for: .normal)
         subTaskTextField.text = subTask.subTaskTitle
     }

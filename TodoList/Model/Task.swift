@@ -25,12 +25,12 @@ enum DegreeOfProtection: Int {
     }
 }
 
-struct Task {
-    let taskTitle: String
-    let isComplite: Bool
-    let isNitificate: Bool
-    let dateNotification: Date
-    let degreeOfProtection: DegreeOfProtection.RawValue
-    let taskId: UUID
-}
+//struct Task {
+//    let taskTitle: String
+//    let isComplite: Bool
+//    let isNitificate: Bool
+//    let dateNotification: Date
+//    let degreeOfProtection: DegreeOfProtection.RawValue
+//    let taskId: UUID
+//}
 
