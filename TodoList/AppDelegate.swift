@@ -9,13 +9,16 @@
 import UIKit
 import CoreData
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    let notificationManager = NotificationManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-      
+    
+        notificationManager.setupNotificationCenter()
+        
         return true
     }
     
@@ -44,6 +47,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("error - \(error.userInfo)")
         }
     }
-
 }
-

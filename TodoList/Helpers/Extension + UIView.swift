@@ -9,6 +9,14 @@
 import UIKit
 
 extension UIView {
+    func loadFromNib<T: UIView>() -> T {
+        guard let viewFromNib = Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)?.first as? T else { fatalError("Fatal error \(T.self) does not exist") }
+        return viewFromNib
+    }
+}
+
+
+extension UIView {
     func drawCircle(centerPoint: CGPoint, radius: CGFloat, constant: CGFloat, startAngle: CGFloat, endAngle: CGFloat,fillColor: UIColor, strokeColor: UIColor) {
         let shapeLayer = CAShapeLayer()
         let path = UIBezierPath(arcCenter: centerPoint, radius: radius + constant, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -23,3 +31,4 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
 }
+

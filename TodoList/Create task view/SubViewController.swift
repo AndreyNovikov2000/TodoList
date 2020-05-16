@@ -9,43 +9,59 @@
 import UIKit
 import CoreData
 
+
 class SubViewController: UIViewController {
     
     // MARK: - Public properties
     var task: Task?
+    var heandleDismiss: ((() -> Void)?)
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Private properties
-    private let storageManager: StoreManager = StorageManager()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let headerView = HeaderTextView()
+    private let storageManager: StoreManager = StorageManager()
+    
+    private let headerTextView = HeaderTextView()
     private let footerView = FooterView()
-    private var degreeOfProtection = 0
+    
+    private var alarmView: PickerView!
+    private var calendarView: PickerCalendaView!
+    private var visualEffectView: UIVisualEffectView!
+    
+    private var components = DateComponents()
+    private var calendar = Calendar.current
+    private var isNotificate = false
     private var isCreated: Bool!
+    
     
     // MARK: - Live cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setupTableView()
         setupHeaderView()
         setupFooterView()
+        setupKeyboardNotification()
         
-        // Notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillHideNotification, object: nil)
+        
+        presentationController?.delegate = self
         
         // TASK INIT
         if task != nil {
             isCreated = false
         } else {
             isCreated = true
-            task = Task(context: context)
+            task = storageManager.createEntity(entityName: "Task", contex: context)
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -54,52 +70,28 @@ class SubViewController: UIViewController {
     @objc private func heandleKeyboard(notification: Notification) {
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey]) as? CGRect else { return }
         
-        let tableViewBottomInset = (headerView.inputAccessoryView?.frame.height ?? 0) + keyboardFrame.height + headerView.frame.height + 10
+        let totalHeight = keyboardFrame.height + (headerTextView.inputAccessoryView?.frame.height ?? 0)
         
         if notification.name == UIWindow.keyboardWillShowNotification {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tableViewBottomInset, right: 0)
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: totalHeight, right: 0)
         } else {
             tableView.contentInset = UIEdgeInsets.zero
         }
-        
-        tableView.scrollIndicatorInsets = tableView.contentInset
     }
     
     @objc private func addSubTaskButtonPressed() {
-        
-        // FIXME: - create data manager crete sub task
-        guard let subTaskEntity = NSEntityDescription.entity(forEntityName: "SubTask", in: context) else { return }
-        guard let subTask = NSManagedObject(entity: subTaskEntity, insertInto: context) as? SubTask else { return }
+        let subTask: SubTask  = storageManager.createEntity(entityName: "SubTask", contex: context)
         
         subTask.subTaskTitle = ""
         subTask.isComplite = false
         
         let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet
+        
         subTasks?.add(subTask)
-        
         task?.subTasks = subTasks
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error - \(error.userInfo)")
-        }
-        
+        storageManager.save(context)
         tableView.reloadData()
-        
     }
-    
-    // FIXME: - WHY?
-    private func resignFirstResponderForLastCell() {
-        let section = tableView.numberOfSections - 1
-        let row = tableView.numberOfRows(inSection: section) - 1
-        let indexPath = IndexPath(row: row, section: section)
-        
-        if  let cell = tableView.cellForRow(at: indexPath) as? SubTaskCell {
-            cell.subTaskTextField.resignFirstResponder()
-        }
-    }
-    
     
     // MARK: - Private methods
     
@@ -112,12 +104,13 @@ class SubViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.text = "Добавить задачу..."
-        headerView.textColor = .systemGray
-        headerView.myDelegate = self
-        headerView.delegate = self
-        headerView.frame = CGRect.zero
-        textViewDidChange(headerView)
+        // TODO: - LOCALIZE
+        headerTextView.text = "Добавить задачу..."
+        headerTextView.textColor = .systemGray
+        headerTextView.myDelegate = self
+        headerTextView.delegate = self
+        headerTextView.frame = CGRect.zero
+        textViewDidChange(headerTextView)
     }
     
     private func setupFooterView() {
@@ -125,6 +118,58 @@ class SubViewController: UIViewController {
         footerView.footerButton.addTarget(self, action: #selector(addSubTaskButtonPressed), for: .touchUpInside)
         tableView.tableFooterView = footerView
     }
+    
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(heandleKeyboard), name: UIWindow.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func getSubTask(subTaskCell: SubTaskCell) -> SubTask? {
+        guard let indexPath = tableView.indexPath(for: subTaskCell) else { return nil }
+        let subTask = task?.subTasks?[indexPath.row] as? SubTask
+        
+        return subTask
+    }
+    
+    private func setupAlarmView() {
+        alarmView = Bundle.main.loadNibNamed("PickerView", owner: nil, options: nil)?.first as? PickerView
+        alarmView.center = view.center
+        alarmView?.myDelegate = self
+        view.addSubview(alarmView)
+    }
+    
+    private func setupCalendarView() {
+        calendarView = Bundle.main.loadNibNamed("PickerCalendaView", owner: nil, options: nil)?.first as? PickerCalendaView
+        calendarView?.center = view.center
+        calendarView.myDelegate = self
+        view.addSubview(calendarView!)
+    }
+    
+    private func setupVisualEffectView() {
+        visualEffectView = UIVisualEffectView()
+        visualEffectView.frame = view.frame
+        visualEffectView.effect = UIBlurEffect(style: .dark)
+        view.addSubview(visualEffectView)
+    }
+    
+    private func animateIn(for view: UIView) {
+        view.visualEffectAnimateIn(visualEffectView: visualEffectView, compliteAnimation: nil)
+    }
+    
+    private func pickerViewAnimateOut() {
+        alarmView.visualEffectViewAnimateOut(visualEffectView: visualEffectView) { [weak self] in
+            self?.alarmView.removeFromSuperview()
+            self?.visualEffectView.removeFromSuperview()
+        }
+    }
+    
+    private func calendarViewAnimateOut() {
+        calendarView.visualEffectViewAnimateOut(visualEffectView: visualEffectView) { [weak self] in
+            self?.calendarView.removeFromSuperview()
+            self?.visualEffectView.removeFromSuperview()
+        }
+    }
+    
 }
 
 
@@ -160,24 +205,17 @@ extension SubViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // MARK: - SAVE IN CORE DATA MANAGER
-        guard let sourceSubTask = task?.subTasks?[sourceIndexPath.row] as? SubTask else { return }
-        guard let destanationTask = task?.subTasks?[destinationIndexPath.row] as? SubTask else { return }
-        guard let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet else { return }
-        
-        
-        subTasks.remove(subTasks)
-        subTasks.insert(destanationTask, at: destinationIndexPath.row)
-        
-        context.delete(sourceSubTask)
-        
-        task?.subTasks = subTasks
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error - \(error.userInfo)")
-        }
+        //        guard let sourceSubTask = task?.subTasks?[sourceIndexPath.row] as? SubTask else { return }
+        //        guard let destanationTask = task?.subTasks?[destinationIndexPath.row] as? SubTask else { return }
+        //
+        //        guard let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet else { return }
+        //
+        //        subTasks.remove(sourceSubTask)
+        //        subTasks.insert(destanationTask, at: destinationIndexPath.row)
+        //
+        //        task?.subTasks = subTasks
+        //
+        //        storageManager.save(context)
     }
 }
 
@@ -186,24 +224,18 @@ extension SubViewController: UITableViewDelegate {
 extension SubViewController: SubTaskCellDelegate {
     
     func subTaskCellDidComplite(subTaskCell: SubTaskCell) {
-        // FIXME: - SAVE IN CORE DATA MANAGET
-        
         guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
+        let subTask = getSubTask(subTaskCell: subTaskCell)
         
-        let subTask = task?.subTasks?[indexPath.row] as? SubTask
         subTask?.isComplite.toggle()
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error - \(error.userInfo)")
-        }
+        storageManager.save(context)
         
         subTaskCell.subTaskTextField.resignFirstResponder()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
+    
     func subTaskCellDidRemove(subTaskCell: SubTaskCell) {
-        // FIXME: - SAVE IN CORE DATA MANAGER
         guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
         guard let subTask = task?.subTasks?[indexPath.row] as? SubTask else { return }
         
@@ -213,33 +245,17 @@ extension SubViewController: SubTaskCellDelegate {
         context.delete(subTask)
         task?.subTasks = subTasks
         
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error - \(error.userInfo)")
-        }
-        
+        storageManager.save(context)
         
         tableView.deleteRows(at: [indexPath], with: .left)
-        resignFirstResponderForLastCell()
-        
-        
     }
     
     func subTaskCellDidEndEditing(subTaskCell: SubTaskCell) {
-        guard let indexPath = tableView.indexPath(for: subTaskCell) else { return }
-        
-        let subTask = task?.subTasks?[indexPath.row] as? SubTask
+        let subTask = getSubTask(subTaskCell: subTaskCell)
         
         subTask?.subTaskTitle = subTaskCell.subTaskTextField.text
         
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error - \(error.userInfo)")
-        }
-        
-        // FIXME: - SAVE CORE DATA EDIT
+        storageManager.save(context)
     }
     
     func SubViewController(subTaskCell: SubTaskCell) {
@@ -258,6 +274,9 @@ extension SubViewController: UITextViewDelegate {
         
         textView.frame = CGRect(x: 0, y: 0, width: width, height: estimatedSize.height)
         tableView.tableHeaderView = textView
+        
+        task?.taskTitle = textView.text
+        storageManager.save(context)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -282,35 +301,108 @@ extension SubViewController: UITextViewDelegate {
 // MARK: - HeaderTextViewDelegate
 extension SubViewController: HeaderTextViewDelegate {
     func didCalendarButtonTapped() {
-        print("Calendar")
+        view.endEditing(true)
+        setupVisualEffectView()
+        setupCalendarView()
+        animateIn(for: calendarView)
     }
     
     func didAlarmButtonPressed() {
-        print("Alarm")
+        view.endEditing(true)
+        setupVisualEffectView()
+        setupAlarmView()
+        animateIn(for: alarmView)
     }
     
     func didimportanceButtonPressed(sender: UIButton) {
         
-        Animation.animateDegreeButton(for: sender)
+        sender.animateDegreeButton(for: sender)
         
         switch sender.image(for: .normal) {
         case UIImage(named: "lMarkOne"):
             sender.setImage(UIImage(named: "lMarkTwo"), for: .normal)
-            degreeOfProtection = 1
+            task?.degreeOfProtection = 1
         case UIImage(named: "lMarkTwo"):
             sender.setImage(UIImage(named: "lMarkThree"), for: .normal)
-            degreeOfProtection = 2
+            task?.degreeOfProtection = 2
         case UIImage(named: "lMarkThree"):
             sender.setImage(UIImage(named: "lMarkOne"), for: .normal)
-            degreeOfProtection = 0
+            task?.degreeOfProtection = 0
         default:
             break
         }
         
+        storageManager.save(context)
     }
     
     func didSaveButtonpressed() {
+        
+        if headerTextView.text.isEmpty {
+            headerTextView.shaking()
+            return
+        }
+        
+        task?.isNotificate = isNotificate
+    
+        if isNotificate {
+            task?.dateNotification = calendar.date(from: components)
+        }
+        
+        storageManager.save(context)
+        
+        heandleDismiss?()
         dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - PickerViewDelegate
+extension SubViewController: PickerViewDelegate {
+    func pickerViewSaveButtonPressed(_ dateComponents: DateComponents) {
+        pickerViewAnimateOut()
+        
+        components.hour = dateComponents.hour
+        components.minute = dateComponents.minute
+        
+        isNotificate = true
+    }
+    
+    func pickerViewCancelButtonPressed() {
+        pickerViewAnimateOut()
+    }
+    
+}
+
+// MARK: - PickerCalendarViewDelegate
+extension SubViewController: PickerCalendarViewDelegate {
+    
+    func pickerCalendarViewDidSelectedDate(_ date: Date) {
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        components.year = year
+        components.month = month
+        components.day = day
+    }
+    
+    func pickerCalendarViewDidDeselectedDate() {
+        
+    }
+    
+    func pickerCalendarViewSaveButtonPressed() {
+        calendarViewAnimateOut()
+        isNotificate = true
+    }
+    
+    func pickerCalendarViewCancelButtonPressed() {
+        calendarViewAnimateOut()
+        isNotificate = false
+    }
+}
+
+extension SubViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("dismiss")
+    }
+}

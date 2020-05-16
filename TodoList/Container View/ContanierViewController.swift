@@ -61,7 +61,8 @@ class ContanierViewController: UIViewController {
     }
     
     private func configureTaskViewController() {
-        taskViewController = TaskViewController()
+//        taskViewController = TaskViewController()
+        taskViewController = UIStoryboard(name: "TaskViewController", bundle: nil).instantiateInitialViewController() as! TaskViewController
         
         addChild(taskViewController)
         view.addSubview(taskViewController.view)
