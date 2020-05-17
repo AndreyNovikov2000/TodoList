@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-
 class SubViewController: UIViewController {
     
     // MARK: - Public properties
@@ -315,25 +314,11 @@ extension SubViewController: HeaderTextViewDelegate {
     }
     
     func didimportanceButtonPressed(sender: UIButton) {
-        
         sender.animateDegreeButton(for: sender)
-        
-        switch sender.image(for: .normal) {
-        case UIImage(named: "lMarkOne"):
-            sender.setImage(UIImage(named: "lMarkTwo"), for: .normal)
-            task?.degreeOfProtection = 1
-        case UIImage(named: "lMarkTwo"):
-            sender.setImage(UIImage(named: "lMarkThree"), for: .normal)
-            task?.degreeOfProtection = 2
-        case UIImage(named: "lMarkThree"):
-            sender.setImage(UIImage(named: "lMarkOne"), for: .normal)
-            task?.degreeOfProtection = 0
-        default:
-            break
-        }
-        
+        task?.degreeOfProtection = sender.getDegreeProtection(for: sender)
         storageManager.save(context)
     }
+
     
     func didSaveButtonpressed() {
         
@@ -380,10 +365,8 @@ extension SubViewController: PickerCalendarViewDelegate {
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
-        
-        components.year = year
-        components.month = month
-        components.day = day
+     
+        components.setComponents(year: year, month: month, day: day)
     }
     
     func pickerCalendarViewDidDeselectedDate() {
@@ -398,11 +381,20 @@ extension SubViewController: PickerCalendarViewDelegate {
     func pickerCalendarViewCancelButtonPressed() {
         calendarViewAnimateOut()
         isNotificate = false
+        components.setComponents(year: nil, month: nil, day: nil)
+    }
+    
+    func calendarViewClearButtonPressed() {
+        isNotificate = false
+
+        components.setComponents(year: nil, month: nil, day: nil)
     }
 }
 
 extension SubViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("dismiss")
+        guard let task = task else { return }
+        storageManager.delete(context, object: task)
+        storageManager.save(context)
     }
 }

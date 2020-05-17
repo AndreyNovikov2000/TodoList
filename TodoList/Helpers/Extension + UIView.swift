@@ -27,7 +27,6 @@ extension UIView {
         shapeLayer.path = path.cgPath
         shapeLayer.lineCap = .round
        
-        
         self.layer.addSublayer(shapeLayer)
     }
 }

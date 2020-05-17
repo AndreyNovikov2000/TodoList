@@ -12,6 +12,7 @@ import KDCalendar
 protocol PickerCalendarViewDelegate: class {
     func pickerCalendarViewSaveButtonPressed()
     func pickerCalendarViewCancelButtonPressed()
+    func calendarViewClearButtonPressed()
     func pickerCalendarViewDidSelectedDate(_ date: Date)
     func pickerCalendarViewDidDeselectedDate()
 }
@@ -30,6 +31,8 @@ class PickerCalendaView: UIView {
     @IBOutlet weak var saveButton: UIButton!
     
     // MARK: - Private properties
+    private let myStyle = CalendarView.Style()
+    private let mainColor = UIColor(red: 0.4, green: 0.6509803922, blue: 1, alpha: 1)
     private var currentSelectedDate = Date()
     private var dateFormatter:  DateFormatter = {
         let df = DateFormatter()
@@ -53,7 +56,7 @@ class PickerCalendaView: UIView {
     }
 
     
-    // MARK: - IBACtion
+    // MARK: - IBAction
     @IBAction func saveButtonPressed() {
         myDelegate?.pickerCalendarViewSaveButtonPressed()
     }
@@ -63,17 +66,21 @@ class PickerCalendaView: UIView {
         myDelegate?.pickerCalendarViewCancelButtonPressed()
     }
     
+    @IBAction func clearButtonPressed() {
+        // TODO: LOCALIZED
+        selectedDate.text = "Choise the date"
+    }
+    
     // MARK: - Private methods
     private func setupCalendarView() {
         calendarView.delegate = self
         calendarView.dataSource = self
         calendarView.backgroundColor = .clear
-        
+       
+        clearButtonPressed()
     }
     
     private func setStyle() {
-        let mainColor = UIColor(red: 0.4, green: 0.6509803922, blue: 1, alpha: 1)
-        let myStyle = CalendarView.Style()
         
         myStyle.cellShape = CalendarView.Style.CellShapeOptions.round
         
@@ -85,8 +92,8 @@ class PickerCalendaView: UIView {
         myStyle.cellSelectedColor = mainColor
 
         // today
-        myStyle.cellTextColorToday = .black
-        myStyle.cellColorToday = .clear
+        myStyle.cellTextColorToday = .white
+        myStyle.cellColorToday = mainColor
         
         // weekend
         myStyle.cellTextColorWeekend = .black
@@ -164,6 +171,15 @@ extension PickerCalendaView: CalendarViewDelegate {
         currentSelectedDate = date
         selectedDate.text = dateFormatter.string(from: date)
         myDelegate?.pickerCalendarViewDidSelectedDate(date)
+        
+        // style
+        if currentSelectedDate == Date() {
+            myStyle.cellTextColorToday = .white
+            myStyle.cellColorToday = mainColor
+        }
+        
+        myStyle.cellTextColorToday = .black
+        myStyle.cellColorToday = .clear
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {

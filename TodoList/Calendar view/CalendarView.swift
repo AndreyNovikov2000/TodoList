@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController {
         myStyle.headerBackgroundColor = .red
 
         // today
-//        myStyle.cellTextColorToday = .white
+        myStyle.cellTextColorToday = #colorLiteral(red: 0.4, green: 0.6509803922, blue: 1, alpha: 1)
         myStyle.cellColorToday = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
         myStyle.cellBorderColor = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
 
@@ -69,37 +69,6 @@ class CalendarViewController: UIViewController {
 
         //out of range
         myStyle.cellColorOutOfRange = UIColor(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-
-
-        
-        
-        
-        
-////        CalendarView.Style.Default.cellShape = CalendarView.Style.CellShapeOptions.round
-//
-//        // Header
-//        CalendarView.Style.Default.headerTextColor = .black
-//        CalendarView.Style.Default.headerFont = UIFont.boldSystemFont(ofSize: 11)
-//        CalendarView.Style.Default.showAdjacentDays = true
-//
-//
-//        // Today
-////        CalendarView.Style.Default.cellTextColorToday = .white
-//        CalendarView.Style.Default.cellColorToday = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
-//        CalendarView.Style.Default.cellBorderColor = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
-//
-//        // Selected
-//        CalendarView.Style.Default.cellSelectedBorderColor = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
-//        CalendarView.Style.Default.cellSelectedColor = UIColor(red: 1, green: 0.8196078431, blue: 0.4, alpha: 1)
-//        CalendarView.Style.Default.cellSelectedTextColor = .black
-//        CalendarView.Style.Default.cellColorDefault = .clear
-//
-//        // Weekend
-//        CalendarView.Style.Default.cellTextColorWeekend = .black
-//        CalendarView.Style.Default.cellTextColorDefault = .black
-//
-//        // Out of range
-//         CalendarView.Style.Default.cellColorOutOfRange = UIColor(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     }
     
     

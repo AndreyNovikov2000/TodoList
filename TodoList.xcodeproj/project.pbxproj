@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		08EA27910B7DC6096D5EB76D /* Pods_TodoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034177DF91FDB78DE51338B7 /* Pods_TodoList.framework */; };
+		0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */; };
+		0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBC247164780058EEEC /* HeaderView.swift */; };
+		0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBE247190950058EEEC /* Extension + UIButton.swift */; };
 		0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2309E7246B0F7700BC81AD /* PickerView.swift */; };
 		0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2309E9246B0F8200BC81AD /* PickerView.xib */; };
 		0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */; };
@@ -18,7 +21,7 @@
 		0CBB5266246D909200679162 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB5265246D909200679162 /* TaskCell.swift */; };
 		0CBB5268246DAF7B00679162 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */; };
 		0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB526A246E6FD400679162 /* NotificationManager.swift */; };
-		0CC496D52470418D00A74FF0 /* Extension + UIview animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC496D42470418D00A74FF0 /* Extension + UIview animation.swift */; };
+		0CC496D52470418D00A74FF0 /* Extension + UIviewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */; };
 		0CC8BA67246B151B0031D508 /* PickerViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8BA66246B151B0031D508 /* PickerViewRow.swift */; };
 		0CDF14562469E415006E995E /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027372469E0C600DE2698 /* Task+CoreDataProperties.swift */; };
 		0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027362469E0C600DE2698 /* Task+CoreDataClass.swift */; };
@@ -46,6 +49,9 @@
 
 /* Begin PBXFileReference section */
 		034177DF91FDB78DE51338B7 /* Pods_TodoList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + DateComponents.swift"; sourceTree = "<group>"; };
+		0C16EFBC247164780058EEEC /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		0C16EFBE247190950058EEEC /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 		0C2309E7246B0F7700BC81AD /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		0C2309E9246B0F8200BC81AD /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		0C7027342469DF7900DE2698 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
@@ -60,7 +66,7 @@
 		0CBB5265246D909200679162 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		0CBB526A246E6FD400679162 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		0CC496D42470418D00A74FF0 /* Extension + UIview animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIview animation.swift"; sourceTree = "<group>"; };
+		0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIviewAnimation.swift"; sourceTree = "<group>"; };
 		0CC8BA66246B151B0031D508 /* PickerViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewRow.swift; sourceTree = "<group>"; };
 		0CEDCCC02468713700286911 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEDCCC32468713700286911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C16EFBB247164650058EEEC /* Header view */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFBC247164780058EEEC /* HeaderView.swift */,
+			);
+			path = "Header view";
+			sourceTree = "<group>";
+		};
 		0C2309E6246B0F1E00BC81AD /* Picker time view */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +260,7 @@
 		0CEDCCE7246872CA00286911 /* Task View */ = {
 			isa = PBXGroup;
 			children = (
+				0C16EFBB247164650058EEEC /* Header view */,
 				0CBB5264246D907200679162 /* TaskCell */,
 				0CEDCCE3246872BE00286911 /* TaskViewController.swift */,
 				0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */,
@@ -288,8 +303,10 @@
 				0CEDCD012468758C00286911 /* Constants.swift */,
 				0CEDCCFD2468754E00286911 /* Extension + UIColor.swift */,
 				0CEDCCFF2468756F00286911 /* Extension + UIView.swift */,
-				0CC496D42470418D00A74FF0 /* Extension + UIview animation.swift */,
+				0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */,
 				0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */,
+				0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */,
+				0C16EFBE247190950058EEEC /* Extension + UIButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -435,8 +452,10 @@
 				0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */,
 				0CEDCCE12468728000286911 /* CalendarView.swift in Sources */,
 				0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */,
+				0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */,
 				0CBB5266246D909200679162 /* TaskCell.swift in Sources */,
 				0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */,
+				0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */,
 				0CEDCCC42468713700286911 /* AppDelegate.swift in Sources */,
 				0CEDCCD82468718A00286911 /* ContanierViewController.swift in Sources */,
 				0CC8BA67246B151B0031D508 /* PickerViewRow.swift in Sources */,
@@ -453,10 +472,11 @@
 				0CEDCCE5246872BE00286911 /* TaskViewController.swift in Sources */,
 				0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */,
 				0CEDCD0524687CC300286911 /* SubViewController.swift in Sources */,
-				0CC496D52470418D00A74FF0 /* Extension + UIview animation.swift in Sources */,
+				0CC496D52470418D00A74FF0 /* Extension + UIviewAnimation.swift in Sources */,
 				0CBB5268246DAF7B00679162 /* Extension + UIImage.swift in Sources */,
 				0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */,
 				0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */,
+				0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

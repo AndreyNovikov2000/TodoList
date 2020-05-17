@@ -43,8 +43,12 @@ class TaskViewController: UIViewController {
         label.numberOfLines = 0
         tableView.tableHeaderView = headerView
         
+        let footerView = UIView()
+        footerView.backgroundColor = .green
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        
+        tableView.tableFooterView = footerView
     }
-    
     
     
     // MARK: - IBACtion
@@ -76,19 +80,15 @@ class TaskViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
-    private func deleteCell(with indexPath: IndexPath) -> UIContextualAction {
-        let task = tasks[indexPath.row]
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] (_, _, complition) in
+    
+    private func deleteContextualAction(with indexPath: IndexPath) -> UIContextualAction {
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete") { [weak self] (_, _, complition) in
             if let self = self {
-                self.tasks.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                self.storageManager.delete(self.contex, object: task)
-                self.storageManager.save(self.contex)
+                self.deleteCellWith(indexPath: indexPath)
                 complition(true)
             }
         }
-        
+    
         deleteAction.backgroundColor = UIColor(red: 0.9568627451, green: 0.368627451, blue: 0.4274509804, alpha: 1)
         deleteAction.image = UIImage(systemName: "trash")
         
@@ -103,6 +103,14 @@ class TaskViewController: UIViewController {
         }
     }
     
+    private func deleteCellWith(indexPath: IndexPath) {
+        let task = tasks[indexPath.row]
+        
+        tasks.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
+        storageManager.delete(self.contex, object: task)
+        storageManager.save(self.contex)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -116,17 +124,48 @@ extension TaskViewController: UITableViewDataSource {
         let task = tasks[indexPath.row]
         
         cell.set(task: task)
+        cell.myDelegate = self
         
         return cell
     }
 }
 
+
 // MARK: - UITableViewDelegate
 extension TaskViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = deleteCell(with: indexPath)
+        let deleteAction = deleteContextualAction(with: indexPath)
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = HeaderView()
+        headerView.setHeaderText(text: "Today")
+
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
+    }
+}
+
+extension TaskViewController: TaskCellDelegate {
+    func taskCellDidComplite(taskCell: TaskCell) {
+        guard let indexPath = tableView.indexPath(for: taskCell) else { return }
+        deleteCellWith(indexPath: indexPath)
+    }
+    
+    func taskCellDegreeOfProtectionButtonPressed(taskCell: TaskCell) {
+        guard let indexPath = tableView.indexPath(for: taskCell) else { return }
+        let task = tasks[indexPath.row]
+        let degreeOfProtectionButton = taskCell.degreeOfProtectionButton
+        
+        degreeOfProtectionButton.animateDegreeButton(for: degreeOfProtectionButton)
+        task.degreeOfProtection = degreeOfProtectionButton.getDegreeProtection(for: degreeOfProtectionButton)
+    
+        storageManager.save(contex)
     }
 }

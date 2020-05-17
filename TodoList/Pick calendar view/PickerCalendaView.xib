@@ -101,6 +101,17 @@
                                 <constraint firstAttribute="height" constant="60" id="vGt-nt-GwB"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4i-4C-Odb">
+                            <rect key="frame" x="290" y="428.5" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="HTy-vr-bmO"/>
+                                <constraint firstAttribute="width" constant="16" id="xSo-NW-Wxb"/>
+                            </constraints>
+                            <state key="normal" image="clear"/>
+                            <connections>
+                                <action selector="clearButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="n3e-MQ-mhl"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
@@ -118,8 +129,10 @@
                         <constraint firstAttribute="height" constant="519" id="SeT-4u-qXx"/>
                         <constraint firstItem="d9C-Dh-8QT" firstAttribute="centerX" secondItem="RNQ-re-NOY" secondAttribute="centerX" id="aBy-bc-0xw"/>
                         <constraint firstItem="fPK-5I-n4o" firstAttribute="top" secondItem="W96-h8-Ufb" secondAttribute="bottom" constant="10" id="dII-6S-CXq"/>
+                        <constraint firstAttribute="trailing" secondItem="J4i-4C-Odb" secondAttribute="trailing" constant="10" id="e9N-X8-1H4"/>
                         <constraint firstItem="d9C-Dh-8QT" firstAttribute="top" secondItem="2in-ae-eFK" secondAttribute="bottom" constant="14" id="fLd-GE-3Pv"/>
                         <constraint firstItem="W96-h8-Ufb" firstAttribute="top" secondItem="lbO-AN-oBj" secondAttribute="bottom" constant="22" id="kqb-TZ-3de"/>
+                        <constraint firstItem="J4i-4C-Odb" firstAttribute="centerY" secondItem="TA6-Ci-LwI" secondAttribute="centerY" id="r1y-Lg-Zzd"/>
                         <constraint firstItem="TA6-Ci-LwI" firstAttribute="top" secondItem="fPK-5I-n4o" secondAttribute="bottom" constant="11" id="tXH-nj-GLb"/>
                         <constraint firstItem="2in-ae-eFK" firstAttribute="centerX" secondItem="RNQ-re-NOY" secondAttribute="centerX" id="uDD-UJ-R3y"/>
                     </constraints>
@@ -143,4 +156,7 @@
             <point key="canvasLocation" x="92.028985507246389" y="382.03125"/>
         </view>
     </objects>
+    <resources>
+        <image name="clear" width="30" height="30"/>
+    </resources>
 </document>

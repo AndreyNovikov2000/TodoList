@@ -9,14 +9,8 @@
 import UIKit
 
 protocol TaskCellDelegate: class {
-    
-}
-
-protocol MainTaskCell {
-    var title: String { get }
-    var titleNotification: String? { get }
-    var degreeOfPretection: Int16 { get }
-    var isComplite: Bool { get }
+    func taskCellDidComplite(taskCell: TaskCell)
+    func taskCellDegreeOfProtectionButtonPressed(taskCell: TaskCell)
 }
 
 class TaskCell: UITableViewCell {
@@ -91,8 +85,7 @@ class TaskCell: UITableViewCell {
         return df
     }()
     
-    var alarmImageViewBottomConstraints: NSLayoutConstraint!
-    var taskTitleLableBottomConstraints: NSLayoutConstraint!
+    private var alarmImageViewBottomConstraints: NSLayoutConstraint!
   
 
     // MARK: - Init
@@ -131,11 +124,11 @@ class TaskCell: UITableViewCell {
     
     // MARK: - Action
     @objc fileprivate func heandleDegreeOfProtectionButtonPressed() {
-        print(#function)
+        myDelegate?.taskCellDegreeOfProtectionButtonPressed(taskCell: self)
     }
     
     @objc fileprivate func heanleCompliteButtonPressed() {
-        print(#function)
+         myDelegate?.taskCellDidComplite(taskCell: self)
     }
     
     // MARK: - Private methods
