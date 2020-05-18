@@ -10,11 +10,11 @@ import UIKit
 import KDCalendar
 
 protocol PickerCalendarViewDelegate: class {
-    func pickerCalendarViewSaveButtonPressed()
+    func pickerCalendarViewSaveButtonPressed(date: Date)
     func pickerCalendarViewCancelButtonPressed()
-    func calendarViewClearButtonPressed()
-    func pickerCalendarViewDidSelectedDate(_ date: Date)
-    func pickerCalendarViewDidDeselectedDate()
+    func picerCalendarViewClearButtonPressed()
+//    func pickerCalendarViewDidSelectedDate(_ date: Date)
+//    func pickerCalendarViewDidDeselectedDate()
 }
 
 class PickerCalendaView: UIView {
@@ -58,7 +58,7 @@ class PickerCalendaView: UIView {
     
     // MARK: - IBAction
     @IBAction func saveButtonPressed() {
-        myDelegate?.pickerCalendarViewSaveButtonPressed()
+        myDelegate?.pickerCalendarViewSaveButtonPressed(date: currentSelectedDate)
     }
     
     
@@ -170,7 +170,7 @@ extension PickerCalendaView: CalendarViewDelegate {
         calendarView.deselectDate(currentSelectedDate)
         currentSelectedDate = date
         selectedDate.text = dateFormatter.string(from: date)
-        myDelegate?.pickerCalendarViewDidSelectedDate(date)
+//        myDelegate?.pickerCalendarViewDidSelectedDate(date)
         
         // style
         if currentSelectedDate == Date() {
@@ -187,7 +187,7 @@ extension PickerCalendaView: CalendarViewDelegate {
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
-        myDelegate?.pickerCalendarViewDidDeselectedDate()
+//        myDelegate?.pickerCalendarViewDidDeselectedDate()
     }
     
     func calendar(_ calendar: CalendarView, didLongPressDate date: Date, withEvents events: [CalendarEvent]?) {

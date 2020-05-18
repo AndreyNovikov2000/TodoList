@@ -299,42 +299,39 @@ extension SubViewController: UITextViewDelegate {
 
 // MARK: - HeaderTextViewDelegate
 extension SubViewController: HeaderTextViewDelegate {
-    func didCalendarButtonTapped() {
+    func headerTextViewDidCalendarButtonTapped() {
         view.endEditing(true)
         setupVisualEffectView()
         setupCalendarView()
         animateIn(for: calendarView)
     }
     
-    func didAlarmButtonPressed() {
+    func headerTextViewdidAlarmButtonPressed() {
         view.endEditing(true)
         setupVisualEffectView()
         setupAlarmView()
         animateIn(for: alarmView)
     }
     
-    func didimportanceButtonPressed(sender: UIButton) {
+    func headerTextViewDidimportanceButtonPressed(sender: UIButton) {
         sender.animateDegreeButton(for: sender)
         task?.degreeOfProtection = sender.getDegreeProtection(for: sender)
         storageManager.save(context)
     }
 
-    
-    func didSaveButtonpressed() {
+    func headerxtViewDidSaveButtonpressed() {
         
         if headerTextView.text.isEmpty {
             headerTextView.shaking()
             return
         }
-        
-        task?.isNotificate = isNotificate
     
         if isNotificate {
             task?.dateNotification = calendar.date(from: components)
         }
         
+        task?.isNotificate = isNotificate
         storageManager.save(context)
-        
         heandleDismiss?()
         dismiss(animated: true, completion: nil)
     }
@@ -343,15 +340,15 @@ extension SubViewController: HeaderTextViewDelegate {
 // MARK: - PickerViewDelegate
 extension SubViewController: PickerViewDelegate {
     func pickerViewSaveButtonPressed(_ dateComponents: DateComponents) {
-        pickerViewAnimateOut()
-        
         components.hour = dateComponents.hour
         components.minute = dateComponents.minute
         
         isNotificate = true
+        pickerViewAnimateOut()
     }
     
     func pickerViewCancelButtonPressed() {
+        isNotificate = false
         pickerViewAnimateOut()
     }
     
@@ -360,34 +357,26 @@ extension SubViewController: PickerViewDelegate {
 // MARK: - PickerCalendarViewDelegate
 extension SubViewController: PickerCalendarViewDelegate {
     
-    func pickerCalendarViewDidSelectedDate(_ date: Date) {
+    func pickerCalendarViewSaveButtonPressed(date: Date) {
         
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
-     
-        components.setComponents(year: year, month: month, day: day)
-    }
-    
-    func pickerCalendarViewDidDeselectedDate() {
         
-    }
-    
-    func pickerCalendarViewSaveButtonPressed() {
-        calendarViewAnimateOut()
         isNotificate = true
+        components.setComponents(year: year, month: month, day: day)
+        calendarViewAnimateOut()
+        
+        print(year, month, day, isNotificate)
     }
     
     func pickerCalendarViewCancelButtonPressed() {
-        calendarViewAnimateOut()
         isNotificate = false
-        components.setComponents(year: nil, month: nil, day: nil)
+        calendarViewAnimateOut()
     }
     
-    func calendarViewClearButtonPressed() {
+    func picerCalendarViewClearButtonPressed() {
         isNotificate = false
-
-        components.setComponents(year: nil, month: nil, day: nil)
     }
 }
 

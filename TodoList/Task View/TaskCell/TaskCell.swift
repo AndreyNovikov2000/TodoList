@@ -65,7 +65,9 @@ class TaskCell: UITableViewCell {
         let imageView =  UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "Alarm")
+        imageView.isHidden = false
         imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -75,7 +77,16 @@ class TaskCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.text = "label.textColor"
         label.textColor = UIColor(red: 0.1450980392, green: 0.1647058824, blue: 0.1921568627, alpha: 0.4)
+        label.isHidden = false
         return label
+    }()
+    
+    lazy private var notificationStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [alarmImageView, notificationLabel])
+        stackView.axis = .horizontal
+        stackView.spacing = 6
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     // MARK: - Private properties
@@ -85,9 +96,9 @@ class TaskCell: UITableViewCell {
         return df
     }()
     
-    private var alarmImageViewBottomConstraints: NSLayoutConstraint!
-  
-
+    private var bottomNotificationConstraints: NSLayoutConstraint!
+    
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -106,32 +117,32 @@ class TaskCell: UITableViewCell {
     }
     
     
-    // MARK: - Public methods
-    func set(task: Task) {
-        taskLabel.text = task.taskTitle
-        
-        degreeOfProtectionButton.setImage(UIImage.getGegreeOfProtection(task.degreeOfProtection) , for: .normal)
-        
-        
-        if let dateNotification = task.dateNotification ,task.isNotificate {
-            notificationLabel.text = dateFormatter.string(from: dateNotification)
-        } else {
-            alarmImageViewBottomConstraints.constant = 5
-            alarmImageView.isHidden = true
-            notificationLabel.isHidden = true
-        }
-    }
-    
     // MARK: - Action
     @objc fileprivate func heandleDegreeOfProtectionButtonPressed() {
         myDelegate?.taskCellDegreeOfProtectionButtonPressed(taskCell: self)
     }
     
     @objc fileprivate func heanleCompliteButtonPressed() {
-         myDelegate?.taskCellDidComplite(taskCell: self)
+        myDelegate?.taskCellDidComplite(taskCell: self)
+    }
+    
+    // MARK: - Public methods
+    func set(task: Task) {
+        setupNotificationStackView(isNotificatite: task.isNotificate)
+        taskLabel.text = task.taskTitle
+        degreeOfProtectionButton.setImage(UIImage.getGegreeOfProtection(task.degreeOfProtection) , for: .normal)
+        if let dateNotification = task.dateNotification, task.isNotificate {
+            notificationLabel.text = dateFormatter.string(from: dateNotification)
+        }
     }
     
     // MARK: - Private methods
+    private func setupNotificationStackView(isNotificatite: Bool) {
+        bottomNotificationConstraints.isActive = isNotificatite
+        
+        alarmImageView.isHidden = !isNotificatite
+        notificationLabel.isHidden = !isNotificatite
+    }
     
     // MARK: - Constraints
     func setupConstraintsForContainerView() {
@@ -172,25 +183,24 @@ class TaskCell: UITableViewCell {
     
     func setupConstraintsForTaskLabelAndNotificationLayer() {
         containerView.addSubview(taskLabel)
-        containerView.addSubview(alarmImageView)
-        containerView.addSubview(notificationLabel)
+        containerView.addSubview(notificationStackView)
         
         // task label
+        taskLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -18).isActive = true
         taskLabel.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
         taskLabel.trailingAnchor.constraint(equalTo: degreeOfProtectionButton.leadingAnchor, constant: -16).isActive = true
-        taskLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 19).isActive = true
-        taskLabel.bottomAnchor.constraint(equalTo: alarmImageView.topAnchor, constant: -6).isActive = true
+        taskLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 18).isActive = true
+        
+        // footer view
+        bottomNotificationConstraints = notificationStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18)
+        bottomNotificationConstraints.isActive = true
+        
+        notificationStackView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 5).isActive = true
+        notificationStackView.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
+        notificationStackView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         // alarm image view
-        alarmImageViewBottomConstraints = alarmImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18)
-        alarmImageViewBottomConstraints.isActive = true
-        
-        alarmImageView.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
-        alarmImageView.heightAnchor.constraint(equalToConstant: 17).isActive = true
-        alarmImageView.widthAnchor.constraint(equalToConstant: 17).isActive = true
-        
-        // notification label
-        notificationLabel.centerYAnchor.constraint(equalTo: alarmImageView.centerYAnchor).isActive = true
-        notificationLabel.leadingAnchor.constraint(equalTo: alarmImageView.trailingAnchor, constant: 7).isActive = true
+        alarmImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        alarmImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     }
 }

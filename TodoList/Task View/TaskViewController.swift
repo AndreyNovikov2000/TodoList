@@ -82,7 +82,7 @@ class TaskViewController: UIViewController {
     
     
     private func deleteContextualAction(with indexPath: IndexPath) -> UIContextualAction {
-        let deleteAction = UIContextualAction(style: .destructive, title: "delete") { [weak self] (_, _, complition) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] (_, _, complition) in
             if let self = self {
                 self.deleteCellWith(indexPath: indexPath)
                 complition(true)

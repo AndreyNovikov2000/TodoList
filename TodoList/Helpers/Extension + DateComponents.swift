@@ -14,4 +14,9 @@ extension DateComponents {
         self.month = month
         self.day = day
     }
+    
+    mutating func setTime(hour: Int?, minute: Int?) {
+        self.minute = minute
+        self.hour = hour
+    }
 }

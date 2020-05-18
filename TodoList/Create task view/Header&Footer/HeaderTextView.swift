@@ -9,10 +9,10 @@
 import UIKit
 
 protocol HeaderTextViewDelegate: class {
-    func didCalendarButtonTapped()
-    func didAlarmButtonPressed()
-    func didimportanceButtonPressed(sender: UIButton)
-    func didSaveButtonpressed()
+    func headerTextViewDidCalendarButtonTapped()
+    func headerTextViewdidAlarmButtonPressed()
+    func headerTextViewDidimportanceButtonPressed(sender: UIButton)
+    func headerxtViewDidSaveButtonpressed()
 }
 
 class HeaderTextView: UITextView {
@@ -102,19 +102,19 @@ class HeaderTextView: UITextView {
     
     // MARK: Action
     @objc fileprivate func heandleCalendarButton() {
-        myDelegate?.didCalendarButtonTapped()
+        myDelegate?.headerTextViewDidCalendarButtonTapped()
     }
     
     @objc fileprivate func heandleAralarmButtonPressed() {
-        myDelegate?.didAlarmButtonPressed()
+        myDelegate?.headerTextViewdidAlarmButtonPressed()
     }
     
     @objc fileprivate func heandleImportanceButtonPressed() {
-        myDelegate?.didimportanceButtonPressed(sender: importanceButton)
+        myDelegate?.headerTextViewDidimportanceButtonPressed(sender: importanceButton)
     }
     
     @objc fileprivate func heandleSaveButtonPressed() {
-        myDelegate?.didSaveButtonpressed()
+        myDelegate?.headerxtViewDidSaveButtonpressed()
     }
     
     // MARK: - Private methods
