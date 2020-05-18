@@ -11,15 +11,23 @@ import UIKit
 import UIKit
 import CoreData
 
+
 class TaskViewController: UIViewController {
     
     // MARK: - IBOultets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addNewTaskButton: UIButton!
     
+    // MARK: - Private properties
+    private let footerView = FooterListView()
+    private var visualEffectView: UIVisualEffectView!
+    
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager = StorageManager()
-    var tasks = [Task]()
+    private var tasks = [Task]()
+    
+    private var isCreating = false
+    
     
     // MARK: - Live Cycle
     override func viewDidAppear(_ animated: Bool) {
@@ -29,25 +37,7 @@ class TaskViewController: UIViewController {
         
         setupTableView()
         setupAddButton()
-        
-        let headerView = UIView()
-        headerView.backgroundColor = .red
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 115)
-        
-        let label = UILabel()
-        headerView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        label.text = "setupAddButton() {setupAddButton() {setupAddButton() {setupAddButton() {"
-        label.numberOfLines = 0
-        tableView.tableHeaderView = headerView
-        
-        let footerView = UIView()
-        footerView.backgroundColor = .green
-        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
-        
-        tableView.tableFooterView = footerView
+        setupFooterView()
     }
     
     
@@ -61,8 +51,16 @@ class TaskViewController: UIViewController {
             self.tableView.reloadData()
         }
         
-        present(vc, animated: true, completion: nil)
+        isCreating ? animateOutMenu() : animateInMemu()
+        
+        
+//        present(vc, animated: true, completion: nil)
     }
+    
+    @objc private func heandleVisualEffectViewTapped() {
+        animateOutMenu()
+    }
+    
     
     // MARK: - Private methods
     private func setupAddButton() {
@@ -80,6 +78,39 @@ class TaskViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
+    private func setupFooterView() {
+        footerView.backgroundColor = .clear
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
+        footerView.setFooterText(text: "Lists")
+        tableView.tableFooterView = footerView
+
+    }
+    
+    private func setupVisualEffectView() {
+        visualEffectView = UIVisualEffectView()
+        visualEffectView.frame = view.frame
+        visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(heandleVisualEffectViewTapped)))
+        view.addSubview(visualEffectView)
+    }
+    
+    private func removeVisualEffectView() {
+        visualEffectView.removeGestureRecognizer(UITapGestureRecognizer())
+        visualEffectView.removeFromSuperview()
+    }
+    
+    private func animateInMemu() {
+        isCreating = true
+        setupVisualEffectView()
+        view.bringSubviewToFront(addNewTaskButton)
+        addNewTaskButton.animateInTransition(duration: 0.2, visualEffectView: visualEffectView, compliteAnimation: nil)
+    }
+    
+    private func animateOutMenu() {
+        isCreating = false
+        addNewTaskButton.animateOutTransition(duration: 0.2, visualEffectView: visualEffectView) { [weak self] in
+            self?.removeVisualEffectView()
+        }
+    }
     
     private func deleteContextualAction(with indexPath: IndexPath) -> UIContextualAction {
         let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] (_, _, complition) in
@@ -108,8 +139,8 @@ class TaskViewController: UIViewController {
         
         tasks.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
-        storageManager.delete(self.contex, object: task)
-        storageManager.save(self.contex)
+        storageManager.delete(contex, object: task)
+        storageManager.save(contex)
     }
 }
 
@@ -169,3 +200,4 @@ extension TaskViewController: TaskCellDelegate {
         storageManager.save(contex)
     }
 }
+

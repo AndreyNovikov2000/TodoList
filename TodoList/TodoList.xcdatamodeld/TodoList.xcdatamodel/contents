@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DetailList" representedClassName="DetailList" syncable="YES">
+        <attribute name="isNotificate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="notificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="detailLists" inverseEntity="Lists"/>
+    </entity>
+    <entity name="Lists" representedClassName="Lists" syncable="YES">
+        <attribute name="colorIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="detailLists" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DetailList" inverseName="list" inverseEntity="DetailList"/>
+    </entity>
     <entity name="SubTask" representedClassName="SubTask" syncable="YES">
         <attribute name="isComplite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="subTaskTitle" optional="YES" attributeType="String"/>
@@ -16,6 +27,8 @@
     </entity>
     <elements>
         <element name="SubTask" positionX="-54" positionY="36" width="128" height="88"/>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Task" positionX="160.8828125" positionY="-24.11328125" width="128" height="148"/>
+        <element name="Lists" positionX="525.11328125" positionY="-196.34765625" width="128" height="88"/>
+        <element name="DetailList" positionX="30.46484375" positionY="-206.42578125" width="128" height="103"/>
     </elements>
 </model>

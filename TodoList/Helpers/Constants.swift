@@ -9,13 +9,13 @@
 import UIKit
 
 struct Constants {
-    static let storiesCollectionViewCircleCellSize: CGFloat = 58
-    static let storiesCollectionViewFullCircleCellSize: CGFloat = Constants.storiesCollectionViewCircleCellSize + 15
-    static let storiesCollectionViewInsetItem: UIEdgeInsets = .init(top: 0, left: 16, bottom: 0, right: 16)
-    static let storiesCollectionViewMinimumLineSpacing: CGFloat = 20
-    static let taskCellPadding = UIEdgeInsets(top: 20, left: 18, bottom: 20, right: 20)
-    static let paddingBetweenTableViewAndScrollView = UIEdgeInsets(top: 25, left: 0, bottom: 15, right: 0)
+    static let listCollectionViewContentSize = CGSize(width: 220, height: 80)
+    static let listCollectionViewInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    static let listCollectionViewMinimumLineSpacing: CGFloat = 5
 }
+
+
+
 
 
 

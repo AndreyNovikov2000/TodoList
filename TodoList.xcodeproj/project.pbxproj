@@ -11,6 +11,15 @@
 		0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */; };
 		0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBC247164780058EEEC /* HeaderView.swift */; };
 		0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBE247190950058EEEC /* Extension + UIButton.swift */; };
+		0C16EFC2247261530058EEEC /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFC1247261530058EEEC /* ListCollectionView.swift */; };
+		0C16EFC5247264C80058EEEC /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFC4247264C80058EEEC /* ListCell.swift */; };
+		0C16EFEA2472EAD20058EEEC /* DetailList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFE62472EAD20058EEEC /* DetailList+CoreDataProperties.swift */; };
+		0C16EFEB2472EAD20058EEEC /* Lists+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFE72472EAD20058EEEC /* Lists+CoreDataClass.swift */; };
+		0C16EFEC2472EAD20058EEEC /* DetailList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFE82472EAD20058EEEC /* DetailList+CoreDataClass.swift */; };
+		0C16EFED2472EAD20058EEEC /* Lists+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFE92472EAD20058EEEC /* Lists+CoreDataProperties.swift */; };
+		0C16EFF12473300B0058EEEC /* FooterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF02473300B0058EEEC /* FooterListView.swift */; };
+		0C16EFF42473408A0058EEEC /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF32473408A0058EEEC /* MenuTableView.swift */; };
+		0C16EFF7247340B40058EEEC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF6247340B40058EEEC /* MenuCell.swift */; };
 		0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2309E7246B0F7700BC81AD /* PickerView.swift */; };
 		0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2309E9246B0F8200BC81AD /* PickerView.xib */; };
 		0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */; };
@@ -21,7 +30,7 @@
 		0CBB5266246D909200679162 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB5265246D909200679162 /* TaskCell.swift */; };
 		0CBB5268246DAF7B00679162 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */; };
 		0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB526A246E6FD400679162 /* NotificationManager.swift */; };
-		0CC496D52470418D00A74FF0 /* Extension + UIviewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */; };
+		0CC496D52470418D00A74FF0 /* Extension + UIViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */; };
 		0CC8BA67246B151B0031D508 /* PickerViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8BA66246B151B0031D508 /* PickerViewRow.swift */; };
 		0CDF14562469E415006E995E /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027372469E0C600DE2698 /* Task+CoreDataProperties.swift */; };
 		0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027362469E0C600DE2698 /* Task+CoreDataClass.swift */; };
@@ -52,6 +61,15 @@
 		0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + DateComponents.swift"; sourceTree = "<group>"; };
 		0C16EFBC247164780058EEEC /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0C16EFBE247190950058EEEC /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
+		0C16EFC1247261530058EEEC /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
+		0C16EFC4247264C80058EEEC /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		0C16EFE62472EAD20058EEEC /* DetailList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DetailList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0C16EFE72472EAD20058EEEC /* Lists+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lists+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0C16EFE82472EAD20058EEEC /* DetailList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DetailList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0C16EFE92472EAD20058EEEC /* Lists+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lists+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0C16EFF02473300B0058EEEC /* FooterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterListView.swift; sourceTree = "<group>"; };
+		0C16EFF32473408A0058EEEC /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
+		0C16EFF6247340B40058EEEC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		0C2309E7246B0F7700BC81AD /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		0C2309E9246B0F8200BC81AD /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		0C7027342469DF7900DE2698 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
@@ -66,7 +84,7 @@
 		0CBB5265246D909200679162 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		0CBB526A246E6FD400679162 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIviewAnimation.swift"; sourceTree = "<group>"; };
+		0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewAnimation.swift"; sourceTree = "<group>"; };
 		0CC8BA66246B151B0031D508 /* PickerViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewRow.swift; sourceTree = "<group>"; };
 		0CEDCCC02468713700286911 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEDCCC32468713700286911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +130,59 @@
 			path = "Header view";
 			sourceTree = "<group>";
 		};
+		0C16EFC0247261120058EEEC /* List view */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFC32472649E0058EEEC /* List cell */,
+				0C16EFC1247261530058EEEC /* ListCollectionView.swift */,
+			);
+			path = "List view";
+			sourceTree = "<group>";
+		};
+		0C16EFC32472649E0058EEEC /* List cell */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFC4247264C80058EEEC /* ListCell.swift */,
+			);
+			path = "List cell";
+			sourceTree = "<group>";
+		};
+		0C16EFEE2472EAF80058EEEC /* List + DetailList */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFE72472EAD20058EEEC /* Lists+CoreDataClass.swift */,
+				0C16EFE92472EAD20058EEEC /* Lists+CoreDataProperties.swift */,
+				0C16EFE82472EAD20058EEEC /* DetailList+CoreDataClass.swift */,
+				0C16EFE62472EAD20058EEEC /* DetailList+CoreDataProperties.swift */,
+			);
+			path = "List + DetailList";
+			sourceTree = "<group>";
+		};
+		0C16EFEF24732FEE0058EEEC /* Footer list view */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFF02473300B0058EEEC /* FooterListView.swift */,
+			);
+			path = "Footer list view";
+			sourceTree = "<group>";
+		};
+		0C16EFF2247340550058EEEC /* Menu table */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFF52473408E0058EEEC /* Menu cell */,
+				0C16EFF32473408A0058EEEC /* MenuTableView.swift */,
+			);
+			path = "Menu table";
+			sourceTree = "<group>";
+		};
+		0C16EFF52473408E0058EEEC /* Menu cell */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFF6247340B40058EEEC /* MenuCell.swift */,
+			);
+			path = "Menu cell";
+			sourceTree = "<group>";
+		};
 		0C2309E6246B0F1E00BC81AD /* Picker time view */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				0C70273E2469E0D600DE2698 /* Task + SubTask */,
+				0C16EFEE2472EAF80058EEEC /* List + DetailList */,
 			);
 			path = "Core data entites";
 			sourceTree = "<group>";
@@ -220,6 +292,7 @@
 				0C2309E6246B0F1E00BC81AD /* Picker time view */,
 				0CEDCCDE2468725C00286911 /* Calendar view */,
 				0CEDCCE7246872CA00286911 /* Task View */,
+				0C16EFF2247340550058EEEC /* Menu table */,
 				0CEDCCE8246872F700286911 /* Create task view */,
 				0CEDCCCC2468713700286911 /* Assets.xcassets */,
 				0CEDCCFC2468753800286911 /* Helpers */,
@@ -260,6 +333,8 @@
 		0CEDCCE7246872CA00286911 /* Task View */ = {
 			isa = PBXGroup;
 			children = (
+				0C16EFC0247261120058EEEC /* List view */,
+				0C16EFEF24732FEE0058EEEC /* Footer list view */,
 				0C16EFBB247164650058EEEC /* Header view */,
 				0CBB5264246D907200679162 /* TaskCell */,
 				0CEDCCE3246872BE00286911 /* TaskViewController.swift */,
@@ -303,7 +378,7 @@
 				0CEDCD012468758C00286911 /* Constants.swift */,
 				0CEDCCFD2468754E00286911 /* Extension + UIColor.swift */,
 				0CEDCCFF2468756F00286911 /* Extension + UIView.swift */,
-				0CC496D42470418D00A74FF0 /* Extension + UIviewAnimation.swift */,
+				0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */,
 				0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */,
 				0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */,
 				0C16EFBE247190950058EEEC /* Extension + UIButton.swift */,
@@ -448,32 +523,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C16EFEA2472EAD20058EEEC /* DetailList+CoreDataProperties.swift in Sources */,
 				0CDF14582469E415006E995E /* SubTask+CoreDataClass.swift in Sources */,
 				0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */,
+				0C16EFC2247261530058EEEC /* ListCollectionView.swift in Sources */,
 				0CEDCCE12468728000286911 /* CalendarView.swift in Sources */,
 				0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */,
+				0C16EFF7247340B40058EEEC /* MenuCell.swift in Sources */,
 				0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */,
 				0CBB5266246D909200679162 /* TaskCell.swift in Sources */,
 				0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */,
 				0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */,
+				0C16EFED2472EAD20058EEEC /* Lists+CoreDataProperties.swift in Sources */,
 				0CEDCCC42468713700286911 /* AppDelegate.swift in Sources */,
 				0CEDCCD82468718A00286911 /* ContanierViewController.swift in Sources */,
 				0CC8BA67246B151B0031D508 /* PickerViewRow.swift in Sources */,
 				0CEDCD022468758C00286911 /* Constants.swift in Sources */,
 				0CEDCCC62468713700286911 /* SceneDelegate.swift in Sources */,
 				0CEDCD002468756F00286911 /* Extension + UIView.swift in Sources */,
+				0C16EFF12473300B0058EEEC /* FooterListView.swift in Sources */,
 				0CEDCCDC2468723800286911 /* TitleView.swift in Sources */,
 				0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */,
+				0C16EFC5247264C80058EEEC /* ListCell.swift in Sources */,
 				0CDF14562469E415006E995E /* Task+CoreDataProperties.swift in Sources */,
 				0CEDCCED2468733E00286911 /* FooterView.swift in Sources */,
+				0C16EFEC2472EAD20058EEEC /* DetailList+CoreDataClass.swift in Sources */,
 				0CEDCCFE2468754E00286911 /* Extension + UIColor.swift in Sources */,
 				0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */,
 				0CEDCCEB2468732800286911 /* HeaderTextView.swift in Sources */,
 				0CEDCCE5246872BE00286911 /* TaskViewController.swift in Sources */,
 				0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */,
 				0CEDCD0524687CC300286911 /* SubViewController.swift in Sources */,
-				0CC496D52470418D00A74FF0 /* Extension + UIviewAnimation.swift in Sources */,
+				0CC496D52470418D00A74FF0 /* Extension + UIViewAnimation.swift in Sources */,
+				0C16EFF42473408A0058EEEC /* MenuTableView.swift in Sources */,
 				0CBB5268246DAF7B00679162 /* Extension + UIImage.swift in Sources */,
+				0C16EFEB2472EAD20058EEEC /* Lists+CoreDataClass.swift in Sources */,
 				0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */,
 				0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */,
 				0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */,

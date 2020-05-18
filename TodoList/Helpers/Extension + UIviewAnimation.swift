@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+// MARK: - Button animation
 extension UIView {
     func animateDegreeButton(for button: UIButton) {
         
@@ -28,6 +28,7 @@ extension UIView {
     }
 }
 
+// MARK: - Alert animation
 extension UIView {
     func visualEffectAnimateIn(visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
         self.alpha = 0
@@ -54,6 +55,31 @@ extension UIView {
             self.alpha = 0
             self.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
             
+        }) { _ in
+            compliteAnimation?()
+        }
+    }
+}
+
+// MARK: -  Menu animation
+extension UIView {
+    func animateInTransition(duration: TimeInterval, visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
+        visualEffectView.effect = UIBlurEffect(style: .light)
+        visualEffectView.alpha = 0
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi / 4)
+            visualEffectView.alpha = 1
+        }) { _ in
+            compliteAnimation?()
+        }
+    }
+    
+    func animateOutTransition(duration: TimeInterval, visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.transform = CGAffineTransform.identity
+            visualEffectView.alpha = 0
         }) { _ in
             compliteAnimation?()
         }

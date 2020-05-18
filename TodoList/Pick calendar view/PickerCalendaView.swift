@@ -13,8 +13,6 @@ protocol PickerCalendarViewDelegate: class {
     func pickerCalendarViewSaveButtonPressed(date: Date)
     func pickerCalendarViewCancelButtonPressed()
     func picerCalendarViewClearButtonPressed()
-//    func pickerCalendarViewDidSelectedDate(_ date: Date)
-//    func pickerCalendarViewDidDeselectedDate()
 }
 
 class PickerCalendaView: UIView {
@@ -84,6 +82,14 @@ class PickerCalendaView: UIView {
         
         myStyle.cellShape = CalendarView.Style.CellShapeOptions.round
         
+        // weekend
+        myStyle.cellTextColorWeekend = .black
+        myStyle.weekdaysFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        // header
+        myStyle.headerTextColor = .black
+        myStyle.headerHeight = 30
+        
         // selected
         myStyle.cellSelectedBorderWidth = 1.5
         myStyle.cellSelectedBorderColor = mainColor
@@ -95,17 +101,12 @@ class PickerCalendaView: UIView {
         myStyle.cellTextColorToday = .white
         myStyle.cellColorToday = mainColor
         
-        // weekend
-        myStyle.cellTextColorWeekend = .black
-        myStyle.weekdaysFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-        
         // default
         myStyle.cellTextColorDefault = .black
         myStyle.cellColorDefault = .clear
-    
-        // header
-        myStyle.headerTextColor = .black
-        myStyle.headerHeight = 30
+        
+        myStyle.cellColorOutOfRange = .systemGray
+        
         calendarView.style = myStyle
     }
     
@@ -170,7 +171,7 @@ extension PickerCalendaView: CalendarViewDelegate {
         calendarView.deselectDate(currentSelectedDate)
         currentSelectedDate = date
         selectedDate.text = dateFormatter.string(from: date)
-//        myDelegate?.pickerCalendarViewDidSelectedDate(date)
+
         
         // style
         if currentSelectedDate == Date() {
@@ -180,6 +181,7 @@ extension PickerCalendaView: CalendarViewDelegate {
         
         myStyle.cellTextColorToday = .black
         myStyle.cellColorToday = .clear
+        myStyle.cellColorOutOfRange = .systemGray
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
@@ -187,7 +189,7 @@ extension PickerCalendaView: CalendarViewDelegate {
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
-//        myDelegate?.pickerCalendarViewDidDeselectedDate()
+        myStyle.cellColorOutOfRange = .systemGray
     }
     
     func calendar(_ calendar: CalendarView, didLongPressDate date: Date, withEvents events: [CalendarEvent]?) {
