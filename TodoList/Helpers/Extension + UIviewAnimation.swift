@@ -30,13 +30,13 @@ extension UIView {
 
 // MARK: - Alert animation
 extension UIView {
-    func visualEffectAnimateIn(visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
+    func visualEffectAnimateIn(duration: TimeInterval, visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
         self.alpha = 0
         self.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
         
         visualEffectView.alpha = 0
         
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: duration, animations: {
             visualEffectView.alpha = 1
             
             self.alpha = 1
@@ -47,9 +47,9 @@ extension UIView {
         }
     }
     
-    func visualEffectViewAnimateOut(visualEffectView: UIVisualEffectView, compliteAnimation: ((() -> Void)?)) {
+    func visualEffectViewAnimateOut(duration: TimeInterval ,visualEffectView: UIVisualEffectView, compliteAnimation: ((() -> Void)?)) {
         
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: duration, animations: {
             visualEffectView.alpha = 0
             
             self.alpha = 0
@@ -63,23 +63,17 @@ extension UIView {
 
 // MARK: -  Menu animation
 extension UIView {
-    func animateInTransition(duration: TimeInterval, visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
-        visualEffectView.effect = UIBlurEffect(style: .light)
-        visualEffectView.alpha = 0
-        
+    func animateInTransition(duration: TimeInterval, compliteAnimation: (() -> Void)?) {
         UIView.animate(withDuration: 0.2, animations: {
             self.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi / 4)
-            visualEffectView.alpha = 1
         }) { _ in
             compliteAnimation?()
         }
     }
     
-    func animateOutTransition(duration: TimeInterval, visualEffectView: UIVisualEffectView, compliteAnimation: (() -> Void)?) {
-        
+    func animateOutTransition(duration: TimeInterval, compliteAnimation: (() -> Void)?) {
         UIView.animate(withDuration: duration, animations: {
             self.transform = CGAffineTransform.identity
-            visualEffectView.alpha = 0
         }) { _ in
             compliteAnimation?()
         }

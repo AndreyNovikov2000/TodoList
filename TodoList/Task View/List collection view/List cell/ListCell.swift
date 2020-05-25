@@ -14,7 +14,7 @@ class ListCell: UICollectionViewCell {
     // MARK: - UI
     
     // first layer
-    private let constainerView: UIView = {
+    private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.3803921569, green: 0.8705882353, blue: 0.6431372549, alpha: 1)
@@ -59,35 +59,42 @@ class ListCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     
-        constainerView.layer.cornerRadius = 10
+        containerView.layer.cornerRadius = 10
     }
     
     // MARK: - Public methods
-    func set(text: String) {
-        listNameLabel.text = "Personal"
-        listCounterLabel.text = "2 tasks"
+    func set(list: List) {
+        listNameLabel.text = list.title
+        // TODO: - Localize
+        listCounterLabel.text = "\(String(describing: list.detailLists?.count)) tasks"
+    }
+    
+    func setBg(color: UIColor) {
+        containerView.backgroundColor = color
+        listNameLabel.text = "personal"
+        listCounterLabel.text = "12 tasks"
     }
     
     // MARK: - Constraints
     private func setupConstraintsForContainerView() {
-        addSubview(constainerView)
+        addSubview(containerView)
         
-        constainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        constainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-        constainerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        constainerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     private func setupConstraintsForSecondLayer() {
-        constainerView.addSubview(listNameLabel)
-        constainerView.addSubview(listCounterLabel)
+        containerView.addSubview(listNameLabel)
+        containerView.addSubview(listCounterLabel)
 
-        listNameLabel.topAnchor.constraint(equalTo: constainerView.topAnchor, constant: 12).isActive = true
-        listNameLabel.leadingAnchor.constraint(equalTo: constainerView.leadingAnchor, constant: 16).isActive = true
-        listNameLabel.trailingAnchor.constraint(equalTo: constainerView.trailingAnchor).isActive = true
+        listNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12).isActive = true
+        listNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
+        listNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
 
         listCounterLabel.topAnchor.constraint(equalTo: listNameLabel.bottomAnchor, constant: 4).isActive = true
-        listCounterLabel.leadingAnchor.constraint(equalTo: constainerView.leadingAnchor, constant: 16).isActive = true
-        listCounterLabel.trailingAnchor.constraint(equalTo: constainerView.trailingAnchor).isActive = true
+        listCounterLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
+        listCounterLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
     }
 }

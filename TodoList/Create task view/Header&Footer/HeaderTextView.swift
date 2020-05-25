@@ -75,7 +75,6 @@ class HeaderTextView: UITextView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         button.setImage(UIImage(named: "saveButton"), for: .normal)
-        button.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         return button
     }()
 
@@ -170,20 +169,5 @@ class HeaderTextView: UITextView {
         saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         saveButton.topAnchor.constraint(equalTo: accessaryView.topAnchor,constant: 5).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: accessaryView.trailingAnchor,constant: -16).isActive = true
-    }
-}
-
-
-extension HeaderTextView {
-    func shaking() {
-        let animation = CABasicAnimation(keyPath: "position")
-        
-        animation.duration = 0.05
-        animation.repeatCount = 4
-        animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 3, y: self.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 3, y: self.center.y))
-        
-        layer.add(animation, forKey: "")
     }
 }

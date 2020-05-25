@@ -152,18 +152,18 @@ class SubViewController: UIViewController {
     }
     
     private func animateIn(for view: UIView) {
-        view.visualEffectAnimateIn(visualEffectView: visualEffectView, compliteAnimation: nil)
+        view.visualEffectAnimateIn(duration: 0.4, visualEffectView: visualEffectView, compliteAnimation: nil)
     }
     
     private func pickerViewAnimateOut() {
-        alarmView.visualEffectViewAnimateOut(visualEffectView: visualEffectView) { [weak self] in
+        alarmView.visualEffectViewAnimateOut(duration: 0.4, visualEffectView: visualEffectView) { [weak self] in
             self?.alarmView.removeFromSuperview()
             self?.visualEffectView.removeFromSuperview()
         }
     }
     
     private func calendarViewAnimateOut() {
-        calendarView.visualEffectViewAnimateOut(visualEffectView: visualEffectView) { [weak self] in
+        calendarView.visualEffectViewAnimateOut(duration: 0.4, visualEffectView: visualEffectView) { [weak self] in
             self?.calendarView.removeFromSuperview()
             self?.visualEffectView.removeFromSuperview()
         }
@@ -366,8 +366,6 @@ extension SubViewController: PickerCalendarViewDelegate {
         isNotificate = true
         components.setComponents(year: year, month: month, day: day)
         calendarViewAnimateOut()
-        
-        print(year, month, day, isNotificate)
     }
     
     func pickerCalendarViewCancelButtonPressed() {

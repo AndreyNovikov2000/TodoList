@@ -6,7 +6,6 @@
 //  Copyright © 2020 Andrey Novikov. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 protocol StoreManager {

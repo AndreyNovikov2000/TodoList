@@ -9,7 +9,13 @@
 import UIKit
 
 class ListCollectionView: UICollectionView {
-
+    
+    // MARK: - Private properties
+    private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let storageManager = StorageManager()
+    private var lists = [List]()
+    let colors = ListColor.getColors()
+    
     // MARK: - Init
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
@@ -17,8 +23,9 @@ class ListCollectionView: UICollectionView {
         
         super.init(frame: .zero, collectionViewLayout: layout)
        
-        setuCollectionView()
         
+        setuCollectionView()
+        fetchData()
     }
     
     required init?(coder: NSCoder) {
@@ -36,19 +43,30 @@ class ListCollectionView: UICollectionView {
         backgroundColor = .clear
         contentInset = UIEdgeInsets(top: 0, left: Constants.listCollectionViewInsets.left, bottom: 0, right: Constants.listCollectionViewInsets.right)
     }
+    
+    private func fetchData() {
+        do {
+           try lists = storageManager.request(contex: contex)
+        } catch {
+            print("error - \(error.localizedDescription)")
+        }
+    }
 }
 
 
 // MARK: - UICollectionViewDataSource
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+//        return lists.count
+        return colors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.reuseId, for: indexPath) as! ListCell
+//        let list = lists[indexPath.row]
         
-        cell.set(text: "123")
+//        cell.set(list: list)
+        cell.setBg(color: colors[indexPath.row])
     
         return cell
     }

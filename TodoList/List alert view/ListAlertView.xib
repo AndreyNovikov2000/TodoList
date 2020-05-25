@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListAlertView" customModule="TodoList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="332" height="329"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ic5-od-zEo">
+                    <rect key="frame" x="2.5" y="61.5" width="327" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="327" id="jO3-Yl-qUh"/>
+                        <constraint firstAttribute="height" constant="250" id="qg6-zj-82Y"/>
+                    </constraints>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title list" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQR-b3-ymD">
+                    <rect key="frame" x="18.5" y="86.5" width="255" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="255" id="vVn-7s-clr"/>
+                    </constraints>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gRA-wt-8bz">
+                    <rect key="frame" x="10.5" y="121.5" width="307" height="114"/>
+                    <color key="backgroundColor" red="0.28235294119999998" green="0.77647058820000003" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="307" id="2fQ-yh-I2d"/>
+                        <constraint firstAttribute="height" constant="114" id="94j-ti-tev"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BC6-mt-XA3">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7sf-UJ-ZFU">
+                    <rect key="frame" x="148" y="248.5" width="168" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKo-Wp-T6X" customClass="ListAlertButton" customModule="TodoList" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
+                            <color key="backgroundColor" red="0.58431372550000005" green="0.59999999999999998" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="5dI-Q7-m3G"/>
+                                <constraint firstAttribute="height" constant="44" id="dt8-XP-qI6"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="Uwq-Sq-2ho"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6G-5h-gFJ" customClass="ListAlertButton" customModule="TodoList" customModuleProvider="target">
+                            <rect key="frame" x="88" y="0.0" width="80" height="44"/>
+                            <color key="backgroundColor" red="0.54117647059999996" green="0.33725490200000002" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="97Z-mf-yxb"/>
+                                <constraint firstAttribute="height" constant="44" id="ena-pQ-GPb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="saveButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="8pF-gG-FIc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ic5-od-zEo" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="0Ll-6E-ZgQ"/>
+                <constraint firstItem="QQR-b3-ymD" firstAttribute="leading" secondItem="ic5-od-zEo" secondAttribute="leading" constant="16" id="AKr-rD-Rgm"/>
+                <constraint firstItem="ic5-od-zEo" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Mo3-Ib-f1o"/>
+                <constraint firstItem="gRA-wt-8bz" firstAttribute="top" secondItem="QQR-b3-ymD" secondAttribute="bottom" constant="12" id="Vhu-M4-uKB"/>
+                <constraint firstItem="QQR-b3-ymD" firstAttribute="top" secondItem="ic5-od-zEo" secondAttribute="top" constant="25" id="ZeT-7M-ofJ"/>
+                <constraint firstItem="7sf-UJ-ZFU" firstAttribute="leading" secondItem="ic5-od-zEo" secondAttribute="trailing" constant="-181.5" id="ZkH-ld-ODw"/>
+                <constraint firstItem="gRA-wt-8bz" firstAttribute="leading" secondItem="ic5-od-zEo" secondAttribute="leading" constant="8" id="kbh-C5-fO6"/>
+                <constraint firstItem="7sf-UJ-ZFU" firstAttribute="top" secondItem="gRA-wt-8bz" secondAttribute="bottom" constant="13" id="rGN-Ya-yFW"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="cancelButton" destination="xKo-Wp-T6X" id="KmO-S6-Ium"/>
+                <outlet property="colorCollectionView" destination="gRA-wt-8bz" id="mKT-ss-xtW"/>
+                <outlet property="saveButton" destination="s6G-5h-gFJ" id="qFp-Lx-jKl"/>
+                <outlet property="titeListTextField" destination="QQR-b3-ymD" id="cto-HE-370"/>
+            </connections>
+            <point key="canvasLocation" x="78.260869565217391" y="21.09375"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg" width="327" height="226"/>
+    </resources>
+</document>

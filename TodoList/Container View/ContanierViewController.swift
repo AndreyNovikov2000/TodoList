@@ -20,7 +20,7 @@ class ContanierViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar()
+//        setupNavigationBar()
         configureTaskViewController()
         configureCalendarViewController()
     }
@@ -88,7 +88,6 @@ class ContanierViewController: UIViewController {
         navigationItem.titleView = titleView
         titleView.titleViewDelegate = self
     }
-    
     
 }
 

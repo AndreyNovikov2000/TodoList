@@ -4,11 +4,11 @@
         <attribute name="isNotificate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="detailLists" inverseEntity="Lists"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="detailLists" inverseEntity="List"/>
     </entity>
-    <entity name="Lists" representedClassName="Lists" syncable="YES">
-        <attribute name="colorIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="List" representedClassName="List" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="titntColor" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
         <relationship name="detailLists" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DetailList" inverseName="list" inverseEntity="DetailList"/>
     </entity>
     <entity name="SubTask" representedClassName="SubTask" syncable="YES">
@@ -26,9 +26,9 @@
         <relationship name="subTasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SubTask" inverseName="task" inverseEntity="SubTask"/>
     </entity>
     <elements>
+        <element name="DetailList" positionX="30.46484375" positionY="-206.42578125" width="128" height="103"/>
+        <element name="List" positionX="525.11328125" positionY="-196.34765625" width="128" height="88"/>
         <element name="SubTask" positionX="-54" positionY="36" width="128" height="88"/>
         <element name="Task" positionX="160.8828125" positionY="-24.11328125" width="128" height="148"/>
-        <element name="Lists" positionX="525.11328125" positionY="-196.34765625" width="128" height="88"/>
-        <element name="DetailList" positionX="30.46484375" positionY="-206.42578125" width="128" height="103"/>
     </elements>
 </model>

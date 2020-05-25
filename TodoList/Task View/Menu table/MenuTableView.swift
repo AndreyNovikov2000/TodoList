@@ -8,32 +8,18 @@
 
 import UIKit
 
-enum Menu: Int, CustomStringConvertible, CaseIterable {
-    // TODO: - Localized
-    var description: String {
-        switch self {
-        case .task:
-            return NSLocalizedString("Task", comment: "")
-        case .list:
-            return NSLocalizedString("List", comment: "")
-        }
-    }
-    
-    var image: UIImage? {
-        switch self {
-        case .task:
-            return UIImage(named: "task")
-        case .list:
-            return UIImage(named: "list")
-        }
-    }
-    
-    case task
-    case list
+
+protocol MenuTableViewDelegate: class {
+    func menuTableView(_ menuTableView: MenuTableView, didSelectedElement menuElement: Menu)
 }
 
 class MenuTableView: UITableView {
-
+    
+    // MARK: - External properties
+    weak var menuDelegate: MenuTableViewDelegate?
+    
+    // MARK: - Private properties
+    private let menu = Menu.allCases
     
     // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
@@ -45,12 +31,21 @@ class MenuTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        clipsToBounds = true
+        layer.cornerRadius = 10
+    }
+    
     // MARK: - Private methods
     private func setupMenuTable() {
         register(MenuCell.self, forCellReuseIdentifier: MenuCell.reuseId)
-        separatorStyle = .none
+        isScrollEnabled = false
+        translatesAutoresizingMaskIntoConstraints = false
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
+        separatorStyle = .none
         delegate = self
         dataSource = self
     }
@@ -65,9 +60,10 @@ extension MenuTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuCell.reuseId, for: indexPath) as! MenuCell
-        let menuElement = Menu(rawValue: indexPath.row)
+        let menuElement = menu[indexPath.row]
         
-        cell.textLabel?.text = menuElement?.description
+        cell.menuImageView.image = menuElement.image
+        cell.menuLabel.text = menuElement.description
 
         return cell
     }
@@ -75,5 +71,12 @@ extension MenuTableView: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension MenuTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let menuElement = menu[indexPath.row]
+        menuDelegate?.menuTableView(self, didSelectedElement: menuElement)
+    }
 }

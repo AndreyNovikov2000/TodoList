@@ -15,20 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2M1-Jh-Xt2">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="AMl-Fq-RiH">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AMl-Fq-RiH" id="WLP-L7-kar">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-CD-4aN">
                                 <rect key="frame" x="336" y="755" width="62" height="62"/>
                                 <constraints>
@@ -45,18 +31,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="xZp-0v-HrA" firstAttribute="trailing" secondItem="2M1-Jh-Xt2" secondAttribute="trailing" id="9hU-rV-Z3J"/>
-                            <constraint firstItem="xZp-0v-HrA" firstAttribute="bottom" secondItem="2M1-Jh-Xt2" secondAttribute="bottom" id="BN2-81-CTU"/>
                             <constraint firstItem="xZp-0v-HrA" firstAttribute="trailing" secondItem="f9v-CD-4aN" secondAttribute="trailing" constant="16" id="CJW-pJ-05N"/>
-                            <constraint firstItem="2M1-Jh-Xt2" firstAttribute="leading" secondItem="xZp-0v-HrA" secondAttribute="leading" id="Msa-B1-Cle"/>
-                            <constraint firstItem="2M1-Jh-Xt2" firstAttribute="top" secondItem="xZp-0v-HrA" secondAttribute="top" id="XyP-JG-fpw"/>
                             <constraint firstItem="xZp-0v-HrA" firstAttribute="bottom" secondItem="f9v-CD-4aN" secondAttribute="bottom" constant="45" id="wj7-he-e55"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xZp-0v-HrA"/>
                     </view>
                     <connections>
                         <outlet property="addNewTaskButton" destination="f9v-CD-4aN" id="eby-Fl-UB0"/>
-                        <outlet property="tableView" destination="2M1-Jh-Xt2" id="O46-Zi-pfG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjc-Ws-BY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

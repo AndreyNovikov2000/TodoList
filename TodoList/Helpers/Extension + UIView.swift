@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func loadFromNib<T: UIView>() -> T {
+    static func loadFromNib<T: UIView>() -> T {
         guard let viewFromNib = Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)?.first as? T else { fatalError("Fatal error \(T.self) does not exist") }
         return viewFromNib
     }

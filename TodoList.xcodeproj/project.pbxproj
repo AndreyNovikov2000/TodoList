@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		08EA27910B7DC6096D5EB76D /* Pods_TodoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034177DF91FDB78DE51338B7 /* Pods_TodoList.framework */; };
+		0C009339247BA71100F4339E /* Extension + UIVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C009338247BA71100F4339E /* Extension + UIVIewController.swift */; };
+		0C00933C247BB66300F4339E /* HeaderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00933B247BB66300F4339E /* HeaderListView.swift */; };
 		0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */; };
 		0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBC247164780058EEEC /* HeaderView.swift */; };
 		0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFBE247190950058EEEC /* Extension + UIButton.swift */; };
@@ -20,10 +22,21 @@
 		0C16EFF12473300B0058EEEC /* FooterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF02473300B0058EEEC /* FooterListView.swift */; };
 		0C16EFF42473408A0058EEEC /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF32473408A0058EEEC /* MenuTableView.swift */; };
 		0C16EFF7247340B40058EEEC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF6247340B40058EEEC /* MenuCell.swift */; };
+		0C16EFFA2473ECCF0058EEEC /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF92473ECCF0058EEEC /* Menu.swift */; };
+		0C16EFFD2473FEBB0058EEEC /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */; };
 		0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2309E7246B0F7700BC81AD /* PickerView.swift */; };
 		0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2309E9246B0F8200BC81AD /* PickerView.xib */; };
+		0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF524796A87003190FE /* Extension + TextView.swift */; };
+		0C441AF9247B888D003190FE /* ListAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF8247B888D003190FE /* ListAlertView.swift */; };
+		0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C441AFA247B88A1003190FE /* ListAlertView.xib */; };
+		0C441AFF247B923D003190FE /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AFE247B923D003190FE /* ColorCell.swift */; };
+		0C476BFB247BA5D8008E01B9 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C476BFA247BA5D8008E01B9 /* TaskListCell.swift */; };
+		0C5C8D612479657B00E0988E /* ColorAccessaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C8D602479657B00E0988E /* ColorAccessaryView.swift */; };
+		0C5C8D632479662D00E0988E /* ColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C8D622479662D00E0988E /* ColorCollectionView.swift */; };
+		0C5C8D662479668100E0988E /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C8D652479668100E0988E /* ColorCollectionViewCell.swift */; };
 		0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */; };
 		0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F9B572469EDB000745524 /* StorageManager.swift */; };
+		0CB617BE24750A8A0053FB77 /* colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB617BD24750A8A0053FB77 /* colors.plist */; };
 		0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB525E246D01D600679162 /* PickerCalendaView.swift */; };
 		0CBB5261246D01DF00679162 /* PickerCalendaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CBB5260246D01DF00679162 /* PickerCalendaView.xib */; };
 		0CBB5263246D8D0A00679162 /* TaskViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */; };
@@ -54,10 +67,16 @@
 		0CEDCD0624687CC300286911 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCD0424687CC300286911 /* SubViewController.xib */; };
 		0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCD072468806900286911 /* SubTaskCell.swift */; };
 		0CEDCD0A2468806A00286911 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCD082468806900286911 /* SubCell.xib */; };
+		0CFA847C247B9CEB009A30E7 /* ListAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */; };
+		0CFA847E247B9F1F009A30E7 /* ListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */; };
+		0CFCFEB524744A91006829F5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCFEB424744A91006829F5 /* ListViewController.swift */; };
+		0CFCFEB72474690C006829F5 /* ListColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCFEB62474690C006829F5 /* ListColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		034177DF91FDB78DE51338B7 /* Pods_TodoList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C009338247BA71100F4339E /* Extension + UIVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIVIewController.swift"; sourceTree = "<group>"; };
+		0C00933B247BB66300F4339E /* HeaderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderListView.swift; sourceTree = "<group>"; };
 		0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + DateComponents.swift"; sourceTree = "<group>"; };
 		0C16EFBC247164780058EEEC /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0C16EFBE247190950058EEEC /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
@@ -70,14 +89,25 @@
 		0C16EFF02473300B0058EEEC /* FooterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterListView.swift; sourceTree = "<group>"; };
 		0C16EFF32473408A0058EEEC /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
 		0C16EFF6247340B40058EEEC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		0C16EFF92473ECCF0058EEEC /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		0C2309E7246B0F7700BC81AD /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		0C2309E9246B0F8200BC81AD /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
+		0C441AF524796A87003190FE /* Extension + TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextView.swift"; sourceTree = "<group>"; };
+		0C441AF8247B888D003190FE /* ListAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAlertView.swift; sourceTree = "<group>"; };
+		0C441AFA247B88A1003190FE /* ListAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListAlertView.xib; sourceTree = "<group>"; };
+		0C441AFE247B923D003190FE /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		0C476BFA247BA5D8008E01B9 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
+		0C5C8D602479657B00E0988E /* ColorAccessaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAccessaryView.swift; sourceTree = "<group>"; };
+		0C5C8D622479662D00E0988E /* ColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionView.swift; sourceTree = "<group>"; };
+		0C5C8D652479668100E0988E /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C7027342469DF7900DE2698 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
 		0C7027362469E0C600DE2698 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0C7027372469E0C600DE2698 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0C7027382469E0C600DE2698 /* SubTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0C7027392469E0C600DE2698 /* SubTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0C7F9B572469EDB000745524 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		0CB617BD24750A8A0053FB77 /* colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
 		0CBB525E246D01D600679162 /* PickerCalendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCalendaView.swift; sourceTree = "<group>"; };
 		0CBB5260246D01DF00679162 /* PickerCalendaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerCalendaView.xib; sourceTree = "<group>"; };
 		0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TaskViewController.storyboard; sourceTree = "<group>"; };
@@ -106,6 +136,10 @@
 		0CEDCD0424687CC300286911 /* SubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 		0CEDCD072468806900286911 /* SubTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskCell.swift; sourceTree = "<group>"; };
 		0CEDCD082468806900286911 /* SubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCell.xib; sourceTree = "<group>"; };
+		0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAlertButton.swift; sourceTree = "<group>"; };
+		0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListViewController.storyboard; sourceTree = "<group>"; };
+		0CFCFEB424744A91006829F5 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		0CFCFEB62474690C006829F5 /* ListColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListColor.swift; sourceTree = "<group>"; };
 		191B8FB3084242E4CC3AAE03 /* Pods-TodoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoList.release.xcconfig"; path = "Target Support Files/Pods-TodoList/Pods-TodoList.release.xcconfig"; sourceTree = "<group>"; };
 		62BEFB2497320F74EA0F66F8 /* Pods-TodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoList.debug.xcconfig"; path = "Target Support Files/Pods-TodoList/Pods-TodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,21 +156,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C16EFBB247164650058EEEC /* Header view */ = {
+		0C00933A247BB64500F4339E /* Header list view */ = {
+			isa = PBXGroup;
+			children = (
+				0C00933B247BB66300F4339E /* HeaderListView.swift */,
+			);
+			path = "Header list view";
+			sourceTree = "<group>";
+		};
+		0C00933D247BF10100F4339E /* list views */ = {
+			isa = PBXGroup;
+			children = (
+				0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */,
+			);
+			path = "list views";
+			sourceTree = "<group>";
+		};
+		0C16EFBB247164650058EEEC /* Header section view */ = {
 			isa = PBXGroup;
 			children = (
 				0C16EFBC247164780058EEEC /* HeaderView.swift */,
 			);
-			path = "Header view";
+			path = "Header section view";
 			sourceTree = "<group>";
 		};
-		0C16EFC0247261120058EEEC /* List view */ = {
+		0C16EFC0247261120058EEEC /* List collection view */ = {
 			isa = PBXGroup;
 			children = (
 				0C16EFC32472649E0058EEEC /* List cell */,
 				0C16EFC1247261530058EEEC /* ListCollectionView.swift */,
 			);
-			path = "List view";
+			path = "List collection view";
 			sourceTree = "<group>";
 		};
 		0C16EFC32472649E0058EEEC /* List cell */ = {
@@ -183,6 +233,25 @@
 			path = "Menu cell";
 			sourceTree = "<group>";
 		};
+		0C16EFF82473ECA90058EEEC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFF92473ECCF0058EEEC /* Menu.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0C16EFFB2473FE800058EEEC /* Task table view */ = {
+			isa = PBXGroup;
+			children = (
+				0C16EFEF24732FEE0058EEEC /* Footer list view */,
+				0C16EFBB247164650058EEEC /* Header section view */,
+				0CBB5264246D907200679162 /* TaskCell */,
+				0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */,
+			);
+			path = "Task table view";
+			sourceTree = "<group>";
+		};
 		0C2309E6246B0F1E00BC81AD /* Picker time view */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +260,43 @@
 				0C2309E9246B0F8200BC81AD /* PickerView.xib */,
 			);
 			path = "Picker time view";
+			sourceTree = "<group>";
+		};
+		0C441AF7247B87EB003190FE /* List alert view */ = {
+			isa = PBXGroup;
+			children = (
+				0C00933D247BF10100F4339E /* list views */,
+				0C441B00247B9BEE003190FE /* Color Cell */,
+				0C441AF8247B888D003190FE /* ListAlertView.swift */,
+				0C441AFA247B88A1003190FE /* ListAlertView.xib */,
+			);
+			path = "List alert view";
+			sourceTree = "<group>";
+		};
+		0C441B00247B9BEE003190FE /* Color Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0C441AFE247B923D003190FE /* ColorCell.swift */,
+			);
+			path = "Color Cell";
+			sourceTree = "<group>";
+		};
+		0C5C8D5F2479651700E0988E /* Color accessory view */ = {
+			isa = PBXGroup;
+			children = (
+				0C5C8D642479663D00E0988E /* Color cell */,
+				0C5C8D622479662D00E0988E /* ColorCollectionView.swift */,
+				0C5C8D602479657B00E0988E /* ColorAccessaryView.swift */,
+			);
+			path = "Color accessory view";
+			sourceTree = "<group>";
+		};
+		0C5C8D642479663D00E0988E /* Color cell */ = {
+			isa = PBXGroup;
+			children = (
+				0C5C8D652479668100E0988E /* ColorCollectionViewCell.swift */,
+			);
+			path = "Color cell";
 			sourceTree = "<group>";
 		};
 		0C7027322469DF4600DE2698 /* Core data entites */ = {
@@ -218,6 +324,8 @@
 			children = (
 				0CBB5269246E68FA00679162 /* Notification manager */,
 				0C7F9B562469ED6D00745524 /* Storage manager */,
+				0C16EFF82473ECA90058EEEC /* Models */,
+				0CFCFEB824746916006829F5 /* ListColor */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -254,13 +362,13 @@
 			path = "View row";
 			sourceTree = "<group>";
 		};
-		0CC8BA68246B4F180031D508 /* Pick calendar view */ = {
+		0CC8BA68246B4F180031D508 /* Picker calendar view */ = {
 			isa = PBXGroup;
 			children = (
 				0CBB525E246D01D600679162 /* PickerCalendaView.swift */,
 				0CBB5260246D01DF00679162 /* PickerCalendaView.xib */,
 			);
-			path = "Pick calendar view";
+			path = "Picker calendar view";
 			sourceTree = "<group>";
 		};
 		0CEDCCB72468713700286911 = {
@@ -288,15 +396,17 @@
 				0CEDCCC52468713700286911 /* SceneDelegate.swift */,
 				0C7F9B552469ED6800745524 /* Services */,
 				0CEDCCD9246871E400286911 /* Container View */,
-				0CC8BA68246B4F180031D508 /* Pick calendar view */,
+				0CC8BA68246B4F180031D508 /* Picker calendar view */,
 				0C2309E6246B0F1E00BC81AD /* Picker time view */,
 				0CEDCCDE2468725C00286911 /* Calendar view */,
+				0C441AF7247B87EB003190FE /* List alert view */,
 				0CEDCCE7246872CA00286911 /* Task View */,
-				0C16EFF2247340550058EEEC /* Menu table */,
 				0CEDCCE8246872F700286911 /* Create task view */,
+				0CFCFEB324744A6A006829F5 /* Cteate list view */,
 				0CEDCCCC2468713700286911 /* Assets.xcassets */,
 				0CEDCCFC2468753800286911 /* Helpers */,
 				0C7027322469DF4600DE2698 /* Core data entites */,
+				0CB617BD24750A8A0053FB77 /* colors.plist */,
 				0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */,
 				0CEDCCCE2468713700286911 /* LaunchScreen.storyboard */,
 				0CEDCCD12468713700286911 /* Info.plist */,
@@ -333,10 +443,9 @@
 		0CEDCCE7246872CA00286911 /* Task View */ = {
 			isa = PBXGroup;
 			children = (
-				0C16EFC0247261120058EEEC /* List view */,
-				0C16EFEF24732FEE0058EEEC /* Footer list view */,
-				0C16EFBB247164650058EEEC /* Header view */,
-				0CBB5264246D907200679162 /* TaskCell */,
+				0C16EFFB2473FE800058EEEC /* Task table view */,
+				0C16EFC0247261120058EEEC /* List collection view */,
+				0C16EFF2247340550058EEEC /* Menu table */,
 				0CEDCCE3246872BE00286911 /* TaskViewController.swift */,
 				0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */,
 			);
@@ -375,15 +484,45 @@
 		0CEDCCFC2468753800286911 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0C5C8D5F2479651700E0988E /* Color accessory view */,
 				0CEDCD012468758C00286911 /* Constants.swift */,
+				0C009338247BA71100F4339E /* Extension + UIVIewController.swift */,
 				0CEDCCFD2468754E00286911 /* Extension + UIColor.swift */,
 				0CEDCCFF2468756F00286911 /* Extension + UIView.swift */,
 				0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */,
 				0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */,
 				0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */,
 				0C16EFBE247190950058EEEC /* Extension + UIButton.swift */,
+				0C441AF524796A87003190FE /* Extension + TextView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0CFA8481247BA52A009A30E7 /* Task list cell */ = {
+			isa = PBXGroup;
+			children = (
+				0C476BFA247BA5D8008E01B9 /* TaskListCell.swift */,
+			);
+			path = "Task list cell";
+			sourceTree = "<group>";
+		};
+		0CFCFEB324744A6A006829F5 /* Cteate list view */ = {
+			isa = PBXGroup;
+			children = (
+				0C00933A247BB64500F4339E /* Header list view */,
+				0CFA8481247BA52A009A30E7 /* Task list cell */,
+				0CFCFEB424744A91006829F5 /* ListViewController.swift */,
+				0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */,
+			);
+			path = "Cteate list view";
+			sourceTree = "<group>";
+		};
+		0CFCFEB824746916006829F5 /* ListColor */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCFEB62474690C006829F5 /* ListColor.swift */,
+			);
+			path = ListColor;
 			sourceTree = "<group>";
 		};
 		56261619FC79378969B91BF0 /* Frameworks */ = {
@@ -466,9 +605,12 @@
 				0CEDCD0624687CC300286911 /* SubViewController.xib in Resources */,
 				0CEDCCE22468728000286911 /* CalendarView.xib in Resources */,
 				0CBB5263246D8D0A00679162 /* TaskViewController.storyboard in Resources */,
+				0CFA847E247B9F1F009A30E7 /* ListViewController.storyboard in Resources */,
 				0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */,
 				0CEDCCD02468713700286911 /* LaunchScreen.storyboard in Resources */,
+				0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */,
 				0CEDCCCD2468713700286911 /* Assets.xcassets in Resources */,
+				0CB617BE24750A8A0053FB77 /* colors.plist in Resources */,
 				0CEDCD0A2468806A00286911 /* SubCell.xib in Resources */,
 				0CBB5261246D01DF00679162 /* PickerCalendaView.xib in Resources */,
 			);
@@ -528,10 +670,12 @@
 				0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */,
 				0C16EFC2247261530058EEEC /* ListCollectionView.swift in Sources */,
 				0CEDCCE12468728000286911 /* CalendarView.swift in Sources */,
+				0C5C8D612479657B00E0988E /* ColorAccessaryView.swift in Sources */,
 				0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */,
 				0C16EFF7247340B40058EEEC /* MenuCell.swift in Sources */,
 				0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */,
 				0CBB5266246D909200679162 /* TaskCell.swift in Sources */,
+				0C16EFFA2473ECCF0058EEEC /* Menu.swift in Sources */,
 				0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */,
 				0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */,
 				0C16EFED2472EAD20058EEEC /* Lists+CoreDataProperties.swift in Sources */,
@@ -543,21 +687,33 @@
 				0CEDCD002468756F00286911 /* Extension + UIView.swift in Sources */,
 				0C16EFF12473300B0058EEEC /* FooterListView.swift in Sources */,
 				0CEDCCDC2468723800286911 /* TitleView.swift in Sources */,
+				0CFCFEB524744A91006829F5 /* ListViewController.swift in Sources */,
 				0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */,
 				0C16EFC5247264C80058EEEC /* ListCell.swift in Sources */,
+				0C5C8D662479668100E0988E /* ColorCollectionViewCell.swift in Sources */,
 				0CDF14562469E415006E995E /* Task+CoreDataProperties.swift in Sources */,
 				0CEDCCED2468733E00286911 /* FooterView.swift in Sources */,
 				0C16EFEC2472EAD20058EEEC /* DetailList+CoreDataClass.swift in Sources */,
+				0C009339247BA71100F4339E /* Extension + UIVIewController.swift in Sources */,
 				0CEDCCFE2468754E00286911 /* Extension + UIColor.swift in Sources */,
 				0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */,
+				0C5C8D632479662D00E0988E /* ColorCollectionView.swift in Sources */,
 				0CEDCCEB2468732800286911 /* HeaderTextView.swift in Sources */,
 				0CEDCCE5246872BE00286911 /* TaskViewController.swift in Sources */,
+				0C441AF9247B888D003190FE /* ListAlertView.swift in Sources */,
 				0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */,
+				0C476BFB247BA5D8008E01B9 /* TaskListCell.swift in Sources */,
+				0CFA847C247B9CEB009A30E7 /* ListAlertButton.swift in Sources */,
+				0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */,
 				0CEDCD0524687CC300286911 /* SubViewController.swift in Sources */,
+				0CFCFEB72474690C006829F5 /* ListColor.swift in Sources */,
 				0CC496D52470418D00A74FF0 /* Extension + UIViewAnimation.swift in Sources */,
 				0C16EFF42473408A0058EEEC /* MenuTableView.swift in Sources */,
+				0C441AFF247B923D003190FE /* ColorCell.swift in Sources */,
 				0CBB5268246DAF7B00679162 /* Extension + UIImage.swift in Sources */,
 				0C16EFEB2472EAD20058EEEC /* Lists+CoreDataClass.swift in Sources */,
+				0C00933C247BB66300F4339E /* HeaderListView.swift in Sources */,
+				0C16EFFD2473FEBB0058EEEC /* TaskTableView.swift in Sources */,
 				0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */,
 				0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */,
 				0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */,

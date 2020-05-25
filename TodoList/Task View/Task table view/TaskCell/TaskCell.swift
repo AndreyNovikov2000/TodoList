@@ -198,9 +198,5 @@ class TaskCell: UITableViewCell {
         notificationStackView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 5).isActive = true
         notificationStackView.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
         notificationStackView.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
-        // alarm image view
-        alarmImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        alarmImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     }
 }

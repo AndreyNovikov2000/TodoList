@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let secondScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: secondScene)
-        window?.rootViewController = UINavigationController(rootViewController: ContanierViewController())
+        window?.rootViewController = ContanierViewController()
         window?.makeKeyAndVisible()
         window?.backgroundColor = .white
     }
