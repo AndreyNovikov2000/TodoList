@@ -35,6 +35,7 @@ class HeaderListView: UIView {
         label.text = "0 tasks"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .white
+        label.alpha = 0.5
         return label
     }()
     

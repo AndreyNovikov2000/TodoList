@@ -124,6 +124,7 @@ class HeaderTextView: UITextView {
         textColor = .black
         textContainerInset = UIEdgeInsets(top: 30, left: 16, bottom: 10, right: 16)
         font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        becomeFirstResponder()
     }
     
     

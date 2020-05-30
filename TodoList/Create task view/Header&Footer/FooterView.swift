@@ -44,5 +44,4 @@ class FooterView: UIView {
         footerButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
         footerButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
-    
 }

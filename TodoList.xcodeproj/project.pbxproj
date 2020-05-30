@@ -67,6 +67,7 @@
 		0CEDCD0624687CC300286911 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCD0424687CC300286911 /* SubViewController.xib */; };
 		0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCD072468806900286911 /* SubTaskCell.swift */; };
 		0CEDCD0A2468806A00286911 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCD082468806900286911 /* SubCell.xib */; };
+		0CF17C52247FC57A003E1ADF /* SubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF17C51247FC57A003E1ADF /* SubListViewController.swift */; };
 		0CFA847C247B9CEB009A30E7 /* ListAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */; };
 		0CFA847E247B9F1F009A30E7 /* ListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */; };
 		0CFCFEB524744A91006829F5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCFEB424744A91006829F5 /* ListViewController.swift */; };
@@ -136,6 +137,7 @@
 		0CEDCD0424687CC300286911 /* SubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 		0CEDCD072468806900286911 /* SubTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskCell.swift; sourceTree = "<group>"; };
 		0CEDCD082468806900286911 /* SubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCell.xib; sourceTree = "<group>"; };
+		0CF17C51247FC57A003E1ADF /* SubListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListViewController.swift; sourceTree = "<group>"; };
 		0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAlertButton.swift; sourceTree = "<group>"; };
 		0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListViewController.storyboard; sourceTree = "<group>"; };
 		0CFCFEB424744A91006829F5 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -402,7 +404,8 @@
 				0C441AF7247B87EB003190FE /* List alert view */,
 				0CEDCCE7246872CA00286911 /* Task View */,
 				0CEDCCE8246872F700286911 /* Create task view */,
-				0CFCFEB324744A6A006829F5 /* Cteate list view */,
+				0CFCFEB324744A6A006829F5 /* List view */,
+				0CF17C50247FC4A8003E1ADF /* Create list task view */,
 				0CEDCCCC2468713700286911 /* Assets.xcassets */,
 				0CEDCCFC2468753800286911 /* Helpers */,
 				0C7027322469DF4600DE2698 /* Core data entites */,
@@ -498,6 +501,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0CF17C50247FC4A8003E1ADF /* Create list task view */ = {
+			isa = PBXGroup;
+			children = (
+				0CF17C51247FC57A003E1ADF /* SubListViewController.swift */,
+			);
+			path = "Create list task view";
+			sourceTree = "<group>";
+		};
 		0CFA8481247BA52A009A30E7 /* Task list cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,7 +517,7 @@
 			path = "Task list cell";
 			sourceTree = "<group>";
 		};
-		0CFCFEB324744A6A006829F5 /* Cteate list view */ = {
+		0CFCFEB324744A6A006829F5 /* List view */ = {
 			isa = PBXGroup;
 			children = (
 				0C00933A247BB64500F4339E /* Header list view */,
@@ -514,7 +525,7 @@
 				0CFCFEB424744A91006829F5 /* ListViewController.swift */,
 				0CFA847D247B9F1F009A30E7 /* ListViewController.storyboard */,
 			);
-			path = "Cteate list view";
+			path = "List view";
 			sourceTree = "<group>";
 		};
 		0CFCFEB824746916006829F5 /* ListColor */ = {
@@ -714,6 +725,7 @@
 				0C16EFEB2472EAD20058EEEC /* Lists+CoreDataClass.swift in Sources */,
 				0C00933C247BB66300F4339E /* HeaderListView.swift in Sources */,
 				0C16EFFD2473FEBB0058EEEC /* TaskTableView.swift in Sources */,
+				0CF17C52247FC57A003E1ADF /* SubListViewController.swift in Sources */,
 				0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */,
 				0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */,
 				0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */,

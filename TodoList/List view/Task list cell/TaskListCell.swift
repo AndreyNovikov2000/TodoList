@@ -1,24 +1,15 @@
 //
-//  TaskCell.swift
+//  TaskListCell.swift
 //  TodoList
 //
-//  Created by Andrey Novikov on 5/14/20.
+//  Created by Andrey Novikov on 5/25/20.
 //  Copyright © 2020 Andrey Novikov. All rights reserved.
 //
 
 import UIKit
 
-protocol TaskCellDelegate: class {
-    func taskCellDidComplite(taskCell: TaskCell)
-    func taskCellDegreeOfProtectionButtonPressed(taskCell: TaskCell)
-}
-
-class TaskCell: UITableViewCell {
-    
-    // MARK: - Exretnal properties
-    weak var myDelegate: TaskCellDelegate?
-    
-    static let reuseId = "TaskCell"
+class TaskListCell: UITableViewCell {
+    static let reuseId = "TaskListCell"
     
     // MARK: - UI
     let containerView: UIView = {
@@ -31,23 +22,15 @@ class TaskCell: UITableViewCell {
     let lineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0.1450980392, green: 0.1647058824, blue: 0.1921568627, alpha: 0.5048052226)
+        view.backgroundColor = .white
         return view
     }()
     
     lazy var compliteButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "MaskU"), for: .normal)
+        button.setImage(UIImage(named: "MaskW"), for: .normal)
         button.addTarget(self, action: #selector(heanleCompliteButtonPressed), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var degreeOfProtectionButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "lMarkOne"), for: .normal)
-        button.addTarget(self, action: #selector(heandleDegreeOfProtectionButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -56,7 +39,7 @@ class TaskCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 0.1450980392, green: 0.1647058824, blue: 0.1921568627, alpha: 1)
+        label.textColor = .white
         return label
     }()
     
@@ -64,10 +47,11 @@ class TaskCell: UITableViewCell {
     let alarmImageView: UIImageView = {
         let imageView =  UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "Alarm")
+        imageView.image = UIImage(named: "CalendarW")
         imageView.isHidden = false
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
+//        imageView.alpha = 0.5
         return imageView
     }()
     
@@ -75,7 +59,8 @@ class TaskCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor(red: 0.1450980392, green: 0.1647058824, blue: 0.1921568627, alpha: 0.4)
+        label.textColor = .white
+        label.alpha = 0.5
         label.isHidden = false
         return label
     }()
@@ -85,6 +70,7 @@ class TaskCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .clear
         return stackView
     }()
     
@@ -102,13 +88,12 @@ class TaskCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        setupCell()
+        
         setupConstraintsForContainerView()
         setupConstraintsForLineView()
         setupConstraintsForCompliteButton()
-        setupConstraintsForDegreeOfProtectionButton()
         setupConstraintsForTaskLabelAndNotificationLayer()
-        
-        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -117,28 +102,27 @@ class TaskCell: UITableViewCell {
     
     
     // MARK: - Action
-    @objc fileprivate func heandleDegreeOfProtectionButtonPressed() {
-        myDelegate?.taskCellDegreeOfProtectionButtonPressed(taskCell: self)
-    }
     
     @objc fileprivate func heanleCompliteButtonPressed() {
-        compliteButton.setImage(UIImage(named: "MaskC"), for: .normal)
-        myDelegate?.taskCellDidComplite(taskCell: self)
+        
     }
     
     // MARK: - Public methods
     func set(task: Task) {
-        taskLabel.text = task.taskTitle
-        compliteButton.setImage(UIImage(named: "MaskU"), for: .normal)
-        
         setupNotificationStackView(isNotificatite: task.isNotificate)
-        degreeOfProtectionButton.setImage(UIImage.getGegreeOfProtection(task.degreeOfProtection) , for: .normal)
+        taskLabel.text = task.taskTitle
+      
         if let dateNotification = task.dateNotification, task.isNotificate {
             notificationLabel.text = dateFormatter.string(from: dateNotification)
         }
     }
     
     // MARK: - Private methods
+    private func setupCell() {
+        selectionStyle = .none
+        backgroundColor = .clear
+    }
+    
     private func setupNotificationStackView(isNotificatite: Bool) {
         bottomNotificationConstraints.isActive = isNotificatite
         
@@ -173,16 +157,7 @@ class TaskCell: UITableViewCell {
         compliteButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         compliteButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
-    
-    private func setupConstraintsForDegreeOfProtectionButton() {
-        containerView.addSubview(degreeOfProtectionButton)
-        
-        degreeOfProtectionButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
-        degreeOfProtectionButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        degreeOfProtectionButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        degreeOfProtectionButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
-    }
-    
+
     private func setupConstraintsForTaskLabelAndNotificationLayer() {
         containerView.addSubview(taskLabel)
         containerView.addSubview(notificationStackView)
@@ -190,7 +165,7 @@ class TaskCell: UITableViewCell {
         // task label
         taskLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -18).isActive = true
         taskLabel.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
-        taskLabel.trailingAnchor.constraint(equalTo: degreeOfProtectionButton.leadingAnchor, constant: -16).isActive = true
+        taskLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
         taskLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 18).isActive = true
         
         // footer view

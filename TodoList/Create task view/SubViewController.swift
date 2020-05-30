@@ -104,8 +104,7 @@ class SubViewController: UIViewController {
     
     private func setupHeaderView() {
         // TODO: - LOCALIZE
-        headerTextView.text = "Добавить задачу..."
-        headerTextView.textColor = .systemGray
+        headerTextView.text = task?.taskTitle
         headerTextView.myDelegate = self
         headerTextView.delegate = self
         headerTextView.frame = CGRect.zero
@@ -191,9 +190,6 @@ extension SubViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension SubViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
-    }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
@@ -204,17 +200,14 @@ extension SubViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        //        guard let sourceSubTask = task?.subTasks?[sourceIndexPath.row] as? SubTask else { return }
-        //        guard let destanationTask = task?.subTasks?[destinationIndexPath.row] as? SubTask else { return }
-        //
-        //        guard let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet else { return }
-        //
-        //        subTasks.remove(sourceSubTask)
-        //        subTasks.insert(destanationTask, at: destinationIndexPath.row)
-        //
-        //        task?.subTasks = subTasks
-        //
-        //        storageManager.save(context)
+        guard let moveSubTask = task?.subTasks?[sourceIndexPath.row] else { return }
+        let subTasks = task?.subTasks?.mutableCopy() as? NSMutableOrderedSet
+        
+        subTasks?.removeObject(at: sourceIndexPath.row)
+        subTasks?.insert(moveSubTask, at: destinationIndexPath.row)
+        
+        task?.subTasks = subTasks
+        storageManager.save(context)
     }
 }
 
@@ -277,23 +270,6 @@ extension SubViewController: UITextViewDelegate {
         task?.taskTitle = textView.text
         storageManager.save(context)
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        textViewDidChange(textView)
-        
-        if textView.text.isEmpty {
-            // FIXME: - Localize
-            textView.text = "Добавить задачу..."
-            textView.textColor = .systemGray
-        }
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.systemGray {
-            textView.text = ""
-            textView.textColor = .black
-        }
-    }
 }
 
 
@@ -333,6 +309,7 @@ extension SubViewController: HeaderTextViewDelegate {
         task?.isNotificate = isNotificate
         storageManager.save(context)
         heandleDismiss?()
+        
         dismiss(animated: true, completion: nil)
     }
 }
@@ -345,13 +322,14 @@ extension SubViewController: PickerViewDelegate {
         
         isNotificate = true
         pickerViewAnimateOut()
+        headerTextView.becomeFirstResponder()
     }
     
     func pickerViewCancelButtonPressed() {
         isNotificate = false
         pickerViewAnimateOut()
+        headerTextView.becomeFirstResponder()
     }
-    
 }
 
 // MARK: - PickerCalendarViewDelegate
@@ -366,11 +344,13 @@ extension SubViewController: PickerCalendarViewDelegate {
         isNotificate = true
         components.setComponents(year: year, month: month, day: day)
         calendarViewAnimateOut()
+         headerTextView.becomeFirstResponder()
     }
     
     func pickerCalendarViewCancelButtonPressed() {
         isNotificate = false
         calendarViewAnimateOut()
+        headerTextView.becomeFirstResponder()
     }
     
     func picerCalendarViewClearButtonPressed() {
@@ -378,6 +358,7 @@ extension SubViewController: PickerCalendarViewDelegate {
     }
 }
 
+// MARK: - UIAdaptivePresentationControllerDelegate
 extension SubViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         guard let task = task else { return }

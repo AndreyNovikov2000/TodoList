@@ -17,7 +17,7 @@ class ListCell: UICollectionViewCell {
     private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.3803921569, green: 0.8705882353, blue: 0.6431372549, alpha: 1)
+        view.backgroundColor = UIColor(red: 0.3803921569, green: 0.8705882353, blue: 0.6431372549, alpha: 1)
         view.clipsToBounds = true
         view.layer.masksToBounds = true
         return view

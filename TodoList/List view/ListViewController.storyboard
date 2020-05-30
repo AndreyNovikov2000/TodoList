@@ -29,11 +29,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfD-1h-5vr">
+                                <rect key="frame" x="336" y="755" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="Ob5-eo-wfL"/>
+                                    <constraint firstAttribute="height" constant="62" id="rWf-De-zxv"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.63534432649999995" green="0.76279455419999997" blue="0.99218624830000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="taskListButtonPressed" destination="2wE-4e-RBJ" eventType="touchUpInside" id="ygw-3b-aoN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="YHG-lv-psF" firstAttribute="trailing" secondItem="MeP-3L-gEI" secondAttribute="trailing" id="2p1-uK-CI5"/>
+                            <constraint firstItem="YHG-lv-psF" firstAttribute="trailing" secondItem="zfD-1h-5vr" secondAttribute="trailing" constant="16" id="DKQ-jY-H5w"/>
                             <constraint firstItem="MeP-3L-gEI" firstAttribute="leading" secondItem="YHG-lv-psF" secondAttribute="leading" id="T0m-SN-FX8"/>
+                            <constraint firstItem="YHG-lv-psF" firstAttribute="bottom" secondItem="zfD-1h-5vr" secondAttribute="bottom" constant="45" id="ZyZ-zX-Exz"/>
                             <constraint firstItem="YHG-lv-psF" firstAttribute="bottom" secondItem="MeP-3L-gEI" secondAttribute="bottom" id="aBm-O9-R2v"/>
                             <constraint firstItem="MeP-3L-gEI" firstAttribute="top" secondItem="YHG-lv-psF" secondAttribute="top" id="rem-FE-9kA"/>
                         </constraints>
@@ -41,6 +56,7 @@
                     </view>
                     <connections>
                         <outlet property="table" destination="MeP-3L-gEI" id="Lsz-27-1A4"/>
+                        <outlet property="taskListButton" destination="zfD-1h-5vr" id="zv9-NE-uga"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iX2-Rg-RtB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

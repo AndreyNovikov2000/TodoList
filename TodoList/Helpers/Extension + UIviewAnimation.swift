@@ -79,3 +79,15 @@ extension UIView {
         }
     }
 }
+
+// MARK: - Cell animation
+extension UIView {
+    func cellAnimateOut(complited: (() -> Void)?) {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.alpha = 0
+        }) { _ in
+            complited?()
+        }
+        
+    }
+}

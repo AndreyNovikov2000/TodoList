@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-import UIKit
 import CoreData
 
 
@@ -55,6 +53,11 @@ class TaskViewController: UIViewController {
     
     private func setupTaskTableView() {
         view.addSubview(taskTableView)
+        
+        taskTableView.presentationClosure = { [weak self] task in
+            self?.presentSubTaskColtroller(with: task)
+        }
+        
         taskTableView.separatorStyle = .none
         
         taskTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -110,6 +113,18 @@ class TaskViewController: UIViewController {
         }
         addNewTaskButton.animateOutTransition(duration: 0.3, compliteAnimation: nil)
     }
+    
+    private func presentSubTaskColtroller(with task: Task?) {
+        let subTaskVC = SubViewController()
+        
+        subTaskVC.modalPresentationStyle = .pageSheet
+        subTaskVC.task = task
+        subTaskVC.heandleDismiss = { [weak self] in
+            self?.taskTableView.updateData()
+        }
+        
+        present(subTaskVC, animated: true, completion: nil)
+    }
 }
 
 
@@ -119,15 +134,9 @@ extension TaskViewController: MenuTableViewDelegate {
     func menuTableView(_ menuTableView: MenuTableView, didSelectedElement menuElement: Menu) {
         switch menuElement {
         case .task:
-            let createVC = SubViewController()
-            
-            createVC.modalPresentationStyle = .pageSheet
-            createVC.heandleDismiss = {
-                self.taskTableView.updateData()
-            }
             
             animateOutMenu()
-            present(createVC, animated: true, completion: nil)
+            presentSubTaskColtroller(with: nil)
             
         case .list:
             let listVC: ListViewController = UIViewController.loadFromStoryboard()

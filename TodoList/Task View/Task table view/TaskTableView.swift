@@ -10,6 +10,9 @@ import UIKit
 
 class TaskTableView: UITableView {
     
+    // MARK: - Public properties
+    var presentationClosure: ((Task) -> Void)?
+    
     // MARK: - Private properties
     private let footerView = FooterListView()
     private var tasks = [Task]()
@@ -88,6 +91,7 @@ class TaskTableView: UITableView {
     }
 }
 
+
 // MARK: - UITableViewDataSource
 extension TaskTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,6 +110,8 @@ extension TaskTableView: UITableViewDataSource {
     }
 }
 
+
+// MARK: - UITableViewDelegate
 extension TaskTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = deleteContextualAction(with: indexPath)
@@ -120,16 +126,20 @@ extension TaskTableView: UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task = tasks[indexPath.row]
+        presentationClosure?(task)
     }
 }
+
 
 // MARK: - TaskCellDelegate
 extension TaskTableView: TaskCellDelegate {
     func taskCellDidComplite(taskCell: TaskCell) {
         guard let indexPath = indexPath(for: taskCell) else { return }
-        deleteCellWith(indexPath: indexPath)
+        taskCell.cellAnimateOut { [weak self] in
+             self?.deleteCellWith(indexPath: indexPath)
+        }
     }
     
     func taskCellDegreeOfProtectionButtonPressed(taskCell: TaskCell) {

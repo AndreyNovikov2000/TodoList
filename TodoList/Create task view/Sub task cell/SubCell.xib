@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,43 +16,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltr-x2-t4f">
-                        <rect key="frame" x="1" y="9.5" width="25" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="25" id="5S9-FP-fsr"/>
-                            <constraint firstAttribute="height" constant="25" id="5TC-9J-OU5"/>
-                        </constraints>
-                        <state key="normal" image="MaskU"/>
-                        <connections>
-                            <action selector="compliteButtonTapped" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cat-Q7-vkH"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zC-Hq-q6B">
-                        <rect key="frame" x="293" y="12" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="7nm-q0-jxG"/>
-                            <constraint firstAttribute="height" constant="20" id="CeB-eu-Jn7"/>
-                        </constraints>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zC-Hq-q6B">
+                        <rect key="frame" x="292" y="11" width="23" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="cross"/>
                         <connections>
                             <action selector="deleteButtonTapped" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lni-ui-whj"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t00-qk-VaH">
-                        <rect key="frame" x="33" y="5" width="253" height="34"/>
+                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t00-qk-VaH">
+                        <rect key="frame" x="35" y="5" width="252" height="34"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltr-x2-t4f">
+                        <rect key="frame" x="3" y="8" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="MaskU"/>
+                        <connections>
+                            <action selector="compliteButtonTapped" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cat-Q7-vkH"/>
+                        </connections>
+                    </button>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="t00-qk-VaH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CQh-Kn-Fd9"/>
-                    <constraint firstAttribute="trailing" secondItem="8zC-Hq-q6B" secondAttribute="trailing" constant="7" id="RJ5-nf-xNz"/>
-                    <constraint firstItem="Ltr-x2-t4f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VWW-l2-wh0"/>
-                    <constraint firstItem="8zC-Hq-q6B" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ecN-jh-4WO"/>
-                    <constraint firstItem="8zC-Hq-q6B" firstAttribute="leading" secondItem="t00-qk-VaH" secondAttribute="trailing" constant="7" id="gNb-mg-FbS"/>
-                    <constraint firstItem="Ltr-x2-t4f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="1" id="yeQ-aK-VUv"/>
-                    <constraint firstItem="t00-qk-VaH" firstAttribute="leading" secondItem="Ltr-x2-t4f" secondAttribute="trailing" constant="7" id="z2W-mv-kkJ"/>
-                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
