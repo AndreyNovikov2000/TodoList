@@ -10,32 +10,48 @@ import UIKit
 
 class ListViewController: UIViewController {
     
+    
     // MARK: - IBOutlets
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var taskListButton: UIButton!
+    @IBOutlet weak var heandleView: UIView!
+    
+    // MARK: - Public properties
+    var list: Lists?
+    var dismissComplition: (() -> Void)?
     
     // MARK: - Private properties
     private let headerListView = HeaderListView()
-    private var listAlertView: ListAlertView!
+    private var listAlertView: ListAlertView! = UIView.loadFromNib()
     private var visualEffectView: UIVisualEffectView!
     
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager = StorageManager()
-    private var tasks = [Task]()
+    private var defaulListtColor = UIColor(red: 0.1147335842, green: 0.5975336432, blue: 0.8779801726, alpha: 1)
+    
     
     // MARK: - Live cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if list == nil {
+            list = storageManager.createEntity(entityName: "Lists", contex: contex)
+        }
+
+        if let title = list?.title, let count = list?.detailLists?.count, let color = UIColor.color(withData: list?.titntColor) {
+            headerListView.setListTitleLabel(with: title)
+            headerListView.setListCountLabel(with: String(count))
+            defaulListtColor = color
+        }
+        
         setupTable()
         setupTaskListButton()
+        setupHeandleView()
         setupHeaderListView()
-        
         setupKeyboardNotification()
         
-        view.backgroundColor =  UIColor(red: 0.1147335842, green: 0.5975336432, blue: 0.8779801726, alpha: 1)
-        
-        tasks = try! storageManager.request(contex: contex)
+        presentationController?.delegate = self
+        view.backgroundColor = defaulListtColor
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,7 +73,7 @@ class ListViewController: UIViewController {
             if view.center.y + listAlertViewFrame.height / 2 > keyBoardOffSetY {
                 
                 let yOffSet = view.center.y + listAlertViewFrame.height / 2 - keyBoardOffSetY
-                view.frame.origin.y -= yOffSet
+                view.frame.origin.y -= yOffSet - 40
             }
         } else {
             view.frame.origin.y = 0
@@ -67,9 +83,8 @@ class ListViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func taskListButtonPressed() {
-        let subListVC: SubListViewController = SubListViewController()//UIViewController.loadFromStoryboard()
-        subListVC.modalPresentationStyle = .formSheet
-        present(subListVC, animated: true, completion: nil)
+        setupSubListViewController(with: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Private methods
@@ -80,7 +95,7 @@ class ListViewController: UIViewController {
     
     private func setupTable() {
         table.register(TaskListCell.self, forCellReuseIdentifier: TaskListCell.reuseId)
-        table.backgroundColor =  UIColor(red: 0.1147335842, green: 0.5975336432, blue: 0.8779801726, alpha: 1)
+        table.backgroundColor = defaulListtColor
         table.separatorStyle = .none
         table.showsVerticalScrollIndicator = false
         table.showsHorizontalScrollIndicator = false
@@ -97,9 +112,38 @@ class ListViewController: UIViewController {
         view.bringSubviewToFront(taskListButton)
     }
     
+    private func setupHeandleView() {
+        heandleView.backgroundColor = UIColor(red: 0.145, green: 0.165, blue: 0.192, alpha: 1)
+        heandleView.alpha = 0.2
+        heandleView.layer.cornerRadius = 3
+    }
+    
     private func setupHeaderListView() {
         headerListView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         headerListView.myDelegate = self
+        if let count = list?.detailLists?.count {
+            headerListView.setListCountLabel(with: String(count))
+        }
+    }
+    
+    private func setupSubListViewController(with detailList: DetailList?) {
+        let subListVC: SubListViewController = SubListViewController()
+
+        subListVC.modalPresentationStyle = .formSheet
+        subListVC.listColor = defaulListtColor
+        subListVC.detailList = detailList
+        subListVC.heandleDismiss = { [weak self] detailList in
+            guard let self = self else { return }
+            guard let detailList = detailList else { return }
+            
+            let copySet = self.list?.detailLists?.mutableCopy() as? NSMutableOrderedSet
+            copySet?.add(detailList)
+            self.list?.detailLists = copySet
+            self.table.reloadData()
+            self.storageManager.save(self.contex)
+        }
+        
+         present(subListVC, animated: true, completion: nil)
     }
     
     private func setupListAlertView() {
@@ -136,20 +180,38 @@ class ListViewController: UIViewController {
             self?.removeVisualEffectView()
         }
     }
+    
+    private func saveList() {
+        let listTitle = headerListView.getTitle()
+        let colorData = defaulListtColor.encode()
+        
+        list?.title = listTitle
+        list?.titntColor = colorData
+        
+        do {
+            try contex.save()
+        } catch let error as NSError {
+            print("Error - \(error.userInfo)")
+        }
+    }
 }
 
 
 // MARK: - UITableViewDataSource
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        if let count = list?.detailLists?.count {
+            return count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskListCell.reuseId, for: indexPath) as! TaskListCell
-        let task = tasks[indexPath.row]
         
-        cell.set(task: task)
+        if let detailList = list?.detailLists?[indexPath.row] as? DetailList {
+            cell.set(detailList: detailList)
+        }
         
         return cell
     }
@@ -169,7 +231,10 @@ extension ListViewController: HeaderListViewDelegate {
         setupListAlertView()
         animateIn()
         
-        listAlertView.titeListTextField.becomeFirstResponder()
+        if let text = list?.title{
+            listAlertView.titleListTextField.text = text
+        }
+        listAlertView.titleListTextField.becomeFirstResponder()
     }
 }
 
@@ -187,6 +252,7 @@ extension ListViewController: ListAlertViewDelegate {
     func listAlertView(_ listAlertView: ListAlertView, didSelectedColor color: UIColor) {
         table.backgroundColor = color
         view.backgroundColor = color
+        defaulListtColor = color
         table.reloadData()
     }
     
@@ -194,5 +260,14 @@ extension ListViewController: ListAlertViewDelegate {
         if let text = titleListTextFeild.text {
             headerListView.setListTitleLabel(with: text)
         }
+    }
+}
+
+
+// MARK: - UIAdaptivePresentationControllerDelegate
+extension ListViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        saveList()
+        dismissComplition?()
     }
 }

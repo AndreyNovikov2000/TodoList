@@ -362,7 +362,10 @@ extension SubViewController: PickerCalendarViewDelegate {
 extension SubViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         guard let task = task else { return }
-        storageManager.delete(context, object: task)
-        storageManager.save(context)
+        
+        if isCreated {
+            storageManager.delete(context, object: task)
+            storageManager.save(context)
+        }
     }
 }

@@ -21,7 +21,7 @@ class ListAlertView: UIView {
     weak var myDelegate: ListAlertViewDelegate?
     
     // MARK: - IBOutlets
-    @IBOutlet weak var titeListTextField: UITextField!
+    @IBOutlet weak var titleListTextField: UITextField!
     @IBOutlet weak var colorCollectionView: UICollectionView!
     @IBOutlet weak var saveButton: ListAlertButton!
     @IBOutlet weak var cancelButton: ListAlertButton!
@@ -46,6 +46,7 @@ class ListAlertView: UIView {
         myDelegate?.listAlertViewCancelButtonTapped(self)
     }
     
+    
     // MARK: - Private methods
     private func setupColorCollectionView() {
         colorCollectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.reuseId)
@@ -57,10 +58,10 @@ class ListAlertView: UIView {
     }
     
     private func setupTitleListTextField() {
-        titeListTextField.borderStyle = .none
-        titeListTextField.contentVerticalAlignment = .center
-        titeListTextField.contentHorizontalAlignment = .center
-        titeListTextField.delegate = self
+        titleListTextField.borderStyle = .none
+        titleListTextField.contentVerticalAlignment = .center
+        titleListTextField.contentHorizontalAlignment = .center
+        titleListTextField.delegate = self
     }
 }
 

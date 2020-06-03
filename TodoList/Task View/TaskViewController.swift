@@ -19,7 +19,7 @@ class TaskViewController: UIViewController {
     private let taskTableView = TaskTableView()
     private var menuTableView: MenuTableView!
     private var visualEffectView: UIVisualEffectView!
-        
+    
     private var isCreating = false
     
     
@@ -54,8 +54,14 @@ class TaskViewController: UIViewController {
     private func setupTaskTableView() {
         view.addSubview(taskTableView)
         
+        // selected task
         taskTableView.presentationClosure = { [weak self] task in
             self?.presentSubTaskColtroller(with: task)
+        }
+        
+        // selected list
+        taskTableView.footerView.listCollectionView.presentationClosure = { [weak self] list in
+            self?.presentListViewController(with: list)
         }
         
         taskTableView.separatorStyle = .none
@@ -125,6 +131,17 @@ class TaskViewController: UIViewController {
         
         present(subTaskVC, animated: true, completion: nil)
     }
+    
+    private func presentListViewController(with list: Lists?) {
+        let listVC: ListViewController = UIViewController.loadFromStoryboard()
+        listVC.modalPresentationStyle = .pageSheet
+        listVC.list = list
+        listVC.dismissComplition = { [weak self] in
+            self?.taskTableView.footerView.listCollectionView.update()
+        }
+        
+        present(listVC, animated: true, completion: nil)
+    }
 }
 
 
@@ -139,10 +156,10 @@ extension TaskViewController: MenuTableViewDelegate {
             presentSubTaskColtroller(with: nil)
             
         case .list:
-            let listVC: ListViewController = UIViewController.loadFromStoryboard()
-            listVC.modalPresentationStyle = .pageSheet
+            
             animateOutMenu()
-            present(listVC, animated: true, completion: nil)
+            presentListViewController(with: nil)
+    
         }
     }
 }

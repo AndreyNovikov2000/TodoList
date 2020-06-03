@@ -83,7 +83,7 @@ class TaskCell: UITableViewCell {
     lazy private var notificationStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [alarmImageView, notificationLabel])
         stackView.axis = .horizontal
-        stackView.spacing = 6
+        stackView.spacing = 1
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()

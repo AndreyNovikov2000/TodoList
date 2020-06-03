@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                         <constraint firstAttribute="height" constant="250" id="qg6-zj-82Y"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title list" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQR-b3-ymD">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title list" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="QQR-b3-ymD">
                     <rect key="frame" x="18.5" y="86.5" width="255" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="255" id="vVn-7s-clr"/>
@@ -100,7 +100,7 @@
                 <outlet property="cancelButton" destination="xKo-Wp-T6X" id="KmO-S6-Ium"/>
                 <outlet property="colorCollectionView" destination="gRA-wt-8bz" id="mKT-ss-xtW"/>
                 <outlet property="saveButton" destination="s6G-5h-gFJ" id="qFp-Lx-jKl"/>
-                <outlet property="titeListTextField" destination="QQR-b3-ymD" id="cto-HE-370"/>
+                <outlet property="titleListTextField" destination="QQR-b3-ymD" id="cto-HE-370"/>
             </connections>
             <point key="canvasLocation" x="78.260869565217391" y="21.09375"/>
         </view>

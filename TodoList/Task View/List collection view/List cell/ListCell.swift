@@ -49,6 +49,8 @@ class ListCell: UICollectionViewCell {
             
         setupConstraintsForContainerView()
         setupConstraintsForSecondLayer()
+        
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -63,17 +65,15 @@ class ListCell: UICollectionViewCell {
     }
     
     // MARK: - Public methods
-    func set(list: List) {
-        listNameLabel.text = list.title
+    func set(list: Lists) {
+        guard let title = list.title, let subTasksCount = list.detailLists?.count, let color = UIColor.color(withData: list.titntColor)  else { return }
+        
         // TODO: - Localize
-        listCounterLabel.text = "\(String(describing: list.detailLists?.count)) tasks"
+        listNameLabel.text = title
+        listCounterLabel.text = "\(String(describing: subTasksCount)) tasks"
+        containerView.backgroundColor = color
     }
     
-    func setBg(color: UIColor) {
-        containerView.backgroundColor = color
-        listNameLabel.text = "personal"
-        listCounterLabel.text = "12 tasks"
-    }
     
     // MARK: - Constraints
     private func setupConstraintsForContainerView() {
@@ -91,7 +91,7 @@ class ListCell: UICollectionViewCell {
 
         listNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12).isActive = true
         listNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
-        listNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        listNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
 
         listCounterLabel.topAnchor.constraint(equalTo: listNameLabel.bottomAnchor, constant: 4).isActive = true
         listCounterLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true

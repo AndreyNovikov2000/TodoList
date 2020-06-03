@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol TaskListCellDelegate: class {
+    func taskListCellCompliteButtonPressed(_ taskListCell: TaskListCell)
+}
+
 class TaskListCell: UITableViewCell {
+    
+    // MARK: - External properties
+    weak var myDelegate:  TaskListCellDelegate?
+    
     static let reuseId = "TaskListCell"
     
     // MARK: - UI
@@ -51,7 +59,6 @@ class TaskListCell: UITableViewCell {
         imageView.isHidden = false
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
-//        imageView.alpha = 0.5
         return imageView
     }()
     
@@ -68,7 +75,7 @@ class TaskListCell: UITableViewCell {
     lazy private var notificationStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [alarmImageView, notificationLabel])
         stackView.axis = .horizontal
-        stackView.spacing = 6
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
         return stackView
@@ -108,11 +115,11 @@ class TaskListCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func set(task: Task) {
-        setupNotificationStackView(isNotificatite: task.isNotificate)
-        taskLabel.text = task.taskTitle
-      
-        if let dateNotification = task.dateNotification, task.isNotificate {
+    func set(detailList: DetailList) {
+        setupNotificationStackView(isNotificatite: detailList.isNotificate)
+        taskLabel.text = detailList.title
+        
+        if let dateNotification = detailList.notificationDate, detailList.isNotificate {
             notificationLabel.text = dateFormatter.string(from: dateNotification)
         }
     }
@@ -154,8 +161,8 @@ class TaskListCell: UITableViewCell {
         
         compliteButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 18).isActive = true
         compliteButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        compliteButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        compliteButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        compliteButton.heightAnchor.constraint(equalToConstant: 23).isActive = true
+        compliteButton.widthAnchor.constraint(equalToConstant: 23).isActive = true
     }
 
     private func setupConstraintsForTaskLabelAndNotificationLayer() {

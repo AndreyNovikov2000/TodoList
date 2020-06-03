@@ -73,7 +73,11 @@ class HeaderListView: UIView {
     }
     
     func setListCountLabel(with title: String) {
-        listCountLabel.text = title
+        listCountLabel.text = title + " tasks"
+    }
+    
+    func getTitle() -> String? {
+        return listTitleLabel.text
     }
     
     // MARK: - Private methods

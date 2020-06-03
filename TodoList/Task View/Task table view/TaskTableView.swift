@@ -12,9 +12,9 @@ class TaskTableView: UITableView {
     
     // MARK: - Public properties
     var presentationClosure: ((Task) -> Void)?
+    let footerView = FooterListView()
     
     // MARK: - Private properties
-    private let footerView = FooterListView()
     private var tasks = [Task]()
     
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

@@ -2,7 +2,7 @@
 //  DetailList+CoreDataProperties.swift
 //  
 //
-//  Created by Andrey Novikov on 5/18/20.
+//  Created by Andrey Novikov on 5/31/20.
 //
 //
 
@@ -16,9 +16,9 @@ extension DetailList {
         return NSFetchRequest<DetailList>(entityName: "DetailList")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var notificationDate: Date?
     @NSManaged public var isNotificate: Bool
-    @NSManaged public var list: List?
+    @NSManaged public var notificationDate: Date?
+    @NSManaged public var title: String?
+    @NSManaged public var list: Lists?
 
 }

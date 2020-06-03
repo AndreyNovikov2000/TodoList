@@ -10,11 +10,13 @@ import UIKit
 
 class ListCollectionView: UICollectionView {
     
+    // MARK: - Public properties
+    var presentationClosure: ((Lists?) -> Void)?
+    
     // MARK: - Private properties
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager = StorageManager()
-    private var lists = [List]()
-    let colors = ListColor.getColors()
+    private var lists = [Lists]()
     
     // MARK: - Init
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -32,6 +34,12 @@ class ListCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    func update() {
+        fetchData()
+        reloadData()
+    }
+    
     // MARK: - Private methods
     private func setuCollectionView() {
         delegate = self
@@ -43,6 +51,7 @@ class ListCollectionView: UICollectionView {
         backgroundColor = .clear
         contentInset = UIEdgeInsets(top: 0, left: Constants.listCollectionViewInsets.left, bottom: 0, right: Constants.listCollectionViewInsets.right)
     }
+    
     
     private func fetchData() {
         do {
@@ -57,24 +66,26 @@ class ListCollectionView: UICollectionView {
 // MARK: - UICollectionViewDataSource
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return lists.count
-        return colors.count
+        return lists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.reuseId, for: indexPath) as! ListCell
-//        let list = lists[indexPath.row]
+        let list = lists[indexPath.row]
         
-//        cell.set(list: list)
-        cell.setBg(color: colors[indexPath.row])
-    
+        cell.set(list: list)
+
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension ListCollectionView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = lists[indexPath.row]
+        
+        presentationClosure?(selectedItem)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
