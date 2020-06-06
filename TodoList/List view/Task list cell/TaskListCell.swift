@@ -109,9 +109,8 @@ class TaskListCell: UITableViewCell {
     
     
     // MARK: - Action
-    
     @objc fileprivate func heanleCompliteButtonPressed() {
-        
+        myDelegate?.taskListCellCompliteButtonPressed(self)
     }
     
     // MARK: - Public methods
@@ -178,6 +177,7 @@ class TaskListCell: UITableViewCell {
         // footer view
         bottomNotificationConstraints = notificationStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18)
         bottomNotificationConstraints.isActive = true
+        bottomNotificationConstraints.priority = UILayoutPriority(999)
         
         notificationStackView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 5).isActive = true
         notificationStackView.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true

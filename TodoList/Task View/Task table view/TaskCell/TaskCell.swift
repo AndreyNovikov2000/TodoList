@@ -188,14 +188,20 @@ class TaskCell: UITableViewCell {
         containerView.addSubview(notificationStackView)
         
         // task label
-        taskLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -18).isActive = true
+        var taskLabelBottomAchor = NSLayoutConstraint()
+        taskLabelBottomAchor.priority = UILayoutPriority(998)
+        taskLabelBottomAchor = taskLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -18)
+        taskLabelBottomAchor.isActive = true
+//        taskLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -18).isActive = true
         taskLabel.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true
         taskLabel.trailingAnchor.constraint(equalTo: degreeOfProtectionButton.leadingAnchor, constant: -16).isActive = true
         taskLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 18).isActive = true
         
+        
         // footer view
         bottomNotificationConstraints = notificationStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18)
         bottomNotificationConstraints.isActive = true
+        bottomNotificationConstraints.priority = UILayoutPriority(999)
         
         notificationStackView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 5).isActive = true
         notificationStackView.leadingAnchor.constraint(equalTo: compliteButton.trailingAnchor, constant: 18).isActive = true

@@ -10,7 +10,6 @@ import UIKit
 
 class ListViewController: UIViewController {
     
-    
     // MARK: - IBOutlets
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var taskListButton: UIButton!
@@ -64,6 +63,7 @@ class ListViewController: UIViewController {
     // MARK: - Objc func
     @objc fileprivate func heandleKeyboardNotification(notification: Notification) {
         guard let keyboardSize = notification.userInfo?[UIWindow.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        // FIXME: - Unraping value when value != nil ?????, add notofication when edn editing second screeen
         let listAlertViewFrame = listAlertView.frame
         let keyBoardOffSetY = view.frame.height - keyboardSize.height
         
@@ -194,6 +194,31 @@ class ListViewController: UIViewController {
             print("Error - \(error.userInfo)")
         }
     }
+    
+    private func deleteContextualAction(with indexPath: IndexPath) -> UIContextualAction {
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] (_, _, complition) in
+            if let self = self {
+                self.deleteCellWith(indexPath: indexPath)
+                complition(true)
+            }
+        }
+    
+        deleteAction.backgroundColor = UIColor(red: 0.9568627451, green: 0.368627451, blue: 0.4274509804, alpha: 1)
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        return deleteAction
+    }
+        
+    private func deleteCellWith(indexPath: IndexPath) {
+        guard let detailListTask = list?.detailLists?[indexPath.row] as? DetailList else { return }
+        let subLists = list?.detailLists?.mutableCopy() as? NSMutableOrderedSet
+
+        subLists?.remove(detailListTask)
+        list?.detailLists = subLists
+        table.deleteRows(at: [indexPath], with: .left)
+        storageManager.delete(contex, object: detailListTask)
+        storageManager.save(contex)
+    }
 }
 
 
@@ -211,6 +236,7 @@ extension ListViewController: UITableViewDataSource {
         
         if let detailList = list?.detailLists?[indexPath.row] as? DetailList {
             cell.set(detailList: detailList)
+            cell.myDelegate = self
         }
         
         return cell
@@ -220,7 +246,25 @@ extension ListViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension ListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = deleteContextualAction(with: indexPath)
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
+
+
+// MARK: - TaskListCellDelegate
+extension ListViewController: TaskListCellDelegate {
+    func taskListCellCompliteButtonPressed(_ taskListCell: TaskListCell) {
+        guard let indexPath = table.indexPath(for: taskListCell) else { return }
+        guard let count = list?.detailLists?.count else { return }
+        
+        taskListCell.cellAnimateOut { [weak self] in
+            self?.deleteCellWith(indexPath: indexPath)
+            self?.headerListView.setListCountLabel(with: String(count - 1))
+        }
+    }
 }
 
 
