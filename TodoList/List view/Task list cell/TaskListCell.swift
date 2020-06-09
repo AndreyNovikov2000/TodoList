@@ -112,6 +112,7 @@ class TaskListCell: UITableViewCell {
     @objc fileprivate func heanleCompliteButtonPressed() {
         myDelegate?.taskListCellCompliteButtonPressed(self)
     }
+
     
     // MARK: - Public methods
     func set(detailList: DetailList) {

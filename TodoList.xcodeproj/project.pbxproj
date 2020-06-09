@@ -26,6 +26,7 @@
 		0C16EFFD2473FEBB0058EEEC /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */; };
 		0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2309E7246B0F7700BC81AD /* PickerView.swift */; };
 		0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2309E9246B0F8200BC81AD /* PickerView.xib */; };
+		0C322448248FBE90002CBD31 /* Extension + Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C322447248FBE90002CBD31 /* Extension + Calendar.swift */; };
 		0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF524796A87003190FE /* Extension + TextView.swift */; };
 		0C441AF9247B888D003190FE /* ListAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF8247B888D003190FE /* ListAlertView.swift */; };
 		0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C441AFA247B88A1003190FE /* ListAlertView.xib */; };
@@ -36,6 +37,10 @@
 		0C5C8D662479668100E0988E /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C8D652479668100E0988E /* ColorCollectionViewCell.swift */; };
 		0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */; };
 		0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F9B572469EDB000745524 /* StorageManager.swift */; };
+		0C9C718B248CF31F00A5D63A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9C718A248CF31F00A5D63A /* AlertView.swift */; };
+		0C9C718D248CF32700A5D63A /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9C718C248CF32600A5D63A /* AlertView.xib */; };
+		0C9C7190248CFB5D00A5D63A /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9C718F248CFB5D00A5D63A /* AlertButton.swift */; };
+		0CA89DF7248E5577008BB2BD /* ListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA89DF6248E5577008BB2BD /* ListMenu.swift */; };
 		0CB617BE24750A8A0053FB77 /* colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB617BD24750A8A0053FB77 /* colors.plist */; };
 		0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB525E246D01D600679162 /* PickerCalendaView.swift */; };
 		0CBB5261246D01DF00679162 /* PickerCalendaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CBB5260246D01DF00679162 /* PickerCalendaView.xib */; };
@@ -95,6 +100,7 @@
 		0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		0C2309E7246B0F7700BC81AD /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		0C2309E9246B0F8200BC81AD /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
+		0C322447248FBE90002CBD31 /* Extension + Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Calendar.swift"; sourceTree = "<group>"; };
 		0C441AF524796A87003190FE /* Extension + TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextView.swift"; sourceTree = "<group>"; };
 		0C441AF8247B888D003190FE /* ListAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAlertView.swift; sourceTree = "<group>"; };
 		0C441AFA247B88A1003190FE /* ListAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListAlertView.xib; sourceTree = "<group>"; };
@@ -109,6 +115,10 @@
 		0C7027382469E0C600DE2698 /* SubTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0C7027392469E0C600DE2698 /* SubTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0C7F9B572469EDB000745524 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		0C9C718A248CF31F00A5D63A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		0C9C718C248CF32600A5D63A /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		0C9C718F248CFB5D00A5D63A /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
+		0CA89DF6248E5577008BB2BD /* ListMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMenu.swift; sourceTree = "<group>"; };
 		0CB617BD24750A8A0053FB77 /* colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
 		0CBB525E246D01D600679162 /* PickerCalendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCalendaView.swift; sourceTree = "<group>"; };
 		0CBB5260246D01DF00679162 /* PickerCalendaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerCalendaView.xib; sourceTree = "<group>"; };
@@ -168,12 +178,12 @@
 			path = "Header list view";
 			sourceTree = "<group>";
 		};
-		0C00933D247BF10100F4339E /* list views */ = {
+		0C00933D247BF10100F4339E /* list alert button */ = {
 			isa = PBXGroup;
 			children = (
 				0CFA847B247B9CEB009A30E7 /* ListAlertButton.swift */,
 			);
-			path = "list views";
+			path = "list alert button";
 			sourceTree = "<group>";
 		};
 		0C16EFBB247164650058EEEC /* Header section view */ = {
@@ -241,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				0C16EFF92473ECCF0058EEEC /* Menu.swift */,
+				0CA89DF6248E5577008BB2BD /* ListMenu.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,7 +280,7 @@
 		0C441AF7247B87EB003190FE /* List alert view */ = {
 			isa = PBXGroup;
 			children = (
-				0C00933D247BF10100F4339E /* list views */,
+				0C00933D247BF10100F4339E /* list alert button */,
 				0C441B00247B9BEE003190FE /* Color Cell */,
 				0C441AF8247B888D003190FE /* ListAlertView.swift */,
 				0C441AFA247B88A1003190FE /* ListAlertView.xib */,
@@ -342,6 +353,24 @@
 			path = "Storage manager";
 			sourceTree = "<group>";
 		};
+		0C9C7189248CF30700A5D63A /* Alert view */ = {
+			isa = PBXGroup;
+			children = (
+				0C9C718E248CFB3300A5D63A /* alert button */,
+				0C9C718A248CF31F00A5D63A /* AlertView.swift */,
+				0C9C718C248CF32600A5D63A /* AlertView.xib */,
+			);
+			path = "Alert view";
+			sourceTree = "<group>";
+		};
+		0C9C718E248CFB3300A5D63A /* alert button */ = {
+			isa = PBXGroup;
+			children = (
+				0C9C718F248CFB5D00A5D63A /* AlertButton.swift */,
+			);
+			path = "alert button";
+			sourceTree = "<group>";
+		};
 		0CBB5264246D907200679162 /* TaskCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +433,7 @@
 				0C2309E6246B0F1E00BC81AD /* Picker time view */,
 				0CEDCCDE2468725C00286911 /* Calendar view */,
 				0C441AF7247B87EB003190FE /* List alert view */,
+				0C9C7189248CF30700A5D63A /* Alert view */,
 				0CEDCCE7246872CA00286911 /* Task View */,
 				0CEDCCE8246872F700286911 /* Create task view */,
 				0CFCFEB324744A6A006829F5 /* List view */,
@@ -450,7 +480,6 @@
 			children = (
 				0C16EFFB2473FE800058EEEC /* Task table view */,
 				0C16EFC0247261120058EEEC /* List collection view */,
-				0C16EFF2247340550058EEEC /* Menu table */,
 				0CEDCCE3246872BE00286911 /* TaskViewController.swift */,
 				0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */,
 			);
@@ -489,6 +518,7 @@
 		0CEDCCFC2468753800286911 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0C16EFF2247340550058EEEC /* Menu table */,
 				0C5C8D5F2479651700E0988E /* Color accessory view */,
 				0CEDCD012468758C00286911 /* Constants.swift */,
 				0C009338247BA71100F4339E /* Extension + UIVIewController.swift */,
@@ -497,6 +527,7 @@
 				0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */,
 				0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */,
 				0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */,
+				0C322447248FBE90002CBD31 /* Extension + Calendar.swift */,
 				0C16EFBE247190950058EEEC /* Extension + UIButton.swift */,
 				0C441AF524796A87003190FE /* Extension + TextView.swift */,
 			);
@@ -633,6 +664,7 @@
 				0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */,
 				0CEDCCCD2468713700286911 /* Assets.xcassets in Resources */,
 				0CB617BE24750A8A0053FB77 /* colors.plist in Resources */,
+				0C9C718D248CF32700A5D63A /* AlertView.xib in Resources */,
 				0CEDCD0A2468806A00286911 /* SubCell.xib in Resources */,
 				0CBB5261246D01DF00679162 /* PickerCalendaView.xib in Resources */,
 			);
@@ -703,6 +735,7 @@
 				0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */,
 				0CEDCCC42468713700286911 /* AppDelegate.swift in Sources */,
 				0CEDCCD82468718A00286911 /* ContanierViewController.swift in Sources */,
+				0C9C7190248CFB5D00A5D63A /* AlertButton.swift in Sources */,
 				0CC8BA67246B151B0031D508 /* PickerViewRow.swift in Sources */,
 				0C13D6CD2483C41D003990AF /* List+CoreDataClass.swift in Sources */,
 				0CEDCD022468758C00286911 /* Constants.swift in Sources */,
@@ -712,6 +745,7 @@
 				0CEDCCDC2468723800286911 /* TitleView.swift in Sources */,
 				0CFCFEB524744A91006829F5 /* ListViewController.swift in Sources */,
 				0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */,
+				0C9C718B248CF31F00A5D63A /* AlertView.swift in Sources */,
 				0C16EFC5247264C80058EEEC /* ListCell.swift in Sources */,
 				0C5C8D662479668100E0988E /* ColorCollectionViewCell.swift in Sources */,
 				0CDF14562469E415006E995E /* Task+CoreDataProperties.swift in Sources */,
@@ -721,6 +755,8 @@
 				0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */,
 				0C5C8D632479662D00E0988E /* ColorCollectionView.swift in Sources */,
 				0CEDCCEB2468732800286911 /* HeaderTextView.swift in Sources */,
+				0CA89DF7248E5577008BB2BD /* ListMenu.swift in Sources */,
+				0C322448248FBE90002CBD31 /* Extension + Calendar.swift in Sources */,
 				0CEDCCE5246872BE00286911 /* TaskViewController.swift in Sources */,
 				0C441AF9247B888D003190FE /* ListAlertView.swift in Sources */,
 				0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */,

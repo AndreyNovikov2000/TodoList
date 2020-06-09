@@ -17,7 +17,7 @@ class TaskViewController: UIViewController {
     
     // MARK: - Private properties
     private let taskTableView = TaskTableView()
-    private var menuTableView: MenuTableView!
+    private var menuTableView: MenuTableView<Menu>!
     private var visualEffectView: UIVisualEffectView!
     
     private var isCreating = false
@@ -74,8 +74,18 @@ class TaskViewController: UIViewController {
     
     
     private func setupMenuTableView() {
-        menuTableView = MenuTableView()
-        menuTableView.menuDelegate = self
+        menuTableView = MenuTableView(object: Menu.allCases)
+        menuTableView.selectedComplitionItem = { [weak self] item in
+            switch item {
+            case .task:
+                
+                self?.animateOutMenu()
+                self?.presentSubTaskColtroller(with: nil)
+            case .list:
+                self?.animateOutMenu()
+                self?.presentListViewController(with: nil)
+            }
+        }
         
         view.addSubview(menuTableView)
         
@@ -141,25 +151,5 @@ class TaskViewController: UIViewController {
         }
         
         present(listVC, animated: true, completion: nil)
-    }
-}
-
-
-
-// MARK: - MenuTableViewDelegate
-extension TaskViewController: MenuTableViewDelegate {
-    func menuTableView(_ menuTableView: MenuTableView, didSelectedElement menuElement: Menu) {
-        switch menuElement {
-        case .task:
-            
-            animateOutMenu()
-            presentSubTaskColtroller(with: nil)
-            
-        case .list:
-            
-            animateOutMenu()
-            presentListViewController(with: nil)
-    
-        }
     }
 }

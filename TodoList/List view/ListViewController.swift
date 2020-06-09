@@ -23,10 +23,13 @@ class ListViewController: UIViewController {
     private let headerListView = HeaderListView()
     private var listAlertView: ListAlertView! = UIView.loadFromNib()
     private var visualEffectView: UIVisualEffectView!
+    private var alertView: AlertView!
+    private var menuTableView: MenuTableView<ListMenu>!
     
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager = StorageManager()
     private var defaulListtColor = UIColor(red: 0.1147335842, green: 0.5975336432, blue: 0.8779801726, alpha: 1)
+    private var listIsEditing = false
     
     
     // MARK: - Live cycle
@@ -36,7 +39,7 @@ class ListViewController: UIViewController {
         if list == nil {
             list = storageManager.createEntity(entityName: "Lists", contex: contex)
         }
-
+        
         if let title = list?.title, let count = list?.detailLists?.count, let color = UIColor.color(withData: list?.titntColor) {
             headerListView.setListTitleLabel(with: title)
             headerListView.setListCountLabel(with: String(count))
@@ -53,6 +56,12 @@ class ListViewController: UIViewController {
         view.backgroundColor = defaulListtColor
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -63,7 +72,6 @@ class ListViewController: UIViewController {
     // MARK: - Objc func
     @objc fileprivate func heandleKeyboardNotification(notification: Notification) {
         guard let keyboardSize = notification.userInfo?[UIWindow.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        // FIXME: - Unraping value when value != nil ?????, add notofication when edn editing second screeen
         let listAlertViewFrame = listAlertView.frame
         let keyBoardOffSetY = view.frame.height - keyboardSize.height
         
@@ -80,12 +88,69 @@ class ListViewController: UIViewController {
         }
     }
     
+    @objc fileprivate func heandleTapVisualEffectView() {
+        menuAnimateOut()
+    }
+    
     
     // MARK: - IBAction
     @IBAction func taskListButtonPressed() {
-        setupSubListViewController(with: nil)
-        NotificationCenter.default.removeObserver(self)
+        listIsEditing ? menuAnimateOut() : menuAnimateIn()
     }
+    
+    private func menuAnimateIn() {
+        listIsEditing = true
+        setupVisualEffectView()
+        setupMenuTableView()
+        view.bringSubviewToFront(taskListButton)
+        menuTableView.visualEffectAnimateIn(duration: 0.4, visualEffectView: visualEffectView, compliteAnimation: nil)
+        taskListButton.animateInTransition(duration: 0.3, compliteAnimation: nil)
+    }
+    
+    private func menuAnimateOut() {
+        listIsEditing = false
+        menuTableView.visualEffectViewAnimateOut(duration: 0.4, visualEffectView: visualEffectView) { [weak self] in
+            self?.removeMenuTableView()
+            self?.removeVisualEffectView()
+        }
+        taskListButton.animateOutTransition(duration: 0.3, compliteAnimation: nil)
+    }
+    
+    private func setupMenuTableView() {
+        menuTableView = MenuTableView(object: ListMenu.allCases)
+        menuTableView.selectedComplitionItem = { [weak self] item in
+            guard let self = self else { return }
+            
+            switch item {
+                
+            case .listSubTask:
+                
+                NotificationCenter.default.removeObserver(self)
+                self.setupSubListViewController(with: nil)
+                self.animateOut(on: self.menuTableView) {
+                    self.menuAnimateOut()
+                }
+                
+            case .deleteList:
+                
+                self.setupAlertView()
+                self.animateIn(on: self.alertView)
+                self.removeMenuTableView()
+            }
+        }
+        
+        view.addSubview(menuTableView)
+        
+        menuTableView.bottomAnchor.constraint(equalTo: taskListButton.topAnchor, constant: -16).isActive = true
+        menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        menuTableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
+        menuTableView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+    }
+    
+    private func removeMenuTableView() {
+        menuTableView.removeFromSuperview()
+    }
+    
     
     // MARK: - Private methods
     private func setupKeyboardNotification() {
@@ -128,7 +193,7 @@ class ListViewController: UIViewController {
     
     private func setupSubListViewController(with detailList: DetailList?) {
         let subListVC: SubListViewController = SubListViewController()
-
+        
         subListVC.modalPresentationStyle = .formSheet
         subListVC.listColor = defaulListtColor
         subListVC.detailList = detailList
@@ -141,9 +206,10 @@ class ListViewController: UIViewController {
             self.list?.detailLists = copySet
             self.table.reloadData()
             self.storageManager.save(self.contex)
+            self.setupKeyboardNotification()
         }
         
-         present(subListVC, animated: true, completion: nil)
+        present(subListVC, animated: true, completion: nil)
     }
     
     private func setupListAlertView() {
@@ -153,15 +219,18 @@ class ListViewController: UIViewController {
         view.addSubview(listAlertView)
     }
     
-    private func removeListAlertView() {
-        listAlertView.removeFromSuperview()
-        listAlertView = nil
+    private func setupAlertView() {
+        alertView = .loadFromNib()
+        alertView.myDelegate = self
+        alertView.center = view.center
+        view.addSubview(alertView)
     }
     
     private func setupVisualEffectView() {
         visualEffectView = UIVisualEffectView()
         visualEffectView.effect = UIBlurEffect(style: .extraLight)
         visualEffectView.frame = view.frame
+        visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(heandleTapVisualEffectView)))
         view.addSubview(visualEffectView)
     }
     
@@ -170,15 +239,12 @@ class ListViewController: UIViewController {
         visualEffectView = nil
     }
     
-    private func animateIn() {
-        listAlertView.visualEffectAnimateIn(duration: 0.4, visualEffectView: visualEffectView, compliteAnimation: nil)
+    private func animateIn(on view: UIView) {
+        view.visualEffectAnimateIn(duration: 0.4, visualEffectView: UIVisualEffectView(), compliteAnimation: nil)
     }
     
-    private func animateOut() {
-        listAlertView.visualEffectViewAnimateOut(duration: 0.4, visualEffectView: visualEffectView) { [weak self] in
-            self?.removeListAlertView()
-            self?.removeVisualEffectView()
-        }
+    private func animateOut(on view: UIView, compliteAnimation: (() -> Void)?) {
+        view.visualEffectViewAnimateOut(duration: 0.4, visualEffectView: visualEffectView, compliteAnimation: compliteAnimation)
     }
     
     private func saveList() {
@@ -202,17 +268,17 @@ class ListViewController: UIViewController {
                 complition(true)
             }
         }
-    
+        
         deleteAction.backgroundColor = UIColor(red: 0.9568627451, green: 0.368627451, blue: 0.4274509804, alpha: 1)
         deleteAction.image = UIImage(systemName: "trash")
         
         return deleteAction
     }
-        
+    
     private func deleteCellWith(indexPath: IndexPath) {
         guard let detailListTask = list?.detailLists?[indexPath.row] as? DetailList else { return }
         let subLists = list?.detailLists?.mutableCopy() as? NSMutableOrderedSet
-
+        
         subLists?.remove(detailListTask)
         list?.detailLists = subLists
         table.deleteRows(at: [indexPath], with: .left)
@@ -248,8 +314,14 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = deleteContextualAction(with: indexPath)
-
+        
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailList = list?.detailLists?[indexPath.row] as? DetailList
+        NotificationCenter.default.removeObserver(self)
+        setupSubListViewController(with: detailList)
     }
 }
 
@@ -273,7 +345,7 @@ extension ListViewController: HeaderListViewDelegate {
     func headerListViewDidEditingButtonTapped(_ headerListView: HeaderListView) {
         setupVisualEffectView()
         setupListAlertView()
-        animateIn()
+        animateIn(on: listAlertView)
         
         if let text = list?.title{
             listAlertView.titleListTextField.text = text
@@ -286,11 +358,17 @@ extension ListViewController: HeaderListViewDelegate {
 // MARK: - ListAlertViewDelegate
 extension ListViewController: ListAlertViewDelegate {
     func listAlertViewSaveButtonTapped(_ listAlertView: ListAlertView) {
-        animateOut()
+        animateOut(on: listAlertView) { [weak self] in
+            self?.listAlertView.removeFromSuperview()
+            self?.removeVisualEffectView()
+        }
     }
     
     func listAlertViewCancelButtonTapped(_ listAlertView: ListAlertView) {
-        animateOut()
+        animateOut(on: listAlertView) { [weak self] in
+            self?.listAlertView.removeFromSuperview()
+            self?.removeVisualEffectView()
+        }
     }
     
     func listAlertView(_ listAlertView: ListAlertView, didSelectedColor color: UIColor) {
@@ -303,6 +381,30 @@ extension ListViewController: ListAlertViewDelegate {
     func listAlertViewTitleTextFieldDidEndEditing(_ listAlertView: ListAlertView, titleListTextFeild: UITextField) {
         if let text = titleListTextFeild.text {
             headerListView.setListTitleLabel(with: text)
+        }
+    }
+}
+
+
+// MARK: - AlertViewDelegate
+extension ListViewController: AlertViewDelegate {
+    func alertViewDeleteButtonPressed(_ alertView: AlertView) {
+        guard let list = list else { return }
+        animateOut(on: alertView) { [weak self] in
+            self?.menuAnimateOut()
+            self?.alertView.removeFromSuperview()
+            self?.dismiss(animated: true, completion: nil)
+        }
+        
+        storageManager.delete(contex, object: list)
+        storageManager.save(contex)
+        dismissComplition?()
+    }
+    
+    func alertViewCancelButtonPressed(_ alertView: AlertView) {
+        animateOut(on: alertView) { [weak self] in
+            self?.menuAnimateOut()
+            self?.alertView.removeFromSuperview()
         }
     }
 }

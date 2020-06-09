@@ -64,7 +64,7 @@ extension UIView {
 // MARK: -  Menu animation
 extension UIView {
     func animateInTransition(duration: TimeInterval, compliteAnimation: (() -> Void)?) {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: duration, animations: {
             self.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi / 4)
         }) { _ in
             compliteAnimation?()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Menu: Int, CustomStringConvertible, CaseIterable {
+enum Menu: Int, MenuConvertable, CaseIterable {
     case task
     case list
     

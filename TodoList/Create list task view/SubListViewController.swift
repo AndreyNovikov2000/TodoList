@@ -13,9 +13,6 @@ class SubListViewController: UIViewController {
     // MARK: - Public properties
     var heandleDismiss: ((DetailList?) -> Void)?
     var detailList: DetailList?
-    
-    
-    // optinal
     var listColor: UIColor?
     
     // MARK: - IBOutlets
@@ -25,7 +22,7 @@ class SubListViewController: UIViewController {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager: StoreManager = StorageManager()
     
-    
+    private let heandleView = UIView()
     private var alarmView: PickerView!
     private var calendarView: PickerCalendaView!
     private var visualEffectView: UIVisualEffectView!
@@ -37,23 +34,35 @@ class SubListViewController: UIViewController {
     
     
     // MARK: - Live cycle
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupKeyboardNotification()
         setupTextView()
+        setupHeandleView()
         
+        presentationController?.delegate = self
         view.backgroundColor = listColor
         
         // List INIT
         if detailList != nil {
             isCreated = false
+            textView.text = detailList?.title
+           
+            if let date = detailList?.notificationDate {
+                isNotificate = true
+                let dateComponents = calendar.getComponents(from: date)
+                components = dateComponents
+            }
+            
         } else {
             isCreated = true
             detailList = storageManager.createEntity(entityName: "DetailList", contex: context)
         }
     }
+    
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -87,6 +96,20 @@ class SubListViewController: UIViewController {
         view.addSubview(textView)
     }
     
+    private func setupHeandleView() {
+        view.addSubview(heandleView)
+        heandleView.backgroundColor = UIColor(red: 0.145, green: 0.165, blue: 0.192, alpha: 1)
+        heandleView.alpha = 0.2
+        heandleView.layer.cornerRadius = 3
+        heandleView.translatesAutoresizingMaskIntoConstraints = false
+        
+        heandleView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        heandleView.widthAnchor.constraint(equalToConstant: 37).isActive = true
+        heandleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
+        heandleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+
+    
     private func setupAlarmView() {
         alarmView = .loadFromNib()
         alarmView.myDelegate = self
@@ -119,6 +142,23 @@ class SubListViewController: UIViewController {
             self?.visualEffectView.removeFromSuperview()
         }
     }
+    
+    private func saveTask() {
+        if textView.text.isEmpty {
+            textView.shaking()
+            return
+        }
+        
+        if isNotificate {
+            let date = calendar.date(from: components)
+            detailList?.notificationDate = date
+        }
+        detailList?.title = textView.text
+        detailList?.isNotificate = isNotificate
+        
+        storageManager.save(context)
+        heandleDismiss?(detailList)
+    }
 }
 
 
@@ -141,21 +181,7 @@ extension SubListViewController: ListTextViewDelegate {
     }
     
     func listTextViewSaveButtonPressed(_ listTextView: ListTextView) {
-        
-        if textView.text.isEmpty {
-            textView.shaking()
-            return
-        }
-        
-        if isNotificate {
-            let date = calendar.date(from: components)
-            detailList?.notificationDate = date
-        }
-        detailList?.title = textView.text
-        detailList?.isNotificate = isNotificate
-        
-        storageManager.save(context)
-        heandleDismiss?(detailList)
+        saveTask()
         dismiss(animated: true, completion: nil)
     }
 }
@@ -205,5 +231,13 @@ extension SubListViewController: PickerCalendarViewDelegate {
     
     func picerCalendarViewClearButtonPressed() {
         
+    }
+}
+
+
+// MARK: - UIAdaptivePresentationControllerDelegate
+extension SubListViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        saveTask()
     }
 }
