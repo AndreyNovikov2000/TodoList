@@ -69,23 +69,23 @@ class ContanierViewController: UIViewController {
     
     private func configureCalendarViewController() {
         if calendarViewController == nil {
-            calendarViewController = CalendarViewController()
-            addChild(calendarViewController)
-            view.insertSubview(calendarViewController.view, at: 0)
+//            calendarViewController = CalendarViewController()
+//            addChild(calendarViewController)
+//            view.insertSubview(calendarViewController.view, at: 0)
         }
     }
     
     private func setupNavigationBar() {
-        let topBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-        topBar.backgroundColor = .white
-        view.addSubview(topBar)
-        
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.titleView = titleView
-        titleView.titleViewDelegate = self
+//        let topBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+//        topBar.backgroundColor = .white
+//        view.addSubview(topBar)
+//        
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.view.backgroundColor = .white
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationItem.titleView = titleView
+//        titleView.titleViewDelegate = self
     }
     
 }

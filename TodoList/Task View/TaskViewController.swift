@@ -44,6 +44,9 @@ class TaskViewController: UIViewController {
     
     // MARK: - Private methods
     private func setupAddButton() {
+        
+        
+      
         addNewTaskButton.layer.cornerRadius = addNewTaskButton.frame.height / 2
         addNewTaskButton.setTitle("", for: .normal)
         addNewTaskButton.backgroundColor = .black
@@ -66,10 +69,10 @@ class TaskViewController: UIViewController {
         
         taskTableView.separatorStyle = .none
         
-        taskTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        taskTableView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1).isActive = true
+        taskTableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 1).isActive = true
         taskTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     

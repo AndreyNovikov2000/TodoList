@@ -20,17 +20,18 @@ class ListViewController: UIViewController {
     var dismissComplition: (() -> Void)?
     
     // MARK: - Private properties
+    private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let storageManager = StorageManager()
+    private let notificationManager = NotificationManager()
+    
     private let headerListView = HeaderListView()
     private var listAlertView: ListAlertView! = UIView.loadFromNib()
     private var visualEffectView: UIVisualEffectView!
     private var alertView: AlertView!
     private var menuTableView: MenuTableView<ListMenu>!
-    
-    private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let storageManager = StorageManager()
+    private var tapGesture: UITapGestureRecognizer!
     private var defaulListtColor = UIColor(red: 0.1147335842, green: 0.5975336432, blue: 0.8779801726, alpha: 1)
     private var listIsEditing = false
-    
     
     // MARK: - Live cycle
     override func viewDidLoad() {
@@ -136,6 +137,7 @@ class ListViewController: UIViewController {
                 self.setupAlertView()
                 self.animateIn(on: self.alertView)
                 self.removeMenuTableView()
+                self.visualEffectView.removeGestureRecognizer(self.tapGesture)
             }
         }
         
@@ -207,6 +209,7 @@ class ListViewController: UIViewController {
             self.table.reloadData()
             self.storageManager.save(self.contex)
             self.setupKeyboardNotification()
+            self.headerListView.setListCountLabel(with: String(self.list?.detailLists?.count ?? 0))
         }
         
         present(subListVC, animated: true, completion: nil)
@@ -228,9 +231,10 @@ class ListViewController: UIViewController {
     
     private func setupVisualEffectView() {
         visualEffectView = UIVisualEffectView()
-        visualEffectView.effect = UIBlurEffect(style: .extraLight)
+        visualEffectView.effect = UIBlurEffect(style: .light)
         visualEffectView.frame = view.frame
-        visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(heandleTapVisualEffectView)))
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(heandleTapVisualEffectView))
+        visualEffectView.addGestureRecognizer(tapGesture)
         view.addSubview(visualEffectView)
     }
     
@@ -270,7 +274,11 @@ class ListViewController: UIViewController {
         }
         
         deleteAction.backgroundColor = UIColor(red: 0.9568627451, green: 0.368627451, blue: 0.4274509804, alpha: 1)
-        deleteAction.image = UIImage(systemName: "trash")
+        if #available(iOS 13.0, *) {
+            deleteAction.image = UIImage(systemName: "trash")
+        } else {
+            // Fallback on earlier versions
+        }
         
         return deleteAction
     }

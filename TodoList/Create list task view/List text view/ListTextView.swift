@@ -142,4 +142,3 @@ class ListTextView: UITextView {
         saveButton.trailingAnchor.constraint(equalTo: accessaryView.trailingAnchor,constant: -16).isActive = true
     }
 }
-

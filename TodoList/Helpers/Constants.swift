@@ -9,9 +9,15 @@
 import UIKit
 
 struct Constants {
+    static let collectionViewInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    
+    // list
     static let listCollectionViewContentSize = CGSize(width: 220, height: 80)
-    static let listCollectionViewInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     static let listCollectionViewMinimumLineSpacing: CGFloat = 5
+    
+    // story
+    static let storyCollectionViewContentSize = CGSize(width: 60, height: 60)
+    static let storyCollectionViewMinimumLineSpacing: CGFloat = 20
 }
 
 

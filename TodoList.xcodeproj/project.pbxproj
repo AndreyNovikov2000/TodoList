@@ -25,8 +25,8 @@
 		0C16EFFA2473ECCF0058EEEC /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFF92473ECCF0058EEEC /* Menu.swift */; };
 		0C16EFFD2473FEBB0058EEEC /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */; };
 		0C2309E8246B0F7700BC81AD /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2309E7246B0F7700BC81AD /* PickerView.swift */; };
-		0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2309E9246B0F8200BC81AD /* PickerView.xib */; };
 		0C322448248FBE90002CBD31 /* Extension + Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C322447248FBE90002CBD31 /* Extension + Calendar.swift */; };
+		0C32244D2490FE24002CBD31 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C32244C2490FE24002CBD31 /* PickerView.xib */; };
 		0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF524796A87003190FE /* Extension + TextView.swift */; };
 		0C441AF9247B888D003190FE /* ListAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C441AF8247B888D003190FE /* ListAlertView.swift */; };
 		0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C441AFA247B88A1003190FE /* ListAlertView.xib */; };
@@ -37,9 +37,13 @@
 		0C5C8D662479668100E0988E /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C8D652479668100E0988E /* ColorCollectionViewCell.swift */; };
 		0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027332469DF7900DE2698 /* TodoList.xcdatamodeld */; };
 		0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F9B572469EDB000745524 /* StorageManager.swift */; };
+		0C81B07A2497BDF100916AB2 /* HeaderStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C81B0792497BDF100916AB2 /* HeaderStoryView.swift */; };
+		0C81B07D2497BEB500916AB2 /* StoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C81B07C2497BEB500916AB2 /* StoryCollectionView.swift */; };
+		0C81B0802497BF6800916AB2 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C81B07F2497BF6800916AB2 /* StoryCell.swift */; };
 		0C9C718B248CF31F00A5D63A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9C718A248CF31F00A5D63A /* AlertView.swift */; };
 		0C9C718D248CF32700A5D63A /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9C718C248CF32600A5D63A /* AlertView.xib */; };
 		0C9C7190248CFB5D00A5D63A /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9C718F248CFB5D00A5D63A /* AlertButton.swift */; };
+		0CA4143C249B3F6400F3DAD5 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4143B249B3F6400F3DAD5 /* LoaderView.swift */; };
 		0CA89DF7248E5577008BB2BD /* ListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA89DF6248E5577008BB2BD /* ListMenu.swift */; };
 		0CB617BE24750A8A0053FB77 /* colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB617BD24750A8A0053FB77 /* colors.plist */; };
 		0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB525E246D01D600679162 /* PickerCalendaView.swift */; };
@@ -60,8 +64,6 @@
 		0CEDCCD02468713700286911 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCCCE2468713700286911 /* LaunchScreen.storyboard */; };
 		0CEDCCD82468718A00286911 /* ContanierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCD72468718A00286911 /* ContanierViewController.swift */; };
 		0CEDCCDC2468723800286911 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCDB2468723800286911 /* TitleView.swift */; };
-		0CEDCCE12468728000286911 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCDF2468728000286911 /* CalendarView.swift */; };
-		0CEDCCE22468728000286911 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCCE02468728000286911 /* CalendarView.xib */; };
 		0CEDCCE5246872BE00286911 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCE3246872BE00286911 /* TaskViewController.swift */; };
 		0CEDCCEB2468732800286911 /* HeaderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCEA2468732800286911 /* HeaderTextView.swift */; };
 		0CEDCCED2468733E00286911 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCEC2468733E00286911 /* FooterView.swift */; };
@@ -99,8 +101,8 @@
 		0C16EFF92473ECCF0058EEEC /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		0C16EFFC2473FEBB0058EEEC /* TaskTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		0C2309E7246B0F7700BC81AD /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
-		0C2309E9246B0F8200BC81AD /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		0C322447248FBE90002CBD31 /* Extension + Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Calendar.swift"; sourceTree = "<group>"; };
+		0C32244C2490FE24002CBD31 /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		0C441AF524796A87003190FE /* Extension + TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextView.swift"; sourceTree = "<group>"; };
 		0C441AF8247B888D003190FE /* ListAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAlertView.swift; sourceTree = "<group>"; };
 		0C441AFA247B88A1003190FE /* ListAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListAlertView.xib; sourceTree = "<group>"; };
@@ -115,9 +117,13 @@
 		0C7027382469E0C600DE2698 /* SubTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0C7027392469E0C600DE2698 /* SubTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0C7F9B572469EDB000745524 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		0C81B0792497BDF100916AB2 /* HeaderStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStoryView.swift; sourceTree = "<group>"; };
+		0C81B07C2497BEB500916AB2 /* StoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionView.swift; sourceTree = "<group>"; };
+		0C81B07F2497BF6800916AB2 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
 		0C9C718A248CF31F00A5D63A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		0C9C718C248CF32600A5D63A /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		0C9C718F248CFB5D00A5D63A /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
+		0CA4143B249B3F6400F3DAD5 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		0CA89DF6248E5577008BB2BD /* ListMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMenu.swift; sourceTree = "<group>"; };
 		0CB617BD24750A8A0053FB77 /* colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
 		0CBB525E246D01D600679162 /* PickerCalendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCalendaView.swift; sourceTree = "<group>"; };
@@ -136,8 +142,6 @@
 		0CEDCCD12468713700286911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CEDCCD72468718A00286911 /* ContanierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContanierViewController.swift; sourceTree = "<group>"; };
 		0CEDCCDB2468723800286911 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		0CEDCCDF2468728000286911 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		0CEDCCE02468728000286911 /* CalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		0CEDCCE3246872BE00286911 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		0CEDCCEA2468732800286911 /* HeaderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTextView.swift; sourceTree = "<group>"; };
 		0CEDCCEC2468733E00286911 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 		0C16EFEF24732FEE0058EEEC /* Footer list view */ = {
 			isa = PBXGroup;
 			children = (
+				0C16EFC0247261120058EEEC /* List collection view */,
 				0C16EFF02473300B0058EEEC /* FooterListView.swift */,
 			);
 			path = "Footer list view";
@@ -259,6 +264,7 @@
 		0C16EFFB2473FE800058EEEC /* Task table view */ = {
 			isa = PBXGroup;
 			children = (
+				0C81B0782497BDAC00916AB2 /* Header stories view */,
 				0C16EFEF24732FEE0058EEEC /* Footer list view */,
 				0C16EFBB247164650058EEEC /* Header section view */,
 				0CBB5264246D907200679162 /* TaskCell */,
@@ -267,14 +273,25 @@
 			path = "Task table view";
 			sourceTree = "<group>";
 		};
-		0C2309E6246B0F1E00BC81AD /* Picker time view */ = {
+		0C2309E6246B0F1E00BC81AD /* Picker view */ = {
 			isa = PBXGroup;
 			children = (
 				0CC8BA65246B14F50031D508 /* View row */,
 				0C2309E7246B0F7700BC81AD /* PickerView.swift */,
-				0C2309E9246B0F8200BC81AD /* PickerView.xib */,
+				0C32244C2490FE24002CBD31 /* PickerView.xib */,
 			);
-			path = "Picker time view";
+			path = "Picker view";
+			sourceTree = "<group>";
+		};
+		0C3224492490FC1A002CBD31 /* Alert views */ = {
+			isa = PBXGroup;
+			children = (
+				0C9C7189248CF30700A5D63A /* Delete alert view */,
+				0C441AF7247B87EB003190FE /* List alert view */,
+				0CC8BA68246B4F180031D508 /* Picker calendar alert view */,
+				0C2309E6246B0F1E00BC81AD /* Picker view */,
+			);
+			path = "Alert views";
 			sourceTree = "<group>";
 		};
 		0C441AF7247B87EB003190FE /* List alert view */ = {
@@ -353,14 +370,41 @@
 			path = "Storage manager";
 			sourceTree = "<group>";
 		};
-		0C9C7189248CF30700A5D63A /* Alert view */ = {
+		0C81B0782497BDAC00916AB2 /* Header stories view */ = {
+			isa = PBXGroup;
+			children = (
+				0C81B07B2497BE8F00916AB2 /* Story collection view */,
+				0C81B0792497BDF100916AB2 /* HeaderStoryView.swift */,
+			);
+			path = "Header stories view";
+			sourceTree = "<group>";
+		};
+		0C81B07B2497BE8F00916AB2 /* Story collection view */ = {
+			isa = PBXGroup;
+			children = (
+				0CA4143A249B3F5000F3DAD5 /* Loader view */,
+				0C81B07E2497BF5100916AB2 /* StoryCell */,
+				0C81B07C2497BEB500916AB2 /* StoryCollectionView.swift */,
+			);
+			path = "Story collection view";
+			sourceTree = "<group>";
+		};
+		0C81B07E2497BF5100916AB2 /* StoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				0C81B07F2497BF6800916AB2 /* StoryCell.swift */,
+			);
+			path = StoryCell;
+			sourceTree = "<group>";
+		};
+		0C9C7189248CF30700A5D63A /* Delete alert view */ = {
 			isa = PBXGroup;
 			children = (
 				0C9C718E248CFB3300A5D63A /* alert button */,
 				0C9C718A248CF31F00A5D63A /* AlertView.swift */,
 				0C9C718C248CF32600A5D63A /* AlertView.xib */,
 			);
-			path = "Alert view";
+			path = "Delete alert view";
 			sourceTree = "<group>";
 		};
 		0C9C718E248CFB3300A5D63A /* alert button */ = {
@@ -369,6 +413,14 @@
 				0C9C718F248CFB5D00A5D63A /* AlertButton.swift */,
 			);
 			path = "alert button";
+			sourceTree = "<group>";
+		};
+		0CA4143A249B3F5000F3DAD5 /* Loader view */ = {
+			isa = PBXGroup;
+			children = (
+				0CA4143B249B3F6400F3DAD5 /* LoaderView.swift */,
+			);
+			path = "Loader view";
 			sourceTree = "<group>";
 		};
 		0CBB5264246D907200679162 /* TaskCell */ = {
@@ -395,13 +447,13 @@
 			path = "View row";
 			sourceTree = "<group>";
 		};
-		0CC8BA68246B4F180031D508 /* Picker calendar view */ = {
+		0CC8BA68246B4F180031D508 /* Picker calendar alert view */ = {
 			isa = PBXGroup;
 			children = (
 				0CBB525E246D01D600679162 /* PickerCalendaView.swift */,
 				0CBB5260246D01DF00679162 /* PickerCalendaView.xib */,
 			);
-			path = "Picker calendar view";
+			path = "Picker calendar alert view";
 			sourceTree = "<group>";
 		};
 		0CEDCCB72468713700286911 = {
@@ -429,11 +481,7 @@
 				0CEDCCC52468713700286911 /* SceneDelegate.swift */,
 				0C7F9B552469ED6800745524 /* Services */,
 				0CEDCCD9246871E400286911 /* Container View */,
-				0CC8BA68246B4F180031D508 /* Picker calendar view */,
-				0C2309E6246B0F1E00BC81AD /* Picker time view */,
-				0CEDCCDE2468725C00286911 /* Calendar view */,
-				0C441AF7247B87EB003190FE /* List alert view */,
-				0C9C7189248CF30700A5D63A /* Alert view */,
+				0C3224492490FC1A002CBD31 /* Alert views */,
 				0CEDCCE7246872CA00286911 /* Task View */,
 				0CEDCCE8246872F700286911 /* Create task view */,
 				0CFCFEB324744A6A006829F5 /* List view */,
@@ -466,20 +514,10 @@
 			path = "Title view";
 			sourceTree = "<group>";
 		};
-		0CEDCCDE2468725C00286911 /* Calendar view */ = {
-			isa = PBXGroup;
-			children = (
-				0CEDCCDF2468728000286911 /* CalendarView.swift */,
-				0CEDCCE02468728000286911 /* CalendarView.xib */,
-			);
-			path = "Calendar view";
-			sourceTree = "<group>";
-		};
 		0CEDCCE7246872CA00286911 /* Task View */ = {
 			isa = PBXGroup;
 			children = (
 				0C16EFFB2473FE800058EEEC /* Task table view */,
-				0C16EFC0247261120058EEEC /* List collection view */,
 				0CEDCCE3246872BE00286911 /* TaskViewController.swift */,
 				0CBB5262246D8D0A00679162 /* TaskViewController.storyboard */,
 			);
@@ -656,10 +694,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CEDCD0624687CC300286911 /* SubViewController.xib in Resources */,
-				0CEDCCE22468728000286911 /* CalendarView.xib in Resources */,
 				0CBB5263246D8D0A00679162 /* TaskViewController.storyboard in Resources */,
 				0CFA847E247B9F1F009A30E7 /* ListViewController.storyboard in Resources */,
-				0C2309EA246B0F8200BC81AD /* PickerView.xib in Resources */,
 				0CEDCCD02468713700286911 /* LaunchScreen.storyboard in Resources */,
 				0C441AFB247B88A1003190FE /* ListAlertView.xib in Resources */,
 				0CEDCCCD2468713700286911 /* Assets.xcassets in Resources */,
@@ -667,6 +703,7 @@
 				0C9C718D248CF32700A5D63A /* AlertView.xib in Resources */,
 				0CEDCD0A2468806A00286911 /* SubCell.xib in Resources */,
 				0CBB5261246D01DF00679162 /* PickerCalendaView.xib in Resources */,
+				0C32244D2490FE24002CBD31 /* PickerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,7 +759,6 @@
 				0CDF14582469E415006E995E /* SubTask+CoreDataClass.swift in Sources */,
 				0CBB525F246D01D600679162 /* PickerCalendaView.swift in Sources */,
 				0C16EFC2247261530058EEEC /* ListCollectionView.swift in Sources */,
-				0CEDCCE12468728000286911 /* CalendarView.swift in Sources */,
 				0C5C8D612479657B00E0988E /* ColorAccessaryView.swift in Sources */,
 				0C7F9B582469EDB000745524 /* StorageManager.swift in Sources */,
 				0C16EFF7247340B40058EEEC /* MenuCell.swift in Sources */,
@@ -730,6 +766,8 @@
 				0C16EFBA24704A300058EEEC /* Extension + DateComponents.swift in Sources */,
 				0CBB5266246D909200679162 /* TaskCell.swift in Sources */,
 				0C13D6CE2483C41D003990AF /* DetailList+CoreDataClass.swift in Sources */,
+				0CA4143C249B3F6400F3DAD5 /* LoaderView.swift in Sources */,
+				0C81B07D2497BEB500916AB2 /* StoryCollectionView.swift in Sources */,
 				0C16EFFA2473ECCF0058EEEC /* Menu.swift in Sources */,
 				0CEDCD092468806A00286911 /* SubTaskCell.swift in Sources */,
 				0C16EFBF247190950058EEEC /* Extension + UIButton.swift in Sources */,
@@ -763,6 +801,7 @@
 				0C476BFB247BA5D8008E01B9 /* TaskListCell.swift in Sources */,
 				0CFA847C247B9CEB009A30E7 /* ListAlertButton.swift in Sources */,
 				0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */,
+				0C81B07A2497BDF100916AB2 /* HeaderStoryView.swift in Sources */,
 				0C13D6CC2483C41D003990AF /* List+CoreDataProperties.swift in Sources */,
 				0CEDCD0524687CC300286911 /* SubViewController.swift in Sources */,
 				0CFCFEB72474690C006829F5 /* ListColor.swift in Sources */,
@@ -777,6 +816,7 @@
 				0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */,
 				0C7027352469DF7900DE2698 /* TodoList.xcdatamodeld in Sources */,
 				0C16EFBD247164780058EEEC /* HeaderView.swift in Sources */,
+				0C81B0802497BF6800916AB2 /* StoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +956,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7L2AL6Q55;
 				INFOPLIST_FILE = TodoList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -935,6 +976,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7L2AL6Q55;
 				INFOPLIST_FILE = TodoList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

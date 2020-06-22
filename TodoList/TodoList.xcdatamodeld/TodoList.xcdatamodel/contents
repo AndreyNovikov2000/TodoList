@@ -21,14 +21,15 @@
         <attribute name="degreeOfProtection" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isComplite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isNotificate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="orderPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taskId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="taskTitle" optional="YES" attributeType="String"/>
         <relationship name="subTasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SubTask" inverseName="task" inverseEntity="SubTask"/>
     </entity>
     <elements>
-        <element name="DetailList" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Lists" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SubTask" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Task" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="DetailList" positionX="286.375" positionY="-23.1171875" width="128" height="103"/>
+        <element name="Lists" positionX="539.625" positionY="-8.3828125" width="128" height="88"/>
+        <element name="SubTask" positionX="-62.7109375" positionY="-21.25" width="128" height="88"/>
+        <element name="Task" positionX="-263.53125" positionY="-81.11328125" width="128" height="163"/>
     </elements>
 </model>

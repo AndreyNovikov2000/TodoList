@@ -24,6 +24,7 @@ extension Task {
     @NSManaged public var degreeOfProtection: Int16
     @NSManaged public var taskId: UUID?
     @NSManaged public var subTasks: NSOrderedSet?
+    @NSManaged public var orderPosition: Int64
 }
 
 // MARK: Generated accessors for subTasks

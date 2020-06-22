@@ -12,13 +12,13 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var window: UIWindow?
+    
     let notificationManager = NotificationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         notificationManager.setupNotificationCenter()
-        
         
         return true
     }

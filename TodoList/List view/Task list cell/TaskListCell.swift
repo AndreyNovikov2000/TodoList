@@ -110,12 +110,14 @@ class TaskListCell: UITableViewCell {
     
     // MARK: - Action
     @objc fileprivate func heanleCompliteButtonPressed() {
+        compliteButton.setImage(UIImage(named: "MaskC"), for: .normal)
         myDelegate?.taskListCellCompliteButtonPressed(self)
     }
 
     
     // MARK: - Public methods
     func set(detailList: DetailList) {
+        compliteButton.setImage(UIImage(named: "MaskW"), for: .normal)
         setupNotificationStackView(isNotificatite: detailList.isNotificate)
         taskLabel.text = detailList.title
         

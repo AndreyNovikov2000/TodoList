@@ -17,6 +17,7 @@ class SubViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var heandleView: UIView!
     
     // MARK: - Private properties
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -32,8 +33,7 @@ class SubViewController: UIViewController {
     private var components = DateComponents()
     private var calendar = Calendar.current
     private var isNotificate = false
-    private var isCreated: Bool!
-    
+    private var isCreated = false
     
     // MARK: - Live cycle
     
@@ -43,6 +43,7 @@ class SubViewController: UIViewController {
         setupTableView()
         setupHeaderView()
         setupFooterView()
+        setupHeandleView()
         setupKeyboardNotification()
         
         
@@ -51,6 +52,12 @@ class SubViewController: UIViewController {
         // TASK INIT
         if task != nil {
             isCreated = false
+        
+            if let date = task?.dateNotification {
+                isNotificate = true
+                let dateComponents = calendar.getComponents(from: date)
+                components = dateComponents
+            }
         } else {
             isCreated = true
             task = storageManager.createEntity(entityName: "Task", contex: context)
@@ -88,7 +95,6 @@ class SubViewController: UIViewController {
         
         subTasks?.add(subTask)
         task?.subTasks = subTasks
-        storageManager.save(context)
         tableView.reloadData()
     }
     
@@ -115,6 +121,12 @@ class SubViewController: UIViewController {
         footerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40)
         footerView.footerButton.addTarget(self, action: #selector(addSubTaskButtonPressed), for: .touchUpInside)
         tableView.tableFooterView = footerView
+    }
+    
+    private func setupHeandleView() {
+        heandleView.backgroundColor = UIColor(red: 0.145, green: 0.165, blue: 0.192, alpha: 1)
+        heandleView.alpha = 0.2
+        heandleView.layer.cornerRadius = 3
     }
     
     private func setupKeyboardNotification() {
@@ -185,6 +197,26 @@ extension SubViewController: UITableViewDataSource {
         cell.myDelegate = self
         return cell
     }
+    
+    private func saveTask() {
+        if headerTextView.text.isEmpty || headerTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
+            headerTextView.shaking()
+            return
+        }
+        
+        if isNotificate {
+            task?.dateNotification = calendar.date(from: components)
+        }
+        
+        if isCreated {
+            task?.orderPosition = Int64.max
+        }
+        
+        task?.taskTitle = headerTextView.text
+        task?.isNotificate = isNotificate
+        storageManager.save(context)
+        heandleDismiss?()
+    }
 }
 
 
@@ -207,7 +239,6 @@ extension SubViewController: UITableViewDelegate {
         subTasks?.insert(moveSubTask, at: destinationIndexPath.row)
         
         task?.subTasks = subTasks
-        storageManager.save(context)
     }
 }
 
@@ -220,7 +251,6 @@ extension SubViewController: SubTaskCellDelegate {
         let subTask = getSubTask(subTaskCell: subTaskCell)
         
         subTask?.isComplite.toggle()
-        storageManager.save(context)
         
         subTaskCell.subTaskTextField.resignFirstResponder()
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -237,8 +267,6 @@ extension SubViewController: SubTaskCellDelegate {
         context.delete(subTask)
         task?.subTasks = subTasks
         
-        storageManager.save(context)
-        
         tableView.deleteRows(at: [indexPath], with: .left)
     }
     
@@ -246,8 +274,6 @@ extension SubViewController: SubTaskCellDelegate {
         let subTask = getSubTask(subTaskCell: subTaskCell)
         
         subTask?.subTaskTitle = subTaskCell.subTaskTextField.text
-        
-        storageManager.save(context)
     }
     
     func SubViewController(subTaskCell: SubTaskCell) {
@@ -266,9 +292,6 @@ extension SubViewController: UITextViewDelegate {
         
         textView.frame = CGRect(x: 0, y: 0, width: width, height: estimatedSize.height)
         tableView.tableHeaderView = textView
-        
-        task?.taskTitle = textView.text
-        storageManager.save(context)
     }
 }
 
@@ -292,24 +315,10 @@ extension SubViewController: HeaderTextViewDelegate {
     func headerTextViewDidimportanceButtonPressed(sender: UIButton) {
         sender.animateDegreeButton(for: sender)
         task?.degreeOfProtection = sender.getDegreeProtection(for: sender)
-        storageManager.save(context)
     }
-
-    func headerxtViewDidSaveButtonpressed() {
-        
-        if headerTextView.text.isEmpty {
-            headerTextView.shaking()
-            return
-        }
     
-        if isNotificate {
-            task?.dateNotification = calendar.date(from: components)
-        }
-        
-        task?.isNotificate = isNotificate
-        storageManager.save(context)
-        heandleDismiss?()
-        
+    func headerxtViewDidSaveButtonpressed() {
+        saveTask()
         dismiss(animated: true, completion: nil)
     }
 }
@@ -344,7 +353,7 @@ extension SubViewController: PickerCalendarViewDelegate {
         isNotificate = true
         components.setComponents(year: year, month: month, day: day)
         calendarViewAnimateOut()
-         headerTextView.becomeFirstResponder()
+        headerTextView.becomeFirstResponder()
     }
     
     func pickerCalendarViewCancelButtonPressed() {
@@ -358,14 +367,10 @@ extension SubViewController: PickerCalendarViewDelegate {
     }
 }
 
+
 // MARK: - UIAdaptivePresentationControllerDelegate
 extension SubViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        guard let task = task else { return }
-        
-        if isCreated {
-            storageManager.delete(context, object: task)
-            storageManager.save(context)
-        }
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        saveTask()
     }
 }

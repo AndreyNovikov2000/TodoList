@@ -26,7 +26,7 @@ class ListCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
        
         
-        setuCollectionView()
+        setupCollectionView()
         fetchData()
     }
     
@@ -41,7 +41,7 @@ class ListCollectionView: UICollectionView {
     }
     
     // MARK: - Private methods
-    private func setuCollectionView() {
+    private func setupCollectionView() {
         delegate = self
         dataSource = self
         register(ListCell.self, forCellWithReuseIdentifier: ListCell.reuseId)
@@ -49,13 +49,13 @@ class ListCollectionView: UICollectionView {
         showsHorizontalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
-        contentInset = UIEdgeInsets(top: 0, left: Constants.listCollectionViewInsets.left, bottom: 0, right: Constants.listCollectionViewInsets.right)
+        contentInset = UIEdgeInsets(top: 0, left: Constants.collectionViewInsets.left, bottom: 0, right: Constants.collectionViewInsets.right)
     }
     
     
     private func fetchData() {
         do {
-           try lists = storageManager.request(contex: contex)
+            try lists = storageManager.request(contex: contex, descriptors: nil)
         } catch {
             print("error - \(error.localizedDescription)")
         }
