@@ -134,7 +134,8 @@ class TaskCell: UITableViewCell {
         setupNotificationStackView(isNotificatite: task.isNotificate)
         degreeOfProtectionButton.setImage(UIImage.getGegreeOfProtection(task.degreeOfProtection) , for: .normal)
         if let dateNotification = task.dateNotification, task.isNotificate {
-            notificationLabel.text = dateFormatter.string(from: dateNotification)
+            notificationLabel.text = dateFormatter.string(from: dateNotification) + " " + String.getDay(with: dateNotification)
+
         }
     }
     

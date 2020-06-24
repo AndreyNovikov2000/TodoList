@@ -10,7 +10,7 @@ import UIKit
 
 class HeaderView: UIView {
     
-    private let headerLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -31,10 +31,6 @@ class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public methods
-    func setHeaderText(text: String) {
-        headerLabel.text = text
-    }
     
     // MARK: - Private methods
     private func setupConstraintsForHeaderLabel() {

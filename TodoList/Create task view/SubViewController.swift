@@ -12,7 +12,7 @@ import CoreData
 class SubViewController: UIViewController {
     
     // MARK: - Public properties
-    var task: Task?
+    var task: Task!
     var heandleDismiss: ((() -> Void)?)
     
     // MARK: - IBOutlets
@@ -199,21 +199,25 @@ extension SubViewController: UITableViewDataSource {
     }
     
     private func saveTask() {
-        if headerTextView.text.isEmpty || headerTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
-            headerTextView.shaking()
+        guard !headerTextView.text.isEmpty || !headerTextView.text.trimmingCharacters(in: .whitespaces).isEmpty else {
+            storageManager.delete(context, object: task)
             return
-        }
-        
-        if isNotificate {
-            task?.dateNotification = calendar.date(from: components)
-        }
-        
-        if isCreated {
-            task?.orderPosition = Int64.max
         }
         
         task?.taskTitle = headerTextView.text
         task?.isNotificate = isNotificate
+    
+                
+        if isCreated {
+            task?.orderPosition = Int64.max
+        }
+        
+        if isNotificate {
+            task?.dateNotification = calendar.date(from: components)
+        } else {
+            task?.dateNotification = Date()
+        }
+
         storageManager.save(context)
         heandleDismiss?()
     }
@@ -318,6 +322,11 @@ extension SubViewController: HeaderTextViewDelegate {
     }
     
     func headerxtViewDidSaveButtonpressed() {
+        if headerTextView.text.isEmpty || headerTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
+            headerTextView.shaking()
+            return
+        }
+        
         saveTask()
         dismiss(animated: true, completion: nil)
     }

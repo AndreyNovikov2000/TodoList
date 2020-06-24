@@ -12,13 +12,10 @@ protocol StoreManager {
     func createEntity<T: NSManagedObject>(entityName: String, contex: NSManagedObjectContext) -> T
     func delete<T: NSManagedObject>(_ contex: NSManagedObjectContext, object: T)
     func request<T: NSManagedObject>(contex: NSManagedObjectContext, descriptors: [NSSortDescriptor]?) throws -> [T]
-    func insert<T: NSManagedObject>(_ contex: NSManagedObjectContext, object: T)
     func save(_ context: NSManagedObjectContext)
 }
 
 class StorageManager: StoreManager {
- 
-    
     
     func createEntity<T: NSManagedObject>(entityName: String, contex: NSManagedObjectContext) -> T {
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: contex), let object = NSManagedObject(entity: entity, insertInto: contex) as? T  else { fatalError("Error: The entity does no exist, entity name - \(String(describing: T.self))!") }
@@ -36,11 +33,6 @@ class StorageManager: StoreManager {
         
         return try contex.fetch(fetchRequest)
     }
-    
-    func insert<T>(_ contex: NSManagedObjectContext, object: T) where T : NSManagedObject {
-        contex.insert(object)
-    }
-    
     
     func save(_ context: NSManagedObjectContext) {
         do {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class TaskTableView: UITableView {
     
@@ -18,6 +17,7 @@ class TaskTableView: UITableView {
     
     // MARK: - Private properties
     private var tasks = [Task]()
+    private var tasks2d = [[Task]]()
     
     private let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let storageManager = StorageManager()
@@ -40,6 +40,8 @@ class TaskTableView: UITableView {
     func updateData() {
         fetchTasks()
         reloadData()
+        
+        print(#function)
     }
     
     // MARK: - Private methods
@@ -111,11 +113,12 @@ class TaskTableView: UITableView {
     }
     
     private func deleteCellWith(indexPath: IndexPath) {
-        let task = tasks[indexPath.row]
+        let task = tasks2d[indexPath.section][indexPath.row]
         
-        tasks.remove(at: indexPath.row)
+        tasks2d[indexPath.section].remove(at: indexPath.row)
         deleteRows(at: [indexPath], with: .left)
         storageManager.delete(contex, object: task)
+        storageManager.save(contex)
     }
     
     private func fetchTasks() {
@@ -123,34 +126,188 @@ class TaskTableView: UITableView {
             
             let sortDescriptor = NSSortDescriptor(key: "orderPosition", ascending: true)
             tasks = try storageManager.request(contex: contex, descriptors: [sortDescriptor])
-            
-            for (index, task) in tasks.enumerated() {
-                task.orderPosition = Int64(index)
-            }
+            getTask2d()
             
         } catch let error as NSError {
             print(error.userInfo)
         }
+    }
+    
+    
+    
+    func getTask2d() {
+        tasks2d.removeAll()
+        
+        var todayTasks = [Task]()
+        var tomorrowTasks = [Task]()
+        var laterTasks = [Task]()
+        
+        let todayDate = Date()
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.day = 1
+        let tomorrowDate = calendar.date(byAdding: dateComponents, to: todayDate)!
+        
+        for task in tasks {
+            let dateNotification = task.dateNotification ?? Date()
+            
+            let taskDay = calendar.component(.day, from: dateNotification)
+            let today = calendar.component(.day, from: todayDate)
+            let tomorrow = calendar.component(.day, from: tomorrowDate)
+            
+            switch taskDay {
+            case today:
+                todayTasks.append(task)
+            case tomorrow:
+                tomorrowTasks.append(task)
+            default:
+                laterTasks.append(task)
+            }
+        }
+        
+        tasks2d.append(todayTasks)
+        tasks2d.append(tomorrowTasks)
+        tasks2d.append(laterTasks)
+        
+        for (index ,todayTask) in todayTasks.enumerated() {
+            todayTask.orderPosition = Int64(index)
+        }
+        
+        for (index ,todayTask) in todayTasks.enumerated() {
+            todayTask.orderPosition = Int64(index)
+        }
+        
+        for (index ,tomorrowTask) in tomorrowTasks.enumerated() {
+            tomorrowTask.orderPosition = Int64(index * 1000)
+        }
+        
+        for (index ,laterTasks) in laterTasks.enumerated() {
+            laterTasks.orderPosition = Int64(index * 10000)
+        }
+        
+        storageManager.save(contex)
+    }
+    
+    private func moveRow(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let calendar = Calendar.current
+        let changeTask = tasks2d[destinationIndexPath.section][destinationIndexPath.row]
+        let taskDate = changeTask.dateNotification ?? Date()
+        
+        switch (sourceIndexPath, destinationIndexPath) {
+        case let (source, destination) where source.section == destination.section:
+            // section does not change, today = today, tomorrow = tomorrow, later = later
+            
+            for (index, task) in tasks2d[sourceIndexPath.section].enumerated() {
+                switch sourceIndexPath.section {
+                case 0: task.orderPosition = Int64(index)
+                case 1: task.orderPosition = Int64(index * 1000)
+                case 2: task.orderPosition = Int64(index * 10000)
+                default: break
+                }
+            }
+            
+        case let (source, destination) where source.section == 0 && destination.section == 1:
+            // move from today section to tomorrow section
+            
+            changeTask.dateNotification = calendar.replaceDate(fromDate: taskDate, byAdding: 1)
+            for (index, task) in tasks2d[destination.section].enumerated() {
+                task.orderPosition = Int64(index * 1000)
+            }
+            
+        case let (source, destination) where source.section == 0 && destination.section == 2:
+            // move from today section to later section
+            
+            changeTask.dateNotification = calendar.replaceDate(fromDate: taskDate, byAdding: 7)
+            for (index, task) in tasks2d[destination.section].enumerated() {
+                task.orderPosition = Int64(index * 10000)
+            }
+            
+        case let (source, destination) where source.section == 1 && destination.section == 0:
+            // move from tomorrow section to today section
+            
+            changeTask.dateNotification = calendar.replaceDate(fromDate: taskDate, byAdding: -1)
+            for (index, task) in tasks2d[destination.section].enumerated() {
+                task.orderPosition = Int64(index)
+            }
+            
+        case let (source, destination) where source.section == 1 && destination.section == 2:
+            // move from tomorrow section to later section
+            
+            changeTask.dateNotification = calendar.replaceDate(fromDate: taskDate, byAdding: 6)
+            for (index, task) in tasks2d[destination.section].enumerated() {
+                task.orderPosition = Int64(index * 10000)
+            }
+            
+        case let (source, destination) where source.section == 2 && destination.section == 0:
+            // move from later section to today section
+            
+            let today = Date()
+            var components = DateComponents()
+
+            components.year = calendar.component(.year, from: today)
+            components.month = calendar.component(.month, from: today)
+            components.day = calendar.component(.day, from: today)
+            components.hour = calendar.component(.hour, from: taskDate)
+            components.minute = calendar.component(.minute, from: taskDate)
+
+            let newTodayDate = calendar.date(from: components)
+
+            changeTask.dateNotification = newTodayDate
+            
+            for (index, task) in tasks2d[destination.section].enumerated() {
+                task.orderPosition = Int64(index)
+            }
+            
+        case let (source, destination) where source.section == 2 && destination.section == 1:
+            // move from later section to tomorrow section
+            
+                let today = Date()
+                var components = DateComponents()
+
+                components.year = calendar.component(.year, from: today)
+                components.month = calendar.component(.month, from: today)
+                components.day = calendar.component(.day, from: today)
+                components.hour = calendar.component(.hour, from: taskDate)
+                components.minute = calendar.component(.minute, from: taskDate)
+
+                let newTodayDate = calendar.date(from: components)
+                
+                changeTask.dateNotification = calendar.replaceDate(fromDate: newTodayDate, byAdding: 1)
+                
+                for (index, task) in tasks2d[destination.section].enumerated() {
+                    task.orderPosition = Int64(index)
+                }
+            
+        default:
+            break
+        }
+        
+        reloadData()
     }
 }
 
 
 // MARK: - UITableViewDataSource
 extension TaskTableView: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tasks2d.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return tasks2d[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.reuseId, for: indexPath) as! TaskCell
-        
-        let task = tasks[indexPath.row]
+        let task = tasks2d[indexPath.section][indexPath.row]
         
         cell.set(task: task)
         cell.myDelegate = self
         
         return cell
     }
+    
 }
 
 
@@ -163,14 +320,33 @@ extension TaskTableView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = HeaderView()
-        headerView.setHeaderText(text: "Today")
         
-        return headerView
+        switch section {
+        case 0:
+            
+            let todayHeaderView = HeaderView()
+            todayHeaderView.headerLabel.text = "Today"
+            return todayHeaderView
+            
+        case 1:
+            
+            let tomorrowHeaderView = HeaderView()
+            tomorrowHeaderView.headerLabel.text = "Tomorrow"
+            return tomorrowHeaderView
+            
+        case 2:
+            
+            let laterHeaderView = HeaderView()
+            laterHeaderView.headerLabel.text = "Later"
+            return laterHeaderView
+            
+        default:
+            return UIView(frame: .zero)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let task = tasks[indexPath.row]
+        let task =  tasks2d[indexPath.section][indexPath.row]
         presentationClosure?(task)
     }
     
@@ -181,15 +357,12 @@ extension TaskTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard sourceIndexPath != destinationIndexPath else { return }
         
-        let deletedObject = tasks[sourceIndexPath.row]
+        let deletedObject = tasks2d[sourceIndexPath.section][sourceIndexPath.row]
+        tasks2d[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        tasks2d[destinationIndexPath.section].insert(deletedObject, at: destinationIndexPath.row)
         
-        tasks.remove(at: sourceIndexPath.row)
-        tasks.insert(deletedObject, at: destinationIndexPath.row)
+        moveRow(from: sourceIndexPath, to: destinationIndexPath)
         
-        for (index, task) in tasks.enumerated() {
-            task.orderPosition = Int64(index)
-        }
-
         storageManager.save(contex)
     }
 }
@@ -206,7 +379,7 @@ extension TaskTableView: TaskCellDelegate {
     
     func taskCellDegreeOfProtectionButtonPressed(taskCell: TaskCell) {
         guard let indexPath = indexPath(for: taskCell) else { return }
-        let task = tasks[indexPath.row]
+        let task = tasks2d[indexPath.section][indexPath.row]
         let degreeOfProtectionButton = taskCell.degreeOfProtectionButton
         
         degreeOfProtectionButton.animateDegreeButton(for: degreeOfProtectionButton)
@@ -231,10 +404,10 @@ extension TaskTableView: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
         canHndle(session)
     }
-
+    
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if tableView.hasActiveDrag {
-
+            
             if session.items.count > 1 {
                 return UITableViewDropProposal(operation: .cancel)
             } else {
@@ -270,8 +443,15 @@ extension TaskTableView: UITableViewDropDelegate {
             tableView.insertRows(at: indexPaths, with: .automatic)
         }
     }
-    
-    func tableView(_ tableView: UITableView, dropSessionDidEnd session: UIDropSession) {
-    
+}
+
+extension Calendar {
+    func replaceDate(fromDate: Date?, byAdding day: Int) -> Date? {
+        guard let fromDate = fromDate else { return Date() }
+        let calendar = Calendar.current
+        var componets = DateComponents()
+        componets.day = day
+        
+        return calendar.date(byAdding: componets, to: fromDate)
     }
 }

@@ -58,6 +58,7 @@
 		0CDF14572469E415006E995E /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027362469E0C600DE2698 /* Task+CoreDataClass.swift */; };
 		0CDF14582469E415006E995E /* SubTask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027382469E0C600DE2698 /* SubTask+CoreDataClass.swift */; };
 		0CDF14592469E415006E995E /* SubTask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7027392469E0C600DE2698 /* SubTask+CoreDataProperties.swift */; };
+		0CDF248024A10F5A00DE1F35 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDF247F24A10F5A00DE1F35 /* Extension + String.swift */; };
 		0CEDCCC42468713700286911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCC32468713700286911 /* AppDelegate.swift */; };
 		0CEDCCC62468713700286911 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDCCC52468713700286911 /* SceneDelegate.swift */; };
 		0CEDCCCD2468713700286911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDCCCC2468713700286911 /* Assets.xcassets */; };
@@ -134,6 +135,7 @@
 		0CBB526A246E6FD400679162 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		0CC496D42470418D00A74FF0 /* Extension + UIViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewAnimation.swift"; sourceTree = "<group>"; };
 		0CC8BA66246B151B0031D508 /* PickerViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewRow.swift; sourceTree = "<group>"; };
+		0CDF247F24A10F5A00DE1F35 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		0CEDCCC02468713700286911 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEDCCC32468713700286911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CEDCCC52468713700286911 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				0CBB5267246DAF7B00679162 /* Extension + UIImage.swift */,
 				0C16EFB924704A300058EEEC /* Extension + DateComponents.swift */,
 				0C322447248FBE90002CBD31 /* Extension + Calendar.swift */,
+				0CDF247F24A10F5A00DE1F35 /* Extension + String.swift */,
 				0C16EFBE247190950058EEEC /* Extension + UIButton.swift */,
 				0C441AF524796A87003190FE /* Extension + TextView.swift */,
 			);
@@ -800,6 +803,7 @@
 				0CBB526B246E6FD400679162 /* NotificationManager.swift in Sources */,
 				0C476BFB247BA5D8008E01B9 /* TaskListCell.swift in Sources */,
 				0CFA847C247B9CEB009A30E7 /* ListAlertButton.swift in Sources */,
+				0CDF248024A10F5A00DE1F35 /* Extension + String.swift in Sources */,
 				0C441AF624796A87003190FE /* Extension + TextView.swift in Sources */,
 				0C81B07A2497BDF100916AB2 /* HeaderStoryView.swift in Sources */,
 				0C13D6CC2483C41D003990AF /* List+CoreDataProperties.swift in Sources */,
