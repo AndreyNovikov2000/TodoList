@@ -27,3 +27,15 @@ extension Calendar {
         return components
     }
 }
+
+extension Calendar {
+    func replaceDate(fromDate: Date?, byAdding day: Int) -> Date? {
+        guard let fromDate = fromDate else { return Date() }
+        let calendar = Calendar.current
+        var componets = DateComponents()
+        componets.day = day
+        
+        return calendar.date(byAdding: componets, to: fromDate)
+    }
+}
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cth-3g-7XE">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Task View Controller-->
+        <scene sceneID="1ut-lX-uGx">
+            <objects>
+                <viewController id="cth-3g-7XE" customClass="TaskViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KEp-0O-6QZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-CD-4aN">
+                                <rect key="frame" x="336" y="755" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="929-MK-ecs"/>
+                                    <constraint firstAttribute="width" constant="62" id="aDS-qC-7kj"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.63534432649999995" green="0.76279455419999997" blue="0.99218624830000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="heandleNewTaskButtonPressed" destination="cth-3g-7XE" eventType="touchUpInside" id="xIF-kk-k9y"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xZp-0v-HrA" firstAttribute="trailing" secondItem="f9v-CD-4aN" secondAttribute="trailing" constant="16" id="CJW-pJ-05N"/>
+                            <constraint firstItem="xZp-0v-HrA" firstAttribute="bottom" secondItem="f9v-CD-4aN" secondAttribute="bottom" constant="45" id="wj7-he-e55"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xZp-0v-HrA"/>
+                    </view>
+                    <connections>
+                        <outlet property="addNewTaskButton" destination="f9v-CD-4aN" id="eby-Fl-UB0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jjc-Ws-BY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13" y="107"/>
+        </scene>
+    </scenes>
+</document>
