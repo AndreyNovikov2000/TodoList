@@ -23,7 +23,11 @@ class ListAlertView: UIView {
     // MARK: - IBOutlets
     @IBOutlet weak var titleListTextField: UITextField!
     @IBOutlet weak var colorCollectionView: UICollectionView!
-    @IBOutlet weak var saveButton: ListAlertButton!
+    @IBOutlet weak var saveButton: ListAlertButton! {
+        didSet {
+            saveButton.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+    }
     @IBOutlet weak var cancelButton: ListAlertButton!
     
     // MARK: - Private properties

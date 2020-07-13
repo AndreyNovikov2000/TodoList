@@ -9,10 +9,20 @@
 import Foundation
 import UserNotifications
 
-class NotificationManager: NSObject {
-    let notificationCenter = UNUserNotificationCenter.current()
+protocol UNotifications {
+    func setCalendarNotification(with task: TaskNotifications, dateComponents: DateComponents, indentifier: String)
+    func deleteNotification(with identifier: String)
+}
+
+class NotificationManager: NSObject, UNotifications {
     
-    func setupNotificationCenter() {
+    static let current = NotificationManager()
+    
+    private let notificationCenter = UNUserNotificationCenter.current()
+    
+    // MARK: - Public methods
+    
+    func configure() {
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (success , error) in
             if let error = error {
                 print("Error - \(error.localizedDescription)")
@@ -20,42 +30,45 @@ class NotificationManager: NSObject {
             
             guard success else { return }
             
-            self.notificationCenter.getNotificationSettings { notificationSetting in
-                guard notificationSetting.authorizationStatus == .authorized else { return }
-            }
         }
+        
+        self.notificationCenter.getNotificationSettings { notificationSetting in
+            guard notificationSetting.authorizationStatus == .authorized else { return }
+        }
+        
         notificationCenter.delegate = self
     }
+
     
-    func setNotification(with identifier: String, dateNotification: Date, repeats: Bool) {
-//        let calendat = Calendar.current
-//        let year = calendat.component(.year, from: dateNotification)
-//        let month = calendat.component(.month, from: dateNotification)
-//        let day = calendat.component(.day, from: dateNotification)
-//        let hour = calendat.component(.hour, from: dateNotification)
-//        let minute = calendat.component(.minute, from: dateNotification)
+    func setCalendarNotification(with task: TaskNotifications, dateComponents: DateComponents, indentifier: String) {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let content = UNMutableNotificationContent()
+        content.title = task.title
+        content.body = task.body
+        content.sound = .default
         
-        let components = DateComponents()
-//        components.minute = minute
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
-        let contextual = UNMutableNotificationContent()
-//        contextual.body
-        
-        let request = UNNotificationRequest(identifier: identifier, content: contextual, trigger: trigger)
+        let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
         notificationCenter.add(request) { error in
             if let error = error {
                 print("Error - \(error.localizedDescription)")
+                return
             }
         }
     }
     
     func deleteNotification(with identifier: String) {
         notificationCenter.removeDeliveredNotifications(withIdentifiers: [identifier])
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
 }
 
+// MARK: - UNUserNotificationCenterDelegate
 extension NotificationManager: UNUserNotificationCenterDelegate {
-    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(response.notification.request.content.body)
+        completionHandler()
+    }
 }
+
+

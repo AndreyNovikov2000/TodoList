@@ -9,6 +9,11 @@
 import UIKit
 
 struct Constants {
+    
+    // Screen
+    static let screenBounds: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+    
+    
     static let collectionViewInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     
     // list cillection view
@@ -21,6 +26,7 @@ struct Constants {
     
     // menu table view
     static let menuTableViewCellHeight: CGFloat = 60
+    
     
 }
 

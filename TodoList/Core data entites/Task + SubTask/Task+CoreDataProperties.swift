@@ -22,7 +22,7 @@ extension Task {
     @NSManaged public var isNotificate: Bool
     @NSManaged public var dateNotification: Date?
     @NSManaged public var degreeOfProtection: Int16
-    @NSManaged public var taskId: UUID?
+    @NSManaged public var taskId: String?
     @NSManaged public var subTasks: NSOrderedSet?
     @NSManaged public var orderPosition: Int64
 }
